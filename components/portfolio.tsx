@@ -125,13 +125,15 @@ export function PortfolioComponent() {
   useEffect(() => {
     if (tableauLoaded) {
       const divElement = document.getElementById('viz1729591853089');
-      const vizElement = divElement.getElementsByTagName('object')[0];
-      if (vizElement) {
-        vizElement.style.width = '100%';
-        vizElement.style.height = '700px';
-        const scriptElement = document.createElement('script');
-        scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';
-        vizElement.parentNode.insertBefore(scriptElement, vizElement);
+      if (divElement) {
+        const vizElement = divElement.getElementsByTagName('object')[0];
+        if (vizElement) {
+          vizElement.style.width = '100%';
+          vizElement.style.height = '700px';
+          const scriptElement = document.createElement('script');
+          scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';
+          vizElement.parentNode?.insertBefore(scriptElement, vizElement);
+        }
       }
     }
   }, [tableauLoaded]);
@@ -401,50 +403,57 @@ export function PortfolioComponent() {
           <section id="biPlayground" ref={sectionRefs.biPlayground} className="py-20">
             <h2 ref={el => { if (el) sectionHeaderRefs.current.biPlayground = el }} className="text-3xl font-bold mb-8 text-center section-header">Business Intelligence Playground</h2>
             
-            {/* Tableau Dashboard */}
-            <h3 className="text-2xl font-semibold mb-4">Tableau Dashboard</h3>
-            <div className='tableauPlaceholder' id='viz1729591853089' style={{position: 'relative', width: '100%', height: '700px', marginBottom: '2rem'}}>
-              <noscript>
-                <a href='#'>
-                  <img 
-                    alt='Number of strikes in the United States ' 
-                    src='https://public.tableau.com/static/images/Fo/Follow-alongguideWorkwithTableauPart1_16953973838800/Story1/1_rss.png' 
-                    style={{border: 'none'}} 
-                  />
-                </a>
-              </noscript>
-              <object className='tableauViz' style={{display:'none', width: '100%', height: '100%'}}>
-                <param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' /> 
-                <param name='embed_code_version' value='3' /> 
-                <param name='site_root' value='' />
-                <param name='name' value='Follow-alongguideWorkwithTableauPart1_16953973838800/Story1' />
-                <param name='tabs' value='no' />
-                <param name='toolbar' value='yes' />
-                <param name='static_image' value='https://public.tableau.com/static/images/Fo/Follow-alongguideWorkwithTableauPart1_16953973838800/Story1/1.png' /> 
-                <param name='animate_transition' value='yes' />
-                <param name='display_static_image' value='yes' />
-                <param name='display_spinner' value='yes' />
-                <param name='display_overlay' value='yes' />
-                <param name='display_count' value='yes' />
-                <param name='language' value='en-US' />
-              </object>
-            </div>
+            <div className="space-y-12">
+              {/* Tableau Dashboard */}
+              <div>
+                <h3 className="text-2xl font-semibold mb-4">Tableau Dashboard</h3>
+                <div className='tableauPlaceholder' id='viz1729591853089' style={{position: 'relative', width: '100%', height: '600px'}}>
+                  <noscript>
+                    <a href='#'>
+                      <img 
+                        alt='Number of strikes in the United States ' 
+                        src='https://public.tableau.com/static/images/Fo/Follow-alongguideWorkwithTableauPart1_16953973838800/Story1/1_rss.png' 
+                        style={{border: 'none'}} 
+                      />
+                    </a>
+                  </noscript>
+                  <object className='tableauViz' style={{display:'none', width: '100%', height: '100%'}}>
+                    <param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' /> 
+                    <param name='embed_code_version' value='3' /> 
+                    <param name='site_root' value='' />
+                    <param name='name' value='Follow-alongguideWorkwithTableauPart1_16953973838800/Story1' />
+                    <param name='tabs' value='no' />
+                    <param name='toolbar' value='yes' />
+                    <param name='static_image' value='https://public.tableau.com/static/images/Fo/Follow-alongguideWorkwithTableauPart1_16953973838800/Story1/1.png' /> 
+                    <param name='animate_transition' value='yes' />
+                    <param name='display_static_image' value='yes' />
+                    <param name='display_spinner' value='yes' />
+                    <param name='display_overlay' value='yes' />
+                    <param name='display_count' value='yes' />
+                    <param name='language' value='en-US' />
+                  </object>
+                </div>
+              </div>
 
-            {/* Power BI Dashboard */}
-            <h3 className="text-2xl font-semibold mb-4">Power BI Dashboard</h3>
-            <div style={{width: '100%', height: '600px', marginBottom: '1rem'}}>
-              <iframe 
-                title="Store Sales" 
-                width="100%" 
-                height="100%" 
-                src="https://app.powerbi.com/view?r=eyJrIjoiM2Y1MTI2YTYtOTNlYS00MGQ4LThmMzktMTYyYjg3Mjk4M2FkIiwidCI6IjQ1NDIwZThkLTg1NTItNGEwMy05YjkyLWE5MzFlZjgzOWQzZiIsImMiOjh9" 
-                frameBorder="0" 
-                allowFullScreen={true}
-              ></iframe>
+              {/* Power BI Dashboard */}
+              <div>
+                <h3 className="text-2xl font-semibold mb-4">Power BI Dashboard</h3>
+                <div style={{width: '100%', height: '600px'}}>
+                  <iframe 
+                    title="Store Sales" 
+                    width="100%" 
+                    height="100%" 
+                    src="https://app.powerbi.com/view?r=eyJrIjoiM2Y1MTI2YTYtOTNlYS00MGQ4LThmMzktMTYyYjg3Mjk4M2FkIiwidCI6IjQ1NDIwZThkLTg1NTItNGEwMy05YjkyLWE5MzFlZjgzOWQzZiIsImMiOjh9" 
+                    frameBorder="0" 
+                    allowFullScreen={true}
+                  ></iframe>
+                </div>
+              </div>
             </div>
-            <div className="mb-8">
+            
+            <div className="mt-8">
               <p className="text-sm text-gray-600 dark:text-gray-400 italic">
-                Disclaimer: This is a sample dashboard that showcases my proficiency in Power BI. It uses publicly available data from Microsoft's website and serves as an example of my data visualization skills.
+                Disclaimer: These are sample dashboards that showcase my proficiency in Tableau and Power BI. They use publicly available data and serve as examples of my data visualization skills.
               </p>
             </div>
           </section>
