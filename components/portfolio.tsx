@@ -13,7 +13,6 @@ export function PortfolioComponent() {
   const [submitMessage, setSubmitMessage] = useState('')
   const [darkMode, setDarkMode] = useState(false)
   const [tableauLoaded, setTableauLoaded] = useState(false);
-  const [powerBILoaded, setPowerBILoaded] = useState(false);
   const sectionRefs = {
     profile: useRef<HTMLElement>(null),
     about: useRef<HTMLElement>(null),
@@ -51,7 +50,7 @@ export function PortfolioComponent() {
     })
 
     return () => observer.disconnect()
-  }, [])
+  }, [sectionRefs])
 
   useEffect(() => {
     const handleScroll = () => {
@@ -138,27 +137,6 @@ export function PortfolioComponent() {
     }
   }, [tableauLoaded]);
 
-  useEffect(() => {
-    const loadPowerBIScript = () => {
-      const script = document.createElement('script');
-      script.src = 'https://microsoft.github.io/PowerBI-JavaScript/demo/node_modules/powerbi-client/dist/powerbi.min.js';
-      script.async = true;
-      script.onload = () => {
-        setPowerBILoaded(true);
-      };
-      document.body.appendChild(script);
-    };
-
-    loadPowerBIScript();
-
-    return () => {
-      const script = document.querySelector('script[src="https://microsoft.github.io/PowerBI-JavaScript/demo/node_modules/powerbi-client/dist/powerbi.min.js"]');
-      if (script) {
-        document.body.removeChild(script);
-      }
-    };
-  }, []);
-
   return (
     <div className={`min-h-screen ${darkMode ? 'dark' : ''}`}>
       <div className={`bg-gray-50 text-gray-800 dark:bg-gray-900 dark:text-gray-100 min-h-screen transition-colors duration-300`}>
@@ -244,10 +222,10 @@ export function PortfolioComponent() {
                   I am a seasoned Data Analytics Professional with a passion for transforming complex data into actionable insights. With extensive experience across various industries, I specialize in leveraging advanced analytics techniques, machine learning, and business intelligence tools to drive data-informed decision-making.
                 </p>
                 <p className="text-gray-700 dark:text-gray-300 mb-4">
-                  My expertise spans the entire data lifecycle, from ETL processes and data warehousing to predictive modeling and visualization. I'm particularly adept at bridging the gap between technical and business stakeholders, ensuring that data solutions align with strategic objectives.
+                  I&apos;m particularly adept at bridging the gap between technical and business stakeholders, ensuring that data solutions align with strategic objectives.
                 </p>
                 <p className="text-gray-700 dark:text-gray-300">
-                  Throughout my career, I've consistently delivered projects that not only meet but exceed expectations, resulting in significant cost savings and performance improvements. I'm always eager to tackle new challenges and contribute to innovative data-driven solutions.
+                  Throughout my career, I&apos;ve consistently delivered projects that not only meet but exceed expectations, resulting in significant cost savings and performance improvements. I&apos;m always eager to tackle new challenges and contribute to innovative data-driven solutions.
                 </p>
               </CardContent>
             </Card>
@@ -451,7 +429,7 @@ export function PortfolioComponent() {
 
           <section id="contact" ref={sectionRefs.contact} className="py-20">
             <h2 ref={el => { if (el) sectionHeaderRefs.current.contact = el }} className="text-3xl font-bold mb-8 text-center section-header">Get in Touch</h2>
-            <p className="text-xl mb-8 text-center">I'm always open to new opportunities and collaborations.</p>
+            <p className="text-xl mb-8 text-center">I&apos;m always open to new opportunities and collaborations.</p>
             <form onSubmit={handleSubmit} className="max-w-md mx-auto mb-8">
               <div className="mb-4">
                 <label htmlFor="email" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
