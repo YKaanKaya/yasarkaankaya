@@ -65,7 +65,7 @@ export function PortfolioComponent() {
 
   useEffect(() => {
     const handleScroll = () => {
-      Object.entries(sectionHeaderRefs.current).forEach(([section, ref]) => {
+      Object.entries(sectionHeaderRefs.current).forEach(([, ref]) => {
         if (ref && isElementInViewport(ref)) {
           ref.classList.add('visible')
         }
