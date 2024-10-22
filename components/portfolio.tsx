@@ -1,6 +1,6 @@
 "use client"
 
-import { useEffect, useRef, useState, useMemo } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { ArrowDown, Linkedin, Mail, Github, Moon, Sun } from 'lucide-react'
 import Image from 'next/image'
 
@@ -13,16 +13,27 @@ export function PortfolioComponent() {
   const [submitMessage, setSubmitMessage] = useState('')
   const [darkMode, setDarkMode] = useState(false)
   const [tableauLoaded, setTableauLoaded] = useState(false);
-  const sectionRefs = useMemo(() => ({
-    profile: useRef<HTMLElement>(null),
-    about: useRef<HTMLElement>(null),
-    experience: useRef<HTMLElement>(null),
-    projects: useRef<HTMLElement>(null),
-    skills: useRef<HTMLElement>(null),
-    certificates: useRef<HTMLElement>(null),
-    biPlayground: useRef<HTMLElement>(null),
-    contact: useRef<HTMLElement>(null),
-  }), [])
+
+  const profileRef = useRef<HTMLElement>(null)
+  const aboutRef = useRef<HTMLElement>(null)
+  const experienceRef = useRef<HTMLElement>(null)
+  const projectsRef = useRef<HTMLElement>(null)
+  const skillsRef = useRef<HTMLElement>(null)
+  const certificatesRef = useRef<HTMLElement>(null)
+  const biPlaygroundRef = useRef<HTMLElement>(null)
+  const contactRef = useRef<HTMLElement>(null)
+
+  const sectionRefs = {
+    profile: profileRef,
+    about: aboutRef,
+    experience: experienceRef,
+    projects: projectsRef,
+    skills: skillsRef,
+    certificates: certificatesRef,
+    biPlayground: biPlaygroundRef,
+    contact: contactRef,
+  }
+
   const sectionHeaderRefs = useRef<{ [key: string]: HTMLHeadingElement }>({})
 
   useEffect(() => {
