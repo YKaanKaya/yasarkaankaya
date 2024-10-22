@@ -1,6 +1,6 @@
 "use client"
 
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useRef, useState, useMemo } from 'react'
 import { ArrowDown, Linkedin, Mail, Github, Moon, Sun } from 'lucide-react'
 import Image from 'next/image'
 
@@ -13,7 +13,7 @@ export function PortfolioComponent() {
   const [submitMessage, setSubmitMessage] = useState('')
   const [darkMode, setDarkMode] = useState(false)
   const [tableauLoaded, setTableauLoaded] = useState(false);
-  const sectionRefs = {
+  const sectionRefs = useMemo(() => ({
     profile: useRef<HTMLElement>(null),
     about: useRef<HTMLElement>(null),
     experience: useRef<HTMLElement>(null),
@@ -22,7 +22,7 @@ export function PortfolioComponent() {
     certificates: useRef<HTMLElement>(null),
     biPlayground: useRef<HTMLElement>(null),
     contact: useRef<HTMLElement>(null),
-  }
+  }), [])
   const sectionHeaderRefs = useRef<{ [key: string]: HTMLHeadingElement }>({})
 
   useEffect(() => {
