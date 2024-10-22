@@ -125,13 +125,15 @@ export function PortfolioComponent() {
   useEffect(() => {
     if (tableauLoaded) {
       const divElement = document.getElementById('viz1729591853089');
-      const vizElement = divElement.getElementsByTagName('object')[0];
-      if (vizElement) {
-        vizElement.style.width = '100%';
-        vizElement.style.height = '700px';
-        const scriptElement = document.createElement('script');
-        scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';
-        vizElement.parentNode.insertBefore(scriptElement, vizElement);
+      if (divElement) {
+        const vizElement = divElement.getElementsByTagName('object')[0];
+        if (vizElement) {
+          vizElement.style.width = '100%';
+          vizElement.style.height = '700px';
+          const scriptElement = document.createElement('script');
+          scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';
+          vizElement.parentNode?.insertBefore(scriptElement, vizElement);
+        }
       }
     }
   }, [tableauLoaded]);
