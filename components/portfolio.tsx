@@ -408,15 +408,6 @@ export function PortfolioComponent() {
               <div>
                 <h3 className="text-2xl font-semibold mb-4">Tableau Dashboard</h3>
                 <div className='tableauPlaceholder' id='viz1729591853089' style={{position: 'relative', width: '100%', height: '600px'}}>
-                  <noscript>
-                    <a href='#'>
-                      <img 
-                        alt='Number of strikes in the United States ' 
-                        src='https://public.tableau.com/static/images/Fo/Follow-alongguideWorkwithTableauPart1_16953973838800/Story1/1_rss.png' 
-                        style={{border: 'none'}} 
-                      />
-                    </a>
-                  </noscript>
                   <object className='tableauViz' style={{display:'none', width: '100%', height: '100%'}}>
                     <param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' /> 
                     <param name='embed_code_version' value='3' /> 
@@ -453,7 +444,7 @@ export function PortfolioComponent() {
             
             <div className="mt-8">
               <p className="text-sm text-gray-600 dark:text-gray-400 italic">
-                Disclaimer: These are sample dashboards that showcase my proficiency in Tableau and Power BI. They use publicly available data and serve as examples of my data visualization skills.
+                Disclaimer: These are interactive dashboards that showcase my proficiency in Tableau and Power BI. They use publicly available data and serve as examples of my data visualization skills.
               </p>
             </div>
           </section>
