@@ -452,7 +452,7 @@ export function PortfolioComponent() {
             </form>
             <div className="flex justify-center space-x-6">
               <a
-                href="mailto:kaankaya@live.com"
+                href="mailto:ysr.kaan.kaya@outlook.com"
                 className={`${buttonVariants({ variant: "outline" })} button-outline`}
                 target="_blank"
                 rel="noopener noreferrer"
