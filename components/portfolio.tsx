@@ -247,9 +247,15 @@ export function PortfolioComponent() {
             <div className="space-y-8">
               {[
                 {
+                  title: 'Business Intelligence Engineer',
+                  company: 'Amazon',
+                  period: 'Jan 2025 - Present',
+                  description: 'Currently building trust with Complaince department, machine learning engineers and Data Science team.'
+                },
+                {
                   title: 'Senior Data Analyst',
-                  company: 'Data Punk',
-                  period: 'Aug 2024 - Current',
+                  company: 'A startup',
+                  period: 'Aug 2024 - Jan 2025',
                   description: 'Designed and automated ETL pipelines, performed text analytics and sentiment analysis, created intuitive dashboards using Power BI and Python, and implemented AI-driven workflows for automation in ratings systems.'
                 },
                 {
@@ -269,24 +275,6 @@ export function PortfolioComponent() {
                   company: 'Standard Chartered Bank',
                   period: 'Nov 2019 - Jul 2021',
                   description: 'Led strategic redesign of market risk reporting systems, automated liquidity and financial reporting processes, and managed regulatory projects.'
-                },
-                {
-                  title: 'Senior Financial Analyst / Product Controller',
-                  company: 'J.P. Morgan Chase',
-                  period: 'Oct 2018 - Oct 2019',
-                  description: 'Automated and improved financial reports using VBA, MS Access, SQL, and Python, driving efficiency and cost savings.'
-                },
-                {
-                  title: 'Financial Analyst / Product Controller',
-                  company: 'NatWest Markets',
-                  period: 'Jul 2016 - Sep 2018',
-                  description: 'Reengineered financial processes, achieving annual cost savings of £70,000 through automation and process improvements.'
-                },
-                {
-                  title: 'Data Analyst',
-                  company: 'FRU.PL S.A.',
-                  period: 'Mar 2015 - Jul 2016',
-                  description: 'Implemented a SQL database by extracting data from various sources and loading it to the database to lead data-driven business decisions.'
                 }
               ].map((job, index) => (
                 <Card key={index} className="bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700">
@@ -440,7 +428,7 @@ export function PortfolioComponent() {
 
           <section id="contact" ref={sectionRefs.contact} className="py-20">
             <h2 ref={el => { if (el) sectionHeaderRefs.current.contact = el }} className="text-3xl font-bold mb-8 text-center section-header">Get in Touch</h2>
-            <p className="text-xl mb-8 text-center">I&apos;m always open to new opportunities and collaborations.</p>
+            <p className="text-xl mb-8 text-center">I&apos;m always open to collaborations.</p>
             <form onSubmit={handleSubmit} className="max-w-md mx-auto mb-8">
               <div className="mb-4">
                 <label htmlFor="email" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
