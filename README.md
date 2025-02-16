@@ -38,4 +38,4 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/bui
 =======
 # yasarkaankaya
 Website
->>>>>>> 6ddae0705acf6db337308b6a4c70fbdba456508b
+https://yasarkaankaya.com/
