@@ -293,6 +293,12 @@ export function PortfolioComponent() {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
               {[
                 {
+                  title: 'DeFtunes Data Pipeline',
+                  description: 'A comprehensive data engineering solution for DeFtunes, a music streaming platform. Implements a robust data pipeline that extracts purchase data, processes it through transformation layers, and delivers analytics insights using AWS services (S3, Glue, Redshift), Apache Airflow, dbt, and Apache Superset.',
+                  link: 'https://github.com/YKaanKaya/deftunes-data-pipeline',
+                  demoLink: '/showcase/deftunes'
+                },
+                {
                   title: 'Stock Performance and ESG Scores',
                   description: 'Developed an application for demonstrating, visualizing, and interacting with various stock performance indicators and ESG scores.',
                   link: 'https://gsinfo.streamlit.app/'
@@ -317,9 +323,16 @@ export function PortfolioComponent() {
                   <CardContent className="p-6">
                     <h3 className="text-xl font-semibold mb-2">{project.title}</h3>
                     <p className="text-gray-600 dark:text-gray-300 mb-4">{project.description}</p>
-                    <Button variant="outline" asChild>
-                      <a href={project.link} target="_blank" rel="noopener noreferrer">View Project</a>
-                    </Button>
+                    <div className="flex space-x-2">
+                      <Button variant="outline" asChild>
+                        <a href={project.link} target="_blank" rel="noopener noreferrer">View Project</a>
+                      </Button>
+                      {project.demoLink && (
+                        <Button variant="default" asChild>
+                          <a href={project.demoLink} target="_blank" rel="noopener noreferrer">View Demo</a>
+                        </Button>
+                      )}
+                    </div>
                   </CardContent>
                 </Card>
               ))}

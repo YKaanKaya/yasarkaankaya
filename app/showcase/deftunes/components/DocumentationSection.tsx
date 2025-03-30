@@ -136,7 +136,7 @@ cd ../scripts
               <li>Log in to the AWS Management Console</li>
               <li>Navigate to AWS Glue → Workflows</li>
               <li>Select the <code>deftunes-api-data-workflow-dev</code> workflow</li>
-              <li>Click "Run" to start the workflow</li>
+              <li>Click &quot;Run&quot; to start the workflow</li>
             </ol>
             
             <h5 className="font-medium mt-4 mb-2">3. Using AWS CLI</h5>
@@ -179,7 +179,7 @@ LIMIT 10;`}
             <p className="mb-2">Access the Superset dashboard:</p>
             <ol className="list-decimal pl-5 space-y-2">
               <li>Open Superset at the configured URL</li>
-              <li>Navigate to the "DeFtunes Analytics" dashboard</li>
+              <li>Navigate to the &quot;DeFtunes Analytics&quot; dashboard</li>
               <li>Use filters to explore data by time period, geography, or artist</li>
             </ol>
           </div>
@@ -255,7 +255,7 @@ LIMIT 10;`}
               </div>
               <div>
                 <h5 className="font-medium mb-2">Why Redshift for Analytics?</h5>
-                <p className="text-sm mb-3">Redshift's MPP architecture makes it well-suited for analytical workloads, with excellent performance for complex queries and aggregations over large datasets.</p>
+                <p className="text-sm mb-3">Redshift&apos;s MPP architecture makes it well-suited for analytical workloads, with excellent performance for complex queries and aggregations over large datasets.</p>
               </div>
               <div>
                 <h5 className="font-medium mb-2">Why dbt?</h5>

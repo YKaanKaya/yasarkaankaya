@@ -3,10 +3,8 @@
 import React, { useState } from "react"
 import Link from "next/link"
 import Image from "next/image"
-import { ArrowLeft, ChevronDown, ExternalLink, Copy, Check, Coffee } from "lucide-react"
+import { ArrowLeft, ChevronDown, Copy, Check, Coffee } from "lucide-react"
 import { motion, AnimatePresence } from "framer-motion"
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 
 import { PipelineTabs } from "./PipelineTabs"

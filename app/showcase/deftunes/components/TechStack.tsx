@@ -3,7 +3,7 @@
 import React from 'react'
 import { motion } from 'framer-motion'
 import { Badge } from '@/components/ui/badge'
-import { Cloud, Database, Server, Code, Infinity, Activity, GitBranch, LineChart } from 'lucide-react'
+import { Cloud, Database, Server, Code, Infinity, Activity, GitBranch } from 'lucide-react'
 
 // Tech categories with icons
 const techCategories = [
@@ -97,7 +97,7 @@ export function TechStack() {
         animate="show"
         className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
       >
-        {techCategories.map((category, index) => (
+        {techCategories.map((category) => (
           <motion.div
             key={category.name}
             variants={item}
