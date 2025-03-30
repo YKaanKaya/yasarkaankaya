@@ -371,6 +371,13 @@ export function PortfolioComponent() {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
               {[
                 {
+                  title: 'Machine Learning Specialization',
+                  description: 'A comprehensive showcase of my journey through Andrew Ng\'s Machine Learning Specialization, featuring implementations of algorithms from basic regression to advanced reinforcement learning with practical demos like the Lunar Lander.',
+                  link: 'https://github.com/YKaanKaya/Machine-learning',
+                  demoLink: '/showcase/MachineLearning',
+                  tags: ['Python', 'TensorFlow', 'scikit-learn', 'Deep Learning', 'Reinforcement Learning']
+                },
+                {
                   title: 'DeFtunes Data Pipeline',
                   description: 'A comprehensive data engineering solution for DeFtunes, a music streaming platform. Implements a robust data pipeline that extracts purchase data, processes it through transformation layers, and delivers analytics insights using AWS services (S3, Glue, Redshift), Apache Airflow, dbt, and Apache Superset.',
                   link: 'https://github.com/YKaanKaya/deftunes-data-pipeline',
