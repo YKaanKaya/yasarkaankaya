@@ -1,8 +1,9 @@
 "use client"
 
 import { useEffect, useRef, useState } from 'react'
-import { ArrowDown, Linkedin, Mail, Github, Moon, Sun, Code, BookOpen, BarChart3, Database, CircuitBoard } from 'lucide-react'
+import { ArrowDown, Linkedin, Mail, Github, Moon, Sun, Code, BookOpen, BarChart3, Database, CircuitBoard, Laptop } from 'lucide-react'
 import Image from 'next/image'
+import { useTheme } from 'next-themes'
 
 import { Button, buttonVariants } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
@@ -12,8 +13,9 @@ export function PortfolioComponent() {
   const [activeSection, setActiveSection] = useState('profile')
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [submitMessage, setSubmitMessage] = useState('')
-  const [darkMode, setDarkMode] = useState(false)
+  const [mounted, setMounted] = useState(false)
   const [tableauLoaded, setTableauLoaded] = useState(false);
+  const { theme, setTheme } = useTheme()
 
   const profileRef = useRef<HTMLElement>(null)
   const aboutRef = useRef<HTMLElement>(null)
@@ -110,9 +112,9 @@ export function PortfolioComponent() {
     setSubmitMessage(`Email ${email} submitted successfully!`)
   }
 
-  const toggleDarkMode = () => {
-    setDarkMode(!darkMode)
-  }
+  useEffect(() => {
+    setMounted(true)
+  }, [])
 
   useEffect(() => {
     const loadTableauScript = () => {
@@ -152,8 +154,8 @@ export function PortfolioComponent() {
   }, [tableauLoaded]);
 
   return (
-    <div className={`min-h-screen ${darkMode ? 'dark' : ''}`}>
-      <div className={`bg-gray-50 text-gray-800 dark:bg-gray-900 dark:text-gray-100 min-h-screen transition-colors duration-300`}>
+    <div className="min-h-screen">
+      <div className={`bg-gray-50 text-gray-800 dark:bg-black dark:text-gray-100 min-h-screen transition-colors duration-300`}>
         <style jsx global>{`
           @keyframes fadeInUp {
             from {
@@ -198,7 +200,7 @@ export function PortfolioComponent() {
             box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
           }
         `}</style>
-        <nav className="sticky top-0 z-50 bg-white dark:bg-gray-800 bg-opacity-90 dark:bg-opacity-90 backdrop-blur-md shadow-sm">
+        <nav className="sticky top-0 z-50 bg-white dark:bg-black bg-opacity-90 dark:bg-opacity-90 backdrop-blur-md shadow-sm">
           <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="flex justify-between items-center h-16">
               <div className="font-bold text-xl text-blue-600 dark:text-blue-400">
@@ -218,36 +220,97 @@ export function PortfolioComponent() {
                   </li>
                 ))}
               </ul>
-              <Button onClick={toggleDarkMode} variant="ghost" size="icon">
-                {darkMode ? <Sun className="h-5 w-5" /> : <Moon className="h-5 w-5" />}
-              </Button>
+              <div className="flex items-center space-x-2">
+                {mounted && (
+                  <div className="flex rounded-md bg-gray-100 dark:bg-gray-800 p-1">
+                    <Button 
+                      onClick={() => setTheme('light')} 
+                      variant="ghost" 
+                      size="icon"
+                      className={`${theme === 'light' ? 'bg-white dark:bg-gray-700 text-blue-600' : 'text-gray-500'} rounded-md`}
+                    >
+                      <Sun className="h-5 w-5" />
+                    </Button>
+                    <Button 
+                      onClick={() => setTheme('system')} 
+                      variant="ghost" 
+                      size="icon" 
+                      className={`${theme === 'system' ? 'bg-white dark:bg-gray-700 text-blue-600' : 'text-gray-500'} rounded-md`}
+                    >
+                      <Laptop className="h-5 w-5" />
+                    </Button>
+                    <Button 
+                      onClick={() => setTheme('dark')} 
+                      variant="ghost" 
+                      size="icon" 
+                      className={`${theme === 'dark' ? 'bg-white dark:bg-gray-700 text-blue-600' : 'text-gray-500'} rounded-md`}
+                    >
+                      <Moon className="h-5 w-5" />
+                    </Button>
+                  </div>
+                )}
+              </div>
             </div>
           </div>
         </nav>
 
         <main className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-          <section id="profile" ref={sectionRefs.profile} className="min-h-screen flex flex-col items-center justify-center py-20">
-            <div className="text-center max-w-3xl mx-auto">
-              <h1 className="text-5xl font-bold mb-4">Kaan KAYA</h1>
-              <div className="flex justify-center gap-3 mb-4">
-                <Badge variant="outline" className="text-md py-1 px-3 bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 border-blue-300 dark:border-blue-700">
-                  <Database className="mr-1 h-4 w-4" /> Data Engineer
-                </Badge>
-                <Badge variant="outline" className="text-md py-1 px-3 bg-purple-100 dark:bg-purple-900 text-purple-800 dark:text-purple-200 border-purple-300 dark:border-purple-700">
-                  <BarChart3 className="mr-1 h-4 w-4" /> BI Engineer
-                </Badge>
-                <Badge variant="outline" className="text-md py-1 px-3 bg-green-100 dark:bg-green-900 text-green-800 dark:text-green-200 border-green-300 dark:border-green-700">
-                  <CircuitBoard className="mr-1 h-4 w-4" /> ML Engineer
-                </Badge>
+          <section id="profile" ref={profileRef} className="min-h-screen flex items-center py-20">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
+              <div className="order-2 lg:order-1 space-y-6">
+                <div>
+                  <h2 className="text-lg font-medium text-blue-600 dark:text-blue-400 mb-2">Hello, I'm</h2>
+                  <h1 className="text-5xl font-bold mb-4">Kaan KAYA</h1>
+                  <div className="flex flex-wrap gap-3 mb-4">
+                    <Badge variant="outline" className="text-md py-1 px-3 bg-blue-100 dark:bg-blue-900/30 text-blue-800 dark:text-blue-200 border-blue-300 dark:border-blue-700">
+                      <Database className="mr-1 h-4 w-4" /> Data Engineer
+                    </Badge>
+                    <Badge variant="outline" className="text-md py-1 px-3 bg-purple-100 dark:bg-purple-900/30 text-purple-800 dark:text-purple-200 border-purple-300 dark:border-purple-700">
+                      <BarChart3 className="mr-1 h-4 w-4" /> BI Engineer
+                    </Badge>
+                    <Badge variant="outline" className="text-md py-1 px-3 bg-green-100 dark:bg-green-900/30 text-green-800 dark:text-green-200 border-green-300 dark:border-green-700">
+                      <CircuitBoard className="mr-1 h-4 w-4" /> ML Engineer
+                    </Badge>
+                  </div>
+                </div>
+                
+                <p className="text-lg text-gray-600 dark:text-gray-300">
+                  I transform complex data into actionable insights and scalable solutions. With expertise in data engineering, business intelligence, and machine learning, I build systems that drive decision-making and innovation.
+                </p>
+                
+                <div className="flex gap-4 pt-4">
+                  <Button onClick={() => scrollToSection('about')} className="px-6">
+                    About Me
+                  </Button>
+                  <Button onClick={() => scrollToSection('projects')} variant="outline" className="px-6 dark:text-white">
+                    View Projects
+                  </Button>
+                </div>
+                
+                <div className="flex gap-4 pt-6">
+                  <a href="https://github.com/YKaanKaya" target="_blank" rel="noopener noreferrer" className="text-gray-600 hover:text-black dark:text-gray-400 dark:hover:text-white transition-colors">
+                    <Github className="h-6 w-6" />
+                  </a>
+                  <a href="https://linkedin.com/in/yasarkaankaya" target="_blank" rel="noopener noreferrer" className="text-gray-600 hover:text-blue-600 dark:text-gray-400 dark:hover:text-blue-400 transition-colors">
+                    <Linkedin className="h-6 w-6" />
+                  </a>
+                  <a href="mailto:yasarkaankaya@gmail.com" target="_blank" rel="noopener noreferrer" className="text-gray-600 hover:text-red-600 dark:text-gray-400 dark:hover:text-red-400 transition-colors">
+                    <Mail className="h-6 w-6" />
+                  </a>
+                </div>
               </div>
-              <p className="text-xl text-gray-600 dark:text-gray-300 mb-8">Building data-driven solutions with code and creativity</p>
-              <Button onClick={() => scrollToSection('about')} className="animate-bounce">
-                <ArrowDown className="mr-2 h-4 w-4" /> Learn More
-              </Button>
+              
+              <div className="order-1 lg:order-2 flex justify-center lg:justify-end">
+                <div className="relative w-64 h-64 md:w-80 md:h-80 bg-gradient-to-br from-blue-500 to-purple-600 rounded-full overflow-hidden shadow-2xl">
+                  <div className="absolute inset-2 bg-white dark:bg-black rounded-full flex items-center justify-center">
+                    <span className="text-4xl font-bold bg-gradient-to-r from-blue-500 to-purple-600 bg-clip-text text-transparent">KK</span>
+                  </div>
+                </div>
+              </div>
             </div>
           </section>
-
-          <section id="about" ref={sectionRefs.about} className="py-20">
+          
+          <section id="about" ref={aboutRef} className="py-20">
             <h2 ref={el => { if (el) sectionHeaderRefs.current.about = el }} className="text-3xl font-bold mb-8 text-center section-header">About Me</h2>
             <Card className="bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700 shadow-md">
               <CardContent className="p-8">
