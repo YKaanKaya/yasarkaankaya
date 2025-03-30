@@ -76,7 +76,7 @@ export function ProjectDemo() {
                 </ul>
                 <div className="mt-4">
                   <Button asChild variant="outline" className="w-full flex items-center gap-2">
-                    <a href="https://github.com/YKaanKaya/Machine-learning/blob/main/C1%20-%20Supervised%20Machine%20Learning/week1/C1_W1_Lab03_Model_Representation_Soln.ipynb" target="_blank" rel="noopener noreferrer">
+                    <a href="https://github.com/YKaanKaya/Machine-learning/blob/main/C1%20-%20Supervised%20Machine%20Learning%20-%20Regression%20and%20Classification/week1/Optional%20Labs/C1_W1_Lab05_Gradient_Descent_Soln.ipynb" target="_blank" rel="noopener noreferrer">
                       <Github className="h-4 w-4" /> View Notebook
                     </a>
                   </Button>
@@ -125,7 +125,7 @@ export function ProjectDemo() {
                 </ul>
                 <div className="mt-4">
                   <Button asChild variant="outline" className="w-full flex items-center gap-2">
-                    <a href="https://github.com/YKaanKaya/Machine-learning/blob/main/C1%20-%20Supervised%20Machine%20Learning/week2/C1_W2_Linear_Regression.ipynb" target="_blank" rel="noopener noreferrer">
+                    <a href="https://github.com/YKaanKaya/Machine-learning/blob/main/C1%20-%20Supervised%20Machine%20Learning%20-%20Regression%20and%20Classification/week2/C1W2A1/C1_W2_Linear_Regression.ipynb" target="_blank" rel="noopener noreferrer">
                       <Github className="h-4 w-4" /> View Notebook
                     </a>
                   </Button>
@@ -173,7 +173,7 @@ export function ProjectDemo() {
                 </ul>
                 <div className="mt-4">
                   <Button asChild variant="outline" className="w-full flex items-center gap-2">
-                    <a href="https://github.com/YKaanKaya/Machine-learning/blob/main/C1%20-%20Supervised%20Machine%20Learning/week3/C1_W3_Logistic_Regression.ipynb" target="_blank" rel="noopener noreferrer">
+                    <a href="https://github.com/YKaanKaya/Machine-learning/blob/main/C1%20-%20Supervised%20Machine%20Learning%20-%20Regression%20and%20Classification/week3/C1W3A1/C1_W3_Logistic_Regression.ipynb" target="_blank" rel="noopener noreferrer">
                       <Github className="h-4 w-4" /> View Notebook
                     </a>
                   </Button>
