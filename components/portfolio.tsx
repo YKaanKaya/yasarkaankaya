@@ -1,11 +1,12 @@
 "use client"
 
 import { useEffect, useRef, useState } from 'react'
-import { ArrowDown, Linkedin, Mail, Github, Moon, Sun } from 'lucide-react'
+import { ArrowDown, Linkedin, Mail, Github, Moon, Sun, Code, BookOpen, BarChart3, Database, CircuitBoard } from 'lucide-react'
 import Image from 'next/image'
 
 import { Button, buttonVariants } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
+import { Badge } from "@/components/ui/badge"
 
 export function PortfolioComponent() {
   const [activeSection, setActiveSection] = useState('profile')
@@ -19,6 +20,7 @@ export function PortfolioComponent() {
   const experienceRef = useRef<HTMLElement>(null)
   const projectsRef = useRef<HTMLElement>(null)
   const skillsRef = useRef<HTMLElement>(null)
+  const educationRef = useRef<HTMLElement>(null)
   const certificatesRef = useRef<HTMLElement>(null)
   const biPlaygroundRef = useRef<HTMLElement>(null)
   const contactRef = useRef<HTMLElement>(null)
@@ -29,6 +31,7 @@ export function PortfolioComponent() {
     experience: experienceRef,
     projects: projectsRef,
     skills: skillsRef,
+    education: educationRef,
     certificates: certificatesRef,
     biPlayground: biPlaygroundRef,
     contact: contactRef,
@@ -182,11 +185,26 @@ export function PortfolioComponent() {
           .dark .button-outline:hover {
             background-color: rgba(255, 255, 255, 0.1);
           }
+          .gradient-text {
+            background: linear-gradient(90deg, #3b82f6 0%, #8b5cf6 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+          }
+          .card-hover {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+          }
+          .card-hover:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+          }
         `}</style>
         <nav className="sticky top-0 z-50 bg-white dark:bg-gray-800 bg-opacity-90 dark:bg-opacity-90 backdrop-blur-md shadow-sm">
           <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="flex justify-between items-center h-16">
-              <ul className="flex space-x-4">
+              <div className="font-bold text-xl text-blue-600 dark:text-blue-400">
+                Kaan KAYA
+              </div>
+              <ul className="hidden md:flex space-x-4">
                 {(Object.keys(sectionRefs) as Array<keyof typeof sectionRefs>).map((section) => (
                   <li key={section}>
                     <button
@@ -209,16 +227,20 @@ export function PortfolioComponent() {
 
         <main className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <section id="profile" ref={sectionRefs.profile} className="min-h-screen flex flex-col items-center justify-center py-20">
-            <div className="text-center">
-              <Image
-                src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/profile-picture-9S4zYT3k7MztvepSNsuVikeKfv1tH2.jpg"
-                alt="Kaan KAYA"
-                width={200}
-                height={200}
-                className="rounded-full mx-auto mb-8 border-4 border-blue-500 dark:border-blue-400"
-              />
+            <div className="text-center max-w-3xl mx-auto">
               <h1 className="text-5xl font-bold mb-4">Kaan KAYA</h1>
-              <p className="text-xl text-gray-600 dark:text-gray-300 mb-8">Data Analytics Professional</p>
+              <div className="flex justify-center gap-3 mb-4">
+                <Badge variant="outline" className="text-md py-1 px-3 bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 border-blue-300 dark:border-blue-700">
+                  <Database className="mr-1 h-4 w-4" /> Data Engineer
+                </Badge>
+                <Badge variant="outline" className="text-md py-1 px-3 bg-purple-100 dark:bg-purple-900 text-purple-800 dark:text-purple-200 border-purple-300 dark:border-purple-700">
+                  <BarChart3 className="mr-1 h-4 w-4" /> BI Engineer
+                </Badge>
+                <Badge variant="outline" className="text-md py-1 px-3 bg-green-100 dark:bg-green-900 text-green-800 dark:text-green-200 border-green-300 dark:border-green-700">
+                  <CircuitBoard className="mr-1 h-4 w-4" /> ML Engineer
+                </Badge>
+              </div>
+              <p className="text-xl text-gray-600 dark:text-gray-300 mb-8">Building data-driven solutions with code and creativity</p>
               <Button onClick={() => scrollToSection('about')} className="animate-bounce">
                 <ArrowDown className="mr-2 h-4 w-4" /> Learn More
               </Button>
@@ -227,16 +249,16 @@ export function PortfolioComponent() {
 
           <section id="about" ref={sectionRefs.about} className="py-20">
             <h2 ref={el => { if (el) sectionHeaderRefs.current.about = el }} className="text-3xl font-bold mb-8 text-center section-header">About Me</h2>
-            <Card className="bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700">
-              <CardContent className="p-6">
-                <p className="text-gray-700 dark:text-gray-300 mb-4">
-                  I am a seasoned Data Analytics Professional with a passion for transforming complex data into actionable insights. With extensive experience across various industries, I specialize in leveraging advanced analytics techniques, machine learning, and business intelligence tools to drive data-informed decision-making.
+            <Card className="bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700 shadow-md">
+              <CardContent className="p-8">
+                <p className="text-gray-700 dark:text-gray-300 mb-4 text-lg">
+                  I am a <span className="font-semibold">Business Intelligence Engineer & Data Engineer</span> with a passion for transforming complex data into actionable insights. With extensive experience across various industries, I specialize in designing robust data pipelines, implementing advanced analytics, and developing machine learning solutions.
                 </p>
-                <p className="text-gray-700 dark:text-gray-300 mb-4">
-                  I&apos;m particularly adept at bridging the gap between technical and business stakeholders, ensuring that data solutions align with strategic objectives.
+                <p className="text-gray-700 dark:text-gray-300 mb-4 text-lg">
+                  Currently pursuing an <span className="font-semibold">MSc in Computer Science at Heriot Watt University</span>, I&apos;m expanding my expertise in software development and machine learning engineering to build more sophisticated data-driven applications.
                 </p>
-                <p className="text-gray-700 dark:text-gray-300">
-                  Throughout my career, I&apos;ve consistently delivered projects that not only meet but exceed expectations, resulting in significant cost savings and performance improvements. I&apos;m always eager to tackle new challenges and contribute to innovative data-driven solutions.
+                <p className="text-gray-700 dark:text-gray-300 text-lg">
+                  I thrive at the intersection of data, software, and AI, enabling organizations to leverage their data assets for strategic decision-making and innovation. My goal is to combine my data engineering foundation with cutting-edge software development practices to create impactful machine learning solutions.
                 </p>
               </CardContent>
             </Card>
@@ -250,42 +272,87 @@ export function PortfolioComponent() {
                   title: 'Business Intelligence Engineer',
                   company: 'Amazon',
                   period: 'Jan 2025 - Present',
-                  description: 'Currently building trust with Complaince department, machine learning engineers and Data Science team.'
+                  description: 'Designing and implementing data pipelines and analytics solutions to support compliance monitoring and risk management. Collaborating with machine learning engineers and data scientists to develop predictive models for risk detection.',
+                  tags: ['ETL', 'AWS', 'Python', 'SQL', 'Data Modeling']
                 },
                 {
                   title: 'Senior Data Analyst',
                   company: 'A startup',
                   period: 'Aug 2024 - Jan 2025',
-                  description: 'Designed and automated ETL pipelines, performed text analytics and sentiment analysis, created intuitive dashboards using Power BI and Python, and implemented AI-driven workflows for automation in ratings systems.'
+                  description: 'Designed and automated ETL pipelines, performed text analytics and sentiment analysis, created intuitive dashboards using Power BI and Python, and implemented AI-driven workflows for automation in ratings systems.',
+                  tags: ['NLP', 'Power BI', 'Python', 'Automation']
                 },
                 {
                   title: 'Technical Business Analyst',
                   company: 'Schroders',
                   period: 'May 2022 - Jul 2024',
-                  description: 'Led transformation of financial reporting processes, managed the full software development lifecycle, and built strong relationships with internal stakeholders.'
+                  description: 'Led transformation of financial reporting processes, managed the full software development lifecycle, and built strong relationships with internal stakeholders.',
+                  tags: ['Financial Reporting', 'SDLC', 'Requirements Analysis']
                 },
                 {
                   title: 'Data Consultancy & Contract work',
                   company: 'Lingaro, Carmignac',
                   period: 'Aug 2021 - Apr 2022',
-                  description: 'Supported clients with data management, automation, and reporting solutions to optimize decision-making processes and meet regulatory requirements.'
+                  description: 'Supported clients with data management, automation, and reporting solutions to optimize decision-making processes and meet regulatory requirements.',
+                  tags: ['Consultancy', 'Data Management', 'Regulatory Reporting']
                 },
                 {
                   title: 'Technical Business Analyst',
                   company: 'Standard Chartered Bank',
                   period: 'Nov 2019 - Jul 2021',
-                  description: 'Led strategic redesign of market risk reporting systems, automated liquidity and financial reporting processes, and managed regulatory projects.'
+                  description: 'Led strategic redesign of market risk reporting systems, automated liquidity and financial reporting processes, and managed regulatory projects.',
+                  tags: ['Market Risk', 'Automation', 'Regulatory Compliance']
                 }
               ].map((job, index) => (
-                <Card key={index} className="bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700">
+                <Card key={index} className="bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700 shadow-md card-hover">
                   <CardContent className="p-6">
-                    <h3 className="text-xl font-semibold">{job.title}</h3>
-                    <p className="text-gray-600 dark:text-gray-300">{job.company} | {job.period}</p>
-                    <p className="mt-2 text-gray-700 dark:text-gray-200">{job.description}</p>
+                    <div className="flex flex-col md:flex-row md:justify-between md:items-start mb-3">
+                      <h3 className="text-xl font-semibold">{job.title}</h3>
+                      <p className="text-gray-500 dark:text-gray-400 text-sm md:text-right">{job.period}</p>
+                    </div>
+                    <p className="text-gray-600 dark:text-gray-300 font-medium mb-3">{job.company}</p>
+                    <p className="mt-2 text-gray-700 dark:text-gray-200 mb-4">{job.description}</p>
+                    <div className="flex flex-wrap gap-2">
+                      {job.tags.map((tag, i) => (
+                        <Badge key={i} variant="secondary" className="bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-gray-200">
+                          {tag}
+                        </Badge>
+                      ))}
+                    </div>
                   </CardContent>
                 </Card>
               ))}
             </div>
+          </section>
+
+          <section id="education" ref={sectionRefs.education} className="py-20">
+            <h2 ref={el => { if (el) sectionHeaderRefs.current.education = el }} className="text-3xl font-bold mb-8 text-center section-header">Education</h2>
+            <Card className="bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700 shadow-md card-hover">
+              <CardContent className="p-6">
+                <div className="flex flex-col md:flex-row justify-between items-start mb-3">
+                  <h3 className="text-xl font-semibold">MSc in Computer Science</h3>
+                  <p className="text-gray-500 dark:text-gray-400 text-sm">2024 - Present</p>
+                </div>
+                <p className="text-gray-600 dark:text-gray-300 font-medium mb-3">Heriot Watt University</p>
+                <p className="text-gray-700 dark:text-gray-200 mb-4">
+                  Focused on advanced software development methodologies, machine learning algorithms, and AI applications for building innovative technical solutions.
+                </p>
+                <div className="flex flex-wrap gap-2">
+                  <Badge variant="secondary" className="bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-gray-200">
+                    Machine Learning
+                  </Badge>
+                  <Badge variant="secondary" className="bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-gray-200">
+                    Software Engineering
+                  </Badge>
+                  <Badge variant="secondary" className="bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-gray-200">
+                    AI Systems
+                  </Badge>
+                  <Badge variant="secondary" className="bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-gray-200">
+                    Algorithms
+                  </Badge>
+                </div>
+              </CardContent>
+            </Card>
           </section>
 
           <section id="projects" ref={sectionRefs.projects} className="py-20">
@@ -296,33 +363,45 @@ export function PortfolioComponent() {
                   title: 'DeFtunes Data Pipeline',
                   description: 'A comprehensive data engineering solution for DeFtunes, a music streaming platform. Implements a robust data pipeline that extracts purchase data, processes it through transformation layers, and delivers analytics insights using AWS services (S3, Glue, Redshift), Apache Airflow, dbt, and Apache Superset.',
                   link: 'https://github.com/YKaanKaya/deftunes-data-pipeline',
-                  demoLink: '/showcase/deftunes'
+                  demoLink: '/showcase/deftunes',
+                  tags: ['AWS', 'Airflow', 'dbt', 'Python', 'Data Engineering']
                 },
                 {
                   title: 'Stock Performance and ESG Scores',
                   description: 'Developed an application for demonstrating, visualizing, and interacting with various stock performance indicators and ESG scores.',
-                  link: 'https://gsinfo.streamlit.app/'
+                  link: 'https://gsinfo.streamlit.app/',
+                  tags: ['Streamlit', 'Python', 'Financial Analytics', 'ESG']
                 },
                 {
                   title: 'Team Performance Dashboard',
                   description: 'Developed and presented a comprehensive Team Performance Dashboard to the CTO for strategic team planning purposes.',
-                  link: '#'
+                  link: '#',
+                  tags: ['Power BI', 'Data Visualization', 'KPI Tracking']
                 },
                 {
                   title: 'System Performance Improvement',
                   description: 'Spearheaded performance analysis, identified bottlenecks, and created system performance dashboards using Power BI. Achieved a 36% performance improvement, resulting in £50,000 in savings.',
-                  link: '#'
+                  link: '#',
+                  tags: ['Performance Optimization', 'Power BI', 'Cost Saving']
                 },
                 {
                   title: 'Automation of Daily Audit Report',
                   description: 'Led a successful transformation project leveraging Python for ETL processes and Power BI for dashboard creation.',
-                  link: '#'
+                  link: '#',
+                  tags: ['Automation', 'Python', 'Power BI', 'ETL']
                 }
               ].map((project, index) => (
-                <Card key={index} className="bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700">
+                <Card key={index} className="bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700 shadow-md card-hover">
                   <CardContent className="p-6">
                     <h3 className="text-xl font-semibold mb-2">{project.title}</h3>
                     <p className="text-gray-600 dark:text-gray-300 mb-4">{project.description}</p>
+                    <div className="flex flex-wrap gap-2 mb-4">
+                      {project.tags.map((tag, i) => (
+                        <Badge key={i} variant="secondary" className="bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200">
+                          {tag}
+                        </Badge>
+                      ))}
+                    </div>
                     <div className="flex space-x-2">
                       <Button variant="outline" asChild>
                         <a href={project.link} target="_blank" rel="noopener noreferrer">View Project</a>
@@ -341,47 +420,177 @@ export function PortfolioComponent() {
 
           <section id="skills" ref={sectionRefs.skills} className="py-20">
             <h2 ref={el => { if (el) sectionHeaderRefs.current.skills = el }} className="text-3xl font-bold mb-8 text-center section-header">Skills</h2>
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
-              {[
-                { name: 'Python', logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg' },
-                { name: 'SQL', logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg' },
-                { name: 'AWS', logo: 'https://upload.wikimedia.org/wikipedia/commons/9/93/Amazon_Web_Services_Logo.svg' },
-                { name: 'Azure', logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/azure/azure-original.svg' },
-                { name: 'GCP', logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/googlecloud/googlecloud-original.svg' },
-                { name: 'Power BI', logo: 'https://upload.wikimedia.org/wikipedia/commons/c/cf/New_Power_BI_Logo.svg' },
-                { name: 'Tableau', logo: 'https://cdn.worldvectorlogo.com/logos/tableau-software.svg' },
-                { name: 'ActivePivot', logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg' },
-              ].map((skill) => (
-                <div key={skill.name} className="flex flex-col items-center">
-                  <div className="w-20 h-20 flex items-center justify-center mb-2 bg-white dark:bg-gray-800 rounded-full p-3">
-                    <Image
-                      src={skill.logo}
-                      alt={`${skill.name} logo`}
-                      width={64}
-                      height={64}
-                      className="max-w-full max-h-full object-contain"
-                    />
+            <div className="grid grid-cols-1 gap-8 md:grid-cols-3">
+              <Card className="bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700 shadow-md card-hover">
+                <CardContent className="p-6">
+                  <div className="flex items-center mb-4">
+                    <Database className="h-6 w-6 text-blue-600 dark:text-blue-400 mr-2" />
+                    <h3 className="text-xl font-semibold">Data Engineering</h3>
                   </div>
-                  <p className="text-center text-sm mt-2">{skill.name}</p>
-                </div>
-              ))}
+                  <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
+                    {[
+                      { name: 'Python', logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg' },
+                      { name: 'SQL', logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg' },
+                      { name: 'AWS', logo: 'https://upload.wikimedia.org/wikipedia/commons/9/93/Amazon_Web_Services_Logo.svg' },
+                      { name: 'Airflow', logo: 'https://upload.wikimedia.org/wikipedia/commons/d/de/AirflowLogo.png' },
+                      { name: 'dbt', logo: 'https://seeklogo.com/images/D/dbt-logo-500AB0BAA7-seeklogo.com.png' },
+                      { name: 'Spark', logo: 'https://upload.wikimedia.org/wikipedia/commons/f/f3/Apache_Spark_logo.svg' }
+                    ].map((skill) => (
+                      <div key={skill.name} className="flex flex-col items-center">
+                        <div className="w-12 h-12 flex items-center justify-center mb-2 bg-white dark:bg-gray-800 rounded-full p-2">
+                          <Image
+                            src={skill.logo}
+                            alt={`${skill.name} logo`}
+                            width={32}
+                            height={32}
+                            className="max-w-full max-h-full object-contain"
+                          />
+                        </div>
+                        <p className="text-center text-xs">{skill.name}</p>
+                      </div>
+                    ))}
+                  </div>
+                </CardContent>
+              </Card>
+              
+              <Card className="bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700 shadow-md card-hover">
+                <CardContent className="p-6">
+                  <div className="flex items-center mb-4">
+                    <BarChart3 className="h-6 w-6 text-purple-600 dark:text-purple-400 mr-2" />
+                    <h3 className="text-xl font-semibold">Business Intelligence</h3>
+                  </div>
+                  <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
+                    <div className="flex flex-col items-center">
+                      <div className="w-12 h-12 flex items-center justify-center mb-2 bg-white dark:bg-gray-800 rounded-full p-2">
+                        <Image
+                          src="https://upload.wikimedia.org/wikipedia/commons/c/cf/New_Power_BI_Logo.svg"
+                          alt="Power BI logo"
+                          width={32}
+                          height={32}
+                          className="max-w-full max-h-full object-contain"
+                        />
+                      </div>
+                      <p className="text-center text-xs">Power BI</p>
+                    </div>
+                    
+                    <div className="flex flex-col items-center">
+                      <div className="w-12 h-12 flex items-center justify-center mb-2 bg-white dark:bg-gray-800 rounded-full p-2">
+                        <Image
+                          src="https://cdn.worldvectorlogo.com/logos/tableau-software.svg"
+                          alt="Tableau logo"
+                          width={32}
+                          height={32}
+                          className="max-w-full max-h-full object-contain"
+                        />
+                      </div>
+                      <p className="text-center text-xs">Tableau</p>
+                    </div>
+                    
+                    <div className="flex flex-col items-center">
+                      <div className="w-12 h-12 flex items-center justify-center mb-2 bg-white dark:bg-gray-800 rounded-full p-2">
+                        <svg viewBox="-78.5 0 413 413" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink" preserveAspectRatio="xMidYMid" className="max-w-full max-h-full">
+                          <g>
+                            <path d="M127.128486,0 C113.797782,0.0058471726 101.556004,7.36006381 95.2905253,19.126605 C89.0250469,30.8931461 89.7564532,45.1553578 97.1927396,56.2192339 L112.606279,40.8274339 C112.096845,39.2920176 111.839876,37.6841242 111.845385,36.066411 C111.845385,27.6618072 118.658663,20.8485297 127.063267,20.8485297 C135.467871,20.8485297 142.281148,27.6618072 142.281148,36.066411 C142.281148,44.4710148 135.467871,51.2842924 127.063267,51.2842924 C125.452814,51.2878362 123.852389,51.0308872 122.323984,50.5233983 L106.932184,65.9151983 C119.749817,74.6084738 136.686605,74.1479499 149.012895,64.7709924 C161.339185,55.3940349 166.302744,39.1943452 161.345227,24.5216568 C156.387711,9.84896827 142.61604,-0.0205786569 127.128486,0 L127.128486,0 Z" fill="#34A853"></path>
+                            <path d="M112.780303,105.112113 C112.803794,92.9288201 108.858278,81.0693768 101.540706,71.3284161 L81.5400617,91.3073204 C87.7949796,102.747737 85.5440645,116.967804 76.0616244,125.917131 L86.9315396,152.483203 C103.037113,142.110661 112.772753,124.268811 112.780303,105.112113 Z" fill="#FBBC04"></path>
+                            <path d="M56.8870939,133.786949 L56.3653379,133.786949 C44.0975407,133.788013 33.1858466,125.990585 29.2128405,114.383946 C25.2398344,102.777307 29.0843199,89.9287712 38.7794013,82.4118404 C48.4744826,74.8949096 61.8756692,74.3722813 72.126715,81.1113398 L91.9317006,61.3063543 C72.6737207,45.6936654 45.4778243,44.4893124 24.9151409,58.3385684 C4.35245741,72.1878245 -4.75374244,97.8421492 2.47549859,121.556363 C9.70473962,145.270576 31.5737,161.482171 56.3653379,161.50524 C60.1906548,161.507115 64.0066702,161.128427 67.7570091,160.374762 L56.8870939,133.786949 Z" fill="#EA4335"></path>
+                            <path d="M127.88938,156.76595 C115.371706,156.753269 102.919887,158.577095 90.9316684,162.179168 L106.780005,200.897806 C113.678715,199.188192 120.760254,198.326726 127.86764,198.332506 C169.050784,198.344513 204.491034,227.444917 212.516351,267.838552 C220.541668,308.232187 198.917134,348.670095 160.866351,364.424121 C122.815568,380.178148 78.9350487,366.861058 56.0581359,332.616375 C33.1812232,298.371692 37.6787581,252.735993 66.8004566,223.615929 C72.8771111,217.558264 79.8143655,212.430409 87.3880761,208.398047 L71.7136583,169.788108 C13.2865745,198.402523 -14.3767247,266.297107 7.41546106,327.59645 C29.2076468,388.895793 93.5203541,424.092503 156.898395,409.404661 C220.276436,394.716818 262.550912,334.818559 255.157557,270.182291 C247.764201,205.546024 193.055814,156.741054 127.998079,156.74421 L127.88938,156.76595 Z" fill="#4285F4"></path>
+                          </g>
+                        </svg>
+                      </div>
+                      <p className="text-center text-xs">Looker</p>
+                    </div>
+                    
+                    <div className="flex flex-col items-center">
+                      <div className="w-12 h-12 flex items-center justify-center mb-2 bg-white dark:bg-gray-800 rounded-full p-2">
+                        <Image
+                          src="https://miro.medium.com/v2/resize:fit:4800/format:webp/1*KL4vQyb9MEI9y2eyb4WEGQ.png"
+                          alt="QuickSight logo"
+                          width={32}
+                          height={32}
+                          className="max-w-full max-h-full object-contain"
+                        />
+                      </div>
+                      <p className="text-center text-xs">QuickSight</p>
+                    </div>
+                    
+                    <div className="flex flex-col items-center">
+                      <div className="w-12 h-12 flex items-center justify-center mb-2 bg-white dark:bg-gray-800 rounded-full p-2">
+                        <Image
+                          src="https://upload.wikimedia.org/wikipedia/commons/6/6f/Superset-logo.svg"
+                          alt="Superset logo"
+                          width={32}
+                          height={32}
+                          className="max-w-full max-h-full object-contain"
+                        />
+                      </div>
+                      <p className="text-center text-xs">Superset</p>
+                    </div>
+                    
+                    <div className="flex flex-col items-center">
+                      <div className="w-12 h-12 flex items-center justify-center mb-2 bg-white dark:bg-gray-800 rounded-full p-2">
+                        <Image
+                          src="https://upload.wikimedia.org/wikipedia/commons/3/34/Microsoft_Office_Excel_%282019%E2%80%93present%29.svg"
+                          alt="Excel logo"
+                          width={32}
+                          height={32}
+                          className="max-w-full max-h-full object-contain"
+                        />
+                      </div>
+                      <p className="text-center text-xs">Excel</p>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+              
+              <Card className="bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700 shadow-md card-hover">
+                <CardContent className="p-6">
+                  <div className="flex items-center mb-4">
+                    <CircuitBoard className="h-6 w-6 text-green-600 dark:text-green-400 mr-2" />
+                    <h3 className="text-xl font-semibold">ML & Software Dev</h3>
+                  </div>
+                  <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
+                    {[
+                      { name: 'TensorFlow', logo: 'https://upload.wikimedia.org/wikipedia/commons/2/2d/Tensorflow_logo.svg' },
+                      { name: 'PyTorch', logo: 'https://pytorch.org/assets/images/pytorch-logo.png' },
+                      { name: 'JavaScript', logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg' },
+                      { name: 'React', logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg' },
+                      { name: 'Docker', logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg' },
+                      { name: 'Git', logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg' }
+                    ].map((skill) => (
+                      <div key={skill.name} className="flex flex-col items-center">
+                        <div className="w-12 h-12 flex items-center justify-center mb-2 bg-white dark:bg-gray-800 rounded-full p-2">
+                          <Image
+                            src={skill.logo}
+                            alt={`${skill.name} logo`}
+                            width={32}
+                            height={32}
+                            className="max-w-full max-h-full object-contain"
+                          />
+                        </div>
+                        <p className="text-center text-xs">{skill.name}</p>
+                      </div>
+                    ))}
+                  </div>
+                </CardContent>
+              </Card>
             </div>
           </section>
 
           <section id="certificates" ref={sectionRefs.certificates} className="py-20">
             <h2 ref={el => { if (el) sectionHeaderRefs.current.certificates = el }} className="text-3xl font-bold mb-8 text-center section-header">Certificates</h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               {[
                 { name: 'Google Advanced Data Analytics', issuer: 'Google', link: 'https://www.coursera.org/account/accomplishments/professional-cert/AALR5T4XSEY6' },
                 { name: 'AZ-900: Microsoft Azure Fundamentals', issuer: 'Microsoft', link: 'https://learn.microsoft.com/api/achievements/share/en-us/YasarKAYA-5240/JY5EYETG?sharingId=7FE4C6AF70E73B72' },
                 { name: 'PSM 1 - Professional Scrum Master', issuer: 'Scrum.org', link: 'https://www.scrum.org/certificates/1021848' },
                 { name: 'Machine Learning Specialization', issuer: 'Stanford University', link: 'https://www.coursera.org/account/accomplishments/specialization/U89AFBFR4NMM' },
+                { name: 'DeepLearning.AI Data Engineering and AWS', issuer: 'DeepLearning.AI', link: 'https://www.coursera.org/account/accomplishments/specialization/OUGD3WNPRZ1I' },
               ].map((cert, index) => (
-                <Card key={index} className="bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700">
+                <Card key={index} className="bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700 shadow-md card-hover">
                   <CardContent className="p-6">
                     <h3 className="text-xl font-semibold mb-2">{cert.name}</h3>
                     <p className="text-gray-600 dark:text-gray-300 mb-4">Issued by: {cert.issuer}</p>
-                    <Button variant="outline" asChild>
+                    <Button variant="outline" asChild className="w-full">
                       <a href={cert.link} target="_blank" rel="noopener noreferrer">View Certificate</a>
                     </Button>
                   </CardContent>
@@ -395,41 +604,45 @@ export function PortfolioComponent() {
             
             <div className="space-y-12">
               {/* Tableau Dashboard */}
-              <div>
-                <h3 className="text-2xl font-semibold mb-4">Tableau Dashboard</h3>
-                <div className='tableauPlaceholder' id='viz1729591853089' style={{position: 'relative', width: '100%', height: '600px'}}>
-                  <object className='tableauViz' style={{display:'none', width: '100%', height: '100%'}}>
-                    <param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' /> 
-                    <param name='embed_code_version' value='3' /> 
-                    <param name='site_root' value='' />
-                    <param name='name' value='Follow-alongguideWorkwithTableauPart1_16953973838800/Story1' />
-                    <param name='tabs' value='no' />
-                    <param name='toolbar' value='yes' />
-                    <param name='static_image' value='https://public.tableau.com/static/images/Fo/Follow-alongguideWorkwithTableauPart1_16953973838800/Story1/1.png' /> 
-                    <param name='animate_transition' value='yes' />
-                    <param name='display_static_image' value='yes' />
-                    <param name='display_spinner' value='yes' />
-                    <param name='display_overlay' value='yes' />
-                    <param name='display_count' value='yes' />
-                    <param name='language' value='en-US' />
-                  </object>
-                </div>
-              </div>
+              <Card className="bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700 shadow-md overflow-hidden">
+                <CardContent className="p-6">
+                  <h3 className="text-2xl font-semibold mb-4">Tableau Dashboard</h3>
+                  <div className='tableauPlaceholder' id='viz1729591853089' style={{position: 'relative', width: '100%', height: '600px'}}>
+                    <object className='tableauViz' style={{display:'none', width: '100%', height: '100%'}}>
+                      <param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' /> 
+                      <param name='embed_code_version' value='3' /> 
+                      <param name='site_root' value='' />
+                      <param name='name' value='Follow-alongguideWorkwithTableauPart1_16953973838800/Story1' />
+                      <param name='tabs' value='no' />
+                      <param name='toolbar' value='yes' />
+                      <param name='static_image' value='https://public.tableau.com/static/images/Fo/Follow-alongguideWorkwithTableauPart1_16953973838800/Story1/1.png' /> 
+                      <param name='animate_transition' value='yes' />
+                      <param name='display_static_image' value='yes' />
+                      <param name='display_spinner' value='yes' />
+                      <param name='display_overlay' value='yes' />
+                      <param name='display_count' value='yes' />
+                      <param name='language' value='en-US' />
+                    </object>
+                  </div>
+                </CardContent>
+              </Card>
 
               {/* Power BI Dashboard */}
-              <div>
-                <h3 className="text-2xl font-semibold mb-4">Power BI Dashboard</h3>
-                <div style={{width: '100%', height: '600px'}}>
-                  <iframe 
-                    title="Store Sales" 
-                    width="100%" 
-                    height="100%" 
-                    src="https://app.powerbi.com/view?r=eyJrIjoiM2Y1MTI2YTYtOTNlYS00MGQ4LThmMzktMTYyYjg3Mjk4M2FkIiwidCI6IjQ1NDIwZThkLTg1NTItNGEwMy05YjkyLWE5MzFlZjgzOWQzZiIsImMiOjh9" 
-                    frameBorder="0" 
-                    allowFullScreen={true}
-                  ></iframe>
-                </div>
-              </div>
+              <Card className="bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700 shadow-md overflow-hidden">
+                <CardContent className="p-6">
+                  <h3 className="text-2xl font-semibold mb-4">Power BI Dashboard</h3>
+                  <div style={{width: '100%', height: '600px'}}>
+                    <iframe 
+                      title="Store Sales" 
+                      width="100%" 
+                      height="100%" 
+                      src="https://app.powerbi.com/view?r=eyJrIjoiM2Y1MTI2YTYtOTNlYS00MGQ4LThmMzktMTYyYjg3Mjk4M2FkIiwidCI6IjQ1NDIwZThkLTg1NTItNGEwMy05YjkyLWE5MzFlZjgzOWQzZiIsImMiOjh9" 
+                      frameBorder="0" 
+                      allowFullScreen={true}
+                    ></iframe>
+                  </div>
+                </CardContent>
+              </Card>
             </div>
             
             <div className="mt-8">
@@ -441,56 +654,93 @@ export function PortfolioComponent() {
 
           <section id="contact" ref={sectionRefs.contact} className="py-20">
             <h2 ref={el => { if (el) sectionHeaderRefs.current.contact = el }} className="text-3xl font-bold mb-8 text-center section-header">Get in Touch</h2>
-            <p className="text-xl mb-8 text-center">I&apos;m always open to collaborations.</p>
-            <form onSubmit={handleSubmit} className="max-w-md mx-auto mb-8">
-              <div className="mb-4">
-                <label htmlFor="email" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                  Email
-                </label>
-                <input
-                  type="email"
-                  id="email"
-                  name="email"
-                  required
-                  className="w-full px-3 py-2 bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-md text-gray-700 dark:text-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-500 dark:focus:ring-blue-400"
-                  placeholder="your@email.com"
-                />
-              </div>
-              <Button type="submit" disabled={isSubmitting} className="w-full">
-                {isSubmitting ? 'Submitting...' : 'Submit'}
-              </Button>
-              {submitMessage && (
-                <p className="mt-4 text-green-600 dark:text-green-400">{submitMessage}</p>
-              )}
-            </form>
-            <div className="flex justify-center space-x-6">
-              <a
-                href="mailto:ysr.kaan.kaya@outlook.com"
-                className={`${buttonVariants({ variant: "outline" })} button-outline`}
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <Mail className="mr-2 h-4 w-4" /> Email
-              </a>
-              <a
-                href="https://linkedin.com/in/yasarkaankaya"
-                className={`${buttonVariants({ variant: "outline" })} button-outline`}
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <Linkedin className="mr-2 h-4 w-4" /> LinkedIn
-              </a>
-              <a
-                href="https://github.com/YKKaya"
-                className={`${buttonVariants({ variant: "outline" })} button-outline`}
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <Github className="mr-2 h-4 w-4" /> GitHub
-              </a>
+            <div className="flex flex-col md:flex-row gap-8 items-start">
+              <Card className="bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700 shadow-md card-hover flex-1">
+                <CardContent className="p-8">
+                  <h3 className="text-xl font-semibold mb-6">Contact Form</h3>
+                  <form onSubmit={handleSubmit} className="space-y-4">
+                    <div>
+                      <label htmlFor="email" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                        Email
+                      </label>
+                      <input
+                        type="email"
+                        id="email"
+                        name="email"
+                        required
+                        className="w-full px-3 py-2 bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-md text-gray-700 dark:text-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-500 dark:focus:ring-blue-400"
+                        placeholder="your@email.com"
+                      />
+                    </div>
+                    <div>
+                      <label htmlFor="message" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                        Message
+                      </label>
+                      <textarea
+                        id="message"
+                        name="message"
+                        rows={4}
+                        required
+                        className="w-full px-3 py-2 bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-md text-gray-700 dark:text-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-500 dark:focus:ring-blue-400"
+                        placeholder="Your message..."
+                      ></textarea>
+                    </div>
+                    <Button type="submit" disabled={isSubmitting} className="w-full">
+                      {isSubmitting ? 'Submitting...' : 'Submit'}
+                    </Button>
+                    {submitMessage && (
+                      <p className="mt-4 text-green-600 dark:text-green-400">{submitMessage}</p>
+                    )}
+                  </form>
+                </CardContent>
+              </Card>
+              
+              <Card className="bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700 shadow-md card-hover flex-1">
+                <CardContent className="p-8">
+                  <h3 className="text-xl font-semibold mb-6">Connect with Me</h3>
+                  <p className="text-gray-600 dark:text-gray-300 mb-6">
+                    Feel free to reach out for collaborations, job opportunities, or just to say hello. I&apos;m always interested in new projects and connections.
+                  </p>
+                  <div className="space-y-4">
+                    <a
+                      href="mailto:ysr.kaan.kaya@outlook.com"
+                      className="flex items-center p-3 bg-gray-100 dark:bg-gray-700 rounded-md hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      <Mail className="h-5 w-5 mr-3 text-blue-600 dark:text-blue-400" /> 
+                      <span>ysr.kaan.kaya@outlook.com</span>
+                    </a>
+                    <a
+                      href="https://linkedin.com/in/yasarkaankaya"
+                      className="flex items-center p-3 bg-gray-100 dark:bg-gray-700 rounded-md hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      <Linkedin className="h-5 w-5 mr-3 text-blue-600 dark:text-blue-400" /> 
+                      <span>linkedin.com/in/yasarkaankaya</span>
+                    </a>
+                    <a
+                      href="https://github.com/YKaanKaya"
+                      className="flex items-center p-3 bg-gray-100 dark:bg-gray-700 rounded-md hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      <Github className="h-5 w-5 mr-3 text-blue-600 dark:text-blue-400" /> 
+                      <span>github.com/YKaanKaya</span>
+                    </a>
+                  </div>
+                </CardContent>
+              </Card>
             </div>
           </section>
         </main>
+        
+        <footer className="bg-gray-100 dark:bg-gray-800 py-6 mt-10">
+          <div className="max-w-6xl mx-auto px-4 text-center text-gray-600 dark:text-gray-400">
+            <p>© {new Date().getFullYear()} Kaan KAYA. All rights reserved.</p>
+          </div>
+        </footer>
       </div>
     </div>
   )
