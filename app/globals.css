@@ -76,3 +76,56 @@ body {
     @apply bg-background text-foreground;
   }
 }
+
+/* Syntax highlighter styles */
+.syntax-highlighter-wrapper pre {
+  margin: 0 !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+}
+
+.syntax-highlighter-wrapper code {
+  background: transparent !important;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace !important;
+}
+
+/* Override default styles for syntax highlighting spans */
+.syntax-highlighter-wrapper .token.comment {
+  color: #6A9955 !important;
+}
+
+.syntax-highlighter-wrapper .token.string {
+  color: #CE9178 !important;
+}
+
+.syntax-highlighter-wrapper .token.number {
+  color: #B5CEA8 !important;
+}
+
+.syntax-highlighter-wrapper .token.keyword {
+  color: #569CD6 !important;
+}
+
+.syntax-highlighter-wrapper .token.function {
+  color: #DCDCAA !important;
+}
+
+.syntax-highlighter-wrapper .token.operator {
+  color: #D4D4D4 !important;
+}
+
+.syntax-highlighter-wrapper .token.property {
+  color: #9CDCFE !important;
+}
+
+.syntax-highlighter-wrapper .token.punctuation {
+  color: #D4D4D4 !important;
+}
+
+.syntax-highlighter-wrapper .token.class-name {
+  color: #4EC9B0 !important;
+}
+
+.syntax-highlighter-wrapper .token.variable {
+  color: #9CDCFE !important;
+}
