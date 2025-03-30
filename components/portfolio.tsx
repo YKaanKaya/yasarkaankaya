@@ -1,20 +1,21 @@
 "use client"
 
 import { useEffect, useRef, useState } from 'react'
-import { ArrowDown, Linkedin, Mail, Github, Moon, Sun, Code, BookOpen, BarChart3, Database, CircuitBoard, Laptop } from 'lucide-react'
+import { ArrowDown, Linkedin, Mail, Github, Code, BookOpen, BarChart3, Database, CircuitBoard } from 'lucide-react'
 import Image from 'next/image'
-import { useTheme } from 'next-themes'
+import { useTheme } from "next-themes"
 
 import { Button, buttonVariants } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
+import { ThemeToggle } from "@/components/ui/theme-toggle"
 
 export function PortfolioComponent() {
   const [activeSection, setActiveSection] = useState('profile')
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [submitMessage, setSubmitMessage] = useState('')
+  const [tableauLoaded, setTableauLoaded] = useState(false)
   const [mounted, setMounted] = useState(false)
-  const [tableauLoaded, setTableauLoaded] = useState(false);
   const { theme, setTheme } = useTheme()
 
   const profileRef = useRef<HTMLElement>(null)
@@ -40,6 +41,11 @@ export function PortfolioComponent() {
   }
 
   const sectionHeaderRefs = useRef<{ [key: string]: HTMLHeadingElement }>({})
+
+  // Make sure we're mounted before rendering theme-dependent UI
+  useEffect(() => {
+    setMounted(true)
+  }, [])
 
   useEffect(() => {
     const observerOptions = {
@@ -112,9 +118,9 @@ export function PortfolioComponent() {
     setSubmitMessage(`Email ${email} submitted successfully!`)
   }
 
-  useEffect(() => {
-    setMounted(true)
-  }, [])
+  const toggleTheme = () => {
+    setTheme(theme === 'dark' ? 'light' : 'dark')
+  }
 
   useEffect(() => {
     const loadTableauScript = () => {
@@ -153,9 +159,14 @@ export function PortfolioComponent() {
     }
   }, [tableauLoaded]);
 
+  // Wait for client-side hydration
+  if (!mounted) {
+    return null;
+  }
+
   return (
     <div className="min-h-screen">
-      <div className={`bg-gray-50 text-gray-800 dark:bg-black dark:text-gray-100 min-h-screen transition-colors duration-300`}>
+      <div className="bg-background text-foreground min-h-screen transition-colors duration-300">
         <style jsx global>{`
           @keyframes fadeInUp {
             from {
@@ -179,13 +190,13 @@ export function PortfolioComponent() {
             opacity: 1;
             transform: translateY(0);
           }
-          .dark .button-outline {
-            color: white;
+          .button-outline {
+            color: inherit;
             background-color: transparent;
-            border-color: white;
+            border-color: currentColor;
           }
-          .dark .button-outline:hover {
-            background-color: rgba(255, 255, 255, 0.1);
+          .button-outline:hover {
+            background-color: rgba(127, 127, 127, 0.1);
           }
           .gradient-text {
             background: linear-gradient(90deg, #3b82f6 0%, #8b5cf6 100%);
@@ -200,19 +211,19 @@ export function PortfolioComponent() {
             box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
           }
         `}</style>
-        <nav className="sticky top-0 z-50 bg-white dark:bg-black bg-opacity-90 dark:bg-opacity-90 backdrop-blur-md shadow-sm">
+        <nav className="sticky top-0 z-50 bg-background/90 backdrop-blur-md shadow-sm">
           <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="flex justify-between items-center h-16">
               <div className="font-bold text-xl text-blue-600 dark:text-blue-400">
                 Kaan KAYA
               </div>
-              <ul className="hidden md:flex space-x-4">
+              <ul className="hidden md:flex space-x-4 mr-4">
                 {(Object.keys(sectionRefs) as Array<keyof typeof sectionRefs>).map((section) => (
                   <li key={section}>
                     <button
                       onClick={() => scrollToSection(section)}
                       className={`text-sm font-medium transition-colors hover:text-blue-600 dark:hover:text-blue-400 ${
-                        activeSection === section ? 'text-blue-600 dark:text-blue-400' : 'text-gray-600 dark:text-gray-300'
+                        activeSection === section ? 'text-blue-600 dark:text-blue-400' : 'text-muted-foreground'
                       }`}
                     >
                       {section === 'biPlayground' ? 'BI Playground' : section.charAt(0).toUpperCase() + section.slice(1)}
@@ -220,107 +231,44 @@ export function PortfolioComponent() {
                   </li>
                 ))}
               </ul>
-              <div className="flex items-center space-x-2">
-                {mounted && (
-                  <div className="flex rounded-md bg-gray-100 dark:bg-gray-800 p-1">
-                    <Button 
-                      onClick={() => setTheme('light')} 
-                      variant="ghost" 
-                      size="icon"
-                      className={`${theme === 'light' ? 'bg-white dark:bg-gray-700 text-blue-600' : 'text-gray-500'} rounded-md`}
-                    >
-                      <Sun className="h-5 w-5" />
-                    </Button>
-                    <Button 
-                      onClick={() => setTheme('system')} 
-                      variant="ghost" 
-                      size="icon" 
-                      className={`${theme === 'system' ? 'bg-white dark:bg-gray-700 text-blue-600' : 'text-gray-500'} rounded-md`}
-                    >
-                      <Laptop className="h-5 w-5" />
-                    </Button>
-                    <Button 
-                      onClick={() => setTheme('dark')} 
-                      variant="ghost" 
-                      size="icon" 
-                      className={`${theme === 'dark' ? 'bg-white dark:bg-gray-700 text-blue-600' : 'text-gray-500'} rounded-md`}
-                    >
-                      <Moon className="h-5 w-5" />
-                    </Button>
-                  </div>
-                )}
-              </div>
+              <ThemeToggle />
             </div>
           </div>
         </nav>
 
         <main className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-          <section id="profile" ref={profileRef} className="min-h-screen flex items-center py-20">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
-              <div className="order-2 lg:order-1 space-y-6">
-                <div>
-                  <h2 className="text-lg font-medium text-blue-600 dark:text-blue-400 mb-2">Hello, I'm</h2>
-                  <h1 className="text-5xl font-bold mb-4">Kaan KAYA</h1>
-                  <div className="flex flex-wrap gap-3 mb-4">
-                    <Badge variant="outline" className="text-md py-1 px-3 bg-blue-100 dark:bg-blue-900/30 text-blue-800 dark:text-blue-200 border-blue-300 dark:border-blue-700">
-                      <Database className="mr-1 h-4 w-4" /> Data Engineer
-                    </Badge>
-                    <Badge variant="outline" className="text-md py-1 px-3 bg-purple-100 dark:bg-purple-900/30 text-purple-800 dark:text-purple-200 border-purple-300 dark:border-purple-700">
-                      <BarChart3 className="mr-1 h-4 w-4" /> BI Engineer
-                    </Badge>
-                    <Badge variant="outline" className="text-md py-1 px-3 bg-green-100 dark:bg-green-900/30 text-green-800 dark:text-green-200 border-green-300 dark:border-green-700">
-                      <CircuitBoard className="mr-1 h-4 w-4" /> ML Engineer
-                    </Badge>
-                  </div>
-                </div>
-                
-                <p className="text-lg text-gray-600 dark:text-gray-300">
-                  I transform complex data into actionable insights and scalable solutions. With expertise in data engineering, business intelligence, and machine learning, I build systems that drive decision-making and innovation.
-                </p>
-                
-                <div className="flex gap-4 pt-4">
-                  <Button onClick={() => scrollToSection('about')} className="px-6">
-                    About Me
-                  </Button>
-                  <Button onClick={() => scrollToSection('projects')} variant="outline" className="px-6 dark:text-white">
-                    View Projects
-                  </Button>
-                </div>
-                
-                <div className="flex gap-4 pt-6">
-                  <a href="https://github.com/YKaanKaya" target="_blank" rel="noopener noreferrer" className="text-gray-600 hover:text-black dark:text-gray-400 dark:hover:text-white transition-colors">
-                    <Github className="h-6 w-6" />
-                  </a>
-                  <a href="https://linkedin.com/in/yasarkaankaya" target="_blank" rel="noopener noreferrer" className="text-gray-600 hover:text-blue-600 dark:text-gray-400 dark:hover:text-blue-400 transition-colors">
-                    <Linkedin className="h-6 w-6" />
-                  </a>
-                  <a href="mailto:yasarkaankaya@gmail.com" target="_blank" rel="noopener noreferrer" className="text-gray-600 hover:text-red-600 dark:text-gray-400 dark:hover:text-red-400 transition-colors">
-                    <Mail className="h-6 w-6" />
-                  </a>
-                </div>
+          <section id="profile" ref={sectionRefs.profile} className="min-h-screen flex flex-col items-center justify-center py-20">
+            <div className="text-center max-w-3xl mx-auto">
+              <h1 className="text-5xl font-bold mb-4">Kaan KAYA</h1>
+              <div className="flex justify-center gap-3 mb-4">
+                <Badge variant="outline" className="text-md py-1 px-3 bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 border-blue-300 dark:border-blue-700">
+                  <Database className="mr-1 h-4 w-4" /> Data Engineer
+                </Badge>
+                <Badge variant="outline" className="text-md py-1 px-3 bg-purple-100 dark:bg-purple-900 text-purple-800 dark:text-purple-200 border-purple-300 dark:border-purple-700">
+                  <BarChart3 className="mr-1 h-4 w-4" /> BI Engineer
+                </Badge>
+                <Badge variant="outline" className="text-md py-1 px-3 bg-green-100 dark:bg-green-900 text-green-800 dark:text-green-200 border-green-300 dark:border-green-700">
+                  <CircuitBoard className="mr-1 h-4 w-4" /> ML Engineer
+                </Badge>
               </div>
-              
-              <div className="order-1 lg:order-2 flex justify-center lg:justify-end">
-                <div className="relative w-64 h-64 md:w-80 md:h-80 bg-gradient-to-br from-blue-500 to-purple-600 rounded-full overflow-hidden shadow-2xl">
-                  <div className="absolute inset-2 bg-white dark:bg-black rounded-full flex items-center justify-center">
-                    <span className="text-4xl font-bold bg-gradient-to-r from-blue-500 to-purple-600 bg-clip-text text-transparent">KK</span>
-                  </div>
-                </div>
-              </div>
+              <p className="text-xl text-muted-foreground mb-8">Building data-driven solutions with code and creativity</p>
+              <Button onClick={() => scrollToSection('about')} className="animate-bounce">
+                <ArrowDown className="mr-2 h-4 w-4" /> Learn More
+              </Button>
             </div>
           </section>
-          
-          <section id="about" ref={aboutRef} className="py-20">
+
+          <section id="about" ref={sectionRefs.about} className="py-20">
             <h2 ref={el => { if (el) sectionHeaderRefs.current.about = el }} className="text-3xl font-bold mb-8 text-center section-header">About Me</h2>
-            <Card className="bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700 shadow-md">
+            <Card className="border-border shadow-md">
               <CardContent className="p-8">
-                <p className="text-gray-700 dark:text-gray-300 mb-4 text-lg">
+                <p className="text-foreground mb-4 text-lg">
                   I am a <span className="font-semibold">Business Intelligence Engineer & Data Engineer</span> with a passion for transforming complex data into actionable insights. With extensive experience across various industries, I specialize in designing robust data pipelines, implementing advanced analytics, and developing machine learning solutions.
                 </p>
-                <p className="text-gray-700 dark:text-gray-300 mb-4 text-lg">
+                <p className="text-foreground mb-4 text-lg">
                   Currently pursuing an <span className="font-semibold">MSc in Computer Science at Heriot Watt University</span>, I&apos;m expanding my expertise in software development and machine learning engineering to build more sophisticated data-driven applications.
                 </p>
-                <p className="text-gray-700 dark:text-gray-300 text-lg">
+                <p className="text-foreground text-lg">
                   I thrive at the intersection of data, software, and AI, enabling organizations to leverage their data assets for strategic decision-making and innovation. My goal is to combine my data engineering foundation with cutting-edge software development practices to create impactful machine learning solutions.
                 </p>
               </CardContent>
@@ -367,17 +315,17 @@ export function PortfolioComponent() {
                   tags: ['Market Risk', 'Automation', 'Regulatory Compliance']
                 }
               ].map((job, index) => (
-                <Card key={index} className="bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700 shadow-md card-hover">
+                <Card key={index} className="border-border shadow-md card-hover">
                   <CardContent className="p-6">
                     <div className="flex flex-col md:flex-row md:justify-between md:items-start mb-3">
                       <h3 className="text-xl font-semibold">{job.title}</h3>
-                      <p className="text-gray-500 dark:text-gray-400 text-sm md:text-right">{job.period}</p>
+                      <p className="text-muted-foreground text-sm md:text-right">{job.period}</p>
                     </div>
-                    <p className="text-gray-600 dark:text-gray-300 font-medium mb-3">{job.company}</p>
-                    <p className="mt-2 text-gray-700 dark:text-gray-200 mb-4">{job.description}</p>
+                    <p className="text-muted-foreground font-medium mb-3">{job.company}</p>
+                    <p className="mt-2 text-foreground mb-4">{job.description}</p>
                     <div className="flex flex-wrap gap-2">
                       {job.tags.map((tag, i) => (
-                        <Badge key={i} variant="secondary" className="bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-gray-200">
+                        <Badge key={i} variant="secondary">
                           {tag}
                         </Badge>
                       ))}
@@ -390,27 +338,27 @@ export function PortfolioComponent() {
 
           <section id="education" ref={sectionRefs.education} className="py-20">
             <h2 ref={el => { if (el) sectionHeaderRefs.current.education = el }} className="text-3xl font-bold mb-8 text-center section-header">Education</h2>
-            <Card className="bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700 shadow-md card-hover">
+            <Card className="border-border shadow-md">
               <CardContent className="p-6">
                 <div className="flex flex-col md:flex-row justify-between items-start mb-3">
                   <h3 className="text-xl font-semibold">MSc in Computer Science</h3>
-                  <p className="text-gray-500 dark:text-gray-400 text-sm">2024 - Present</p>
+                  <p className="text-muted-foreground text-sm">2024 - Present</p>
                 </div>
-                <p className="text-gray-600 dark:text-gray-300 font-medium mb-3">Heriot Watt University</p>
-                <p className="text-gray-700 dark:text-gray-200 mb-4">
+                <p className="text-muted-foreground font-medium mb-3">Heriot Watt University</p>
+                <p className="text-foreground mb-4">
                   Focused on advanced software development methodologies, machine learning algorithms, and AI applications for building innovative technical solutions.
                 </p>
                 <div className="flex flex-wrap gap-2">
-                  <Badge variant="secondary" className="bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-gray-200">
+                  <Badge variant="secondary">
                     Machine Learning
                   </Badge>
-                  <Badge variant="secondary" className="bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-gray-200">
+                  <Badge variant="secondary">
                     Software Engineering
                   </Badge>
-                  <Badge variant="secondary" className="bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-gray-200">
+                  <Badge variant="secondary">
                     AI Systems
                   </Badge>
-                  <Badge variant="secondary" className="bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-gray-200">
+                  <Badge variant="secondary">
                     Algorithms
                   </Badge>
                 </div>
@@ -454,10 +402,10 @@ export function PortfolioComponent() {
                   tags: ['Automation', 'Python', 'Power BI', 'ETL']
                 }
               ].map((project, index) => (
-                <Card key={index} className="bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700 shadow-md card-hover">
+                <Card key={index} className="border-border shadow-md card-hover">
                   <CardContent className="p-6">
                     <h3 className="text-xl font-semibold mb-2">{project.title}</h3>
-                    <p className="text-gray-600 dark:text-gray-300 mb-4">{project.description}</p>
+                    <p className="text-muted-foreground mb-4">{project.description}</p>
                     <div className="flex flex-wrap gap-2 mb-4">
                       {project.tags.map((tag, i) => (
                         <Badge key={i} variant="secondary" className="bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200">
@@ -484,7 +432,7 @@ export function PortfolioComponent() {
           <section id="skills" ref={sectionRefs.skills} className="py-20">
             <h2 ref={el => { if (el) sectionHeaderRefs.current.skills = el }} className="text-3xl font-bold mb-8 text-center section-header">Skills</h2>
             <div className="grid grid-cols-1 gap-8 md:grid-cols-3">
-              <Card className="bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700 shadow-md card-hover">
+              <Card className="border-border shadow-md card-hover">
                 <CardContent className="p-6">
                   <div className="flex items-center mb-4">
                     <Database className="h-6 w-6 text-blue-600 dark:text-blue-400 mr-2" />
@@ -500,7 +448,7 @@ export function PortfolioComponent() {
                       { name: 'Spark', logo: 'https://upload.wikimedia.org/wikipedia/commons/f/f3/Apache_Spark_logo.svg' }
                     ].map((skill) => (
                       <div key={skill.name} className="flex flex-col items-center">
-                        <div className="w-12 h-12 flex items-center justify-center mb-2 bg-white dark:bg-gray-800 rounded-full p-2">
+                        <div className="w-12 h-12 flex items-center justify-center mb-2 bg-card rounded-full p-2">
                           <Image
                             src={skill.logo}
                             alt={`${skill.name} logo`}
@@ -516,7 +464,7 @@ export function PortfolioComponent() {
                 </CardContent>
               </Card>
               
-              <Card className="bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700 shadow-md card-hover">
+              <Card className="border-border shadow-md card-hover">
                 <CardContent className="p-6">
                   <div className="flex items-center mb-4">
                     <BarChart3 className="h-6 w-6 text-purple-600 dark:text-purple-400 mr-2" />
@@ -524,7 +472,7 @@ export function PortfolioComponent() {
                   </div>
                   <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
                     <div className="flex flex-col items-center">
-                      <div className="w-12 h-12 flex items-center justify-center mb-2 bg-white dark:bg-gray-800 rounded-full p-2">
+                      <div className="w-12 h-12 flex items-center justify-center mb-2 bg-card rounded-full p-2">
                         <Image
                           src="https://upload.wikimedia.org/wikipedia/commons/c/cf/New_Power_BI_Logo.svg"
                           alt="Power BI logo"
@@ -537,7 +485,7 @@ export function PortfolioComponent() {
                     </div>
                     
                     <div className="flex flex-col items-center">
-                      <div className="w-12 h-12 flex items-center justify-center mb-2 bg-white dark:bg-gray-800 rounded-full p-2">
+                      <div className="w-12 h-12 flex items-center justify-center mb-2 bg-card rounded-full p-2">
                         <Image
                           src="https://cdn.worldvectorlogo.com/logos/tableau-software.svg"
                           alt="Tableau logo"
@@ -550,7 +498,7 @@ export function PortfolioComponent() {
                     </div>
                     
                     <div className="flex flex-col items-center">
-                      <div className="w-12 h-12 flex items-center justify-center mb-2 bg-white dark:bg-gray-800 rounded-full p-2">
+                      <div className="w-12 h-12 flex items-center justify-center mb-2 bg-card rounded-full p-2">
                         <svg viewBox="-78.5 0 413 413" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink" preserveAspectRatio="xMidYMid" className="max-w-full max-h-full">
                           <g>
                             <path d="M127.128486,0 C113.797782,0.0058471726 101.556004,7.36006381 95.2905253,19.126605 C89.0250469,30.8931461 89.7564532,45.1553578 97.1927396,56.2192339 L112.606279,40.8274339 C112.096845,39.2920176 111.839876,37.6841242 111.845385,36.066411 C111.845385,27.6618072 118.658663,20.8485297 127.063267,20.8485297 C135.467871,20.8485297 142.281148,27.6618072 142.281148,36.066411 C142.281148,44.4710148 135.467871,51.2842924 127.063267,51.2842924 C125.452814,51.2878362 123.852389,51.0308872 122.323984,50.5233983 L106.932184,65.9151983 C119.749817,74.6084738 136.686605,74.1479499 149.012895,64.7709924 C161.339185,55.3940349 166.302744,39.1943452 161.345227,24.5216568 C156.387711,9.84896827 142.61604,-0.0205786569 127.128486,0 L127.128486,0 Z" fill="#34A853"></path>
@@ -564,7 +512,7 @@ export function PortfolioComponent() {
                     </div>
                     
                     <div className="flex flex-col items-center">
-                      <div className="w-12 h-12 flex items-center justify-center mb-2 bg-white dark:bg-gray-800 rounded-full p-2">
+                      <div className="w-12 h-12 flex items-center justify-center mb-2 bg-card rounded-full p-2">
                         <Image
                           src="https://miro.medium.com/v2/resize:fit:4800/format:webp/1*KL4vQyb9MEI9y2eyb4WEGQ.png"
                           alt="QuickSight logo"
@@ -577,7 +525,7 @@ export function PortfolioComponent() {
                     </div>
                     
                     <div className="flex flex-col items-center">
-                      <div className="w-12 h-12 flex items-center justify-center mb-2 bg-white dark:bg-gray-800 rounded-full p-2">
+                      <div className="w-12 h-12 flex items-center justify-center mb-2 bg-card rounded-full p-2">
                         <Image
                           src="https://upload.wikimedia.org/wikipedia/commons/6/6f/Superset-logo.svg"
                           alt="Superset logo"
@@ -590,7 +538,7 @@ export function PortfolioComponent() {
                     </div>
                     
                     <div className="flex flex-col items-center">
-                      <div className="w-12 h-12 flex items-center justify-center mb-2 bg-white dark:bg-gray-800 rounded-full p-2">
+                      <div className="w-12 h-12 flex items-center justify-center mb-2 bg-card rounded-full p-2">
                         <Image
                           src="https://upload.wikimedia.org/wikipedia/commons/3/34/Microsoft_Office_Excel_%282019%E2%80%93present%29.svg"
                           alt="Excel logo"
@@ -605,7 +553,7 @@ export function PortfolioComponent() {
                 </CardContent>
               </Card>
               
-              <Card className="bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700 shadow-md card-hover">
+              <Card className="border-border shadow-md card-hover">
                 <CardContent className="p-6">
                   <div className="flex items-center mb-4">
                     <CircuitBoard className="h-6 w-6 text-green-600 dark:text-green-400 mr-2" />
@@ -621,7 +569,7 @@ export function PortfolioComponent() {
                       { name: 'Git', logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg' }
                     ].map((skill) => (
                       <div key={skill.name} className="flex flex-col items-center">
-                        <div className="w-12 h-12 flex items-center justify-center mb-2 bg-white dark:bg-gray-800 rounded-full p-2">
+                        <div className="w-12 h-12 flex items-center justify-center mb-2 bg-card rounded-full p-2">
                           <Image
                             src={skill.logo}
                             alt={`${skill.name} logo`}
@@ -649,10 +597,10 @@ export function PortfolioComponent() {
                 { name: 'Machine Learning Specialization', issuer: 'Stanford University', link: 'https://www.coursera.org/account/accomplishments/specialization/U89AFBFR4NMM' },
                 { name: 'DeepLearning.AI Data Engineering and AWS', issuer: 'DeepLearning.AI', link: 'https://www.coursera.org/account/accomplishments/specialization/OUGD3WNPRZ1I' },
               ].map((cert, index) => (
-                <Card key={index} className="bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700 shadow-md card-hover">
+                <Card key={index} className="border-border shadow-md card-hover">
                   <CardContent className="p-6">
                     <h3 className="text-xl font-semibold mb-2">{cert.name}</h3>
-                    <p className="text-gray-600 dark:text-gray-300 mb-4">Issued by: {cert.issuer}</p>
+                    <p className="text-muted-foreground mb-4">Issued by: {cert.issuer}</p>
                     <Button variant="outline" asChild className="w-full">
                       <a href={cert.link} target="_blank" rel="noopener noreferrer">View Certificate</a>
                     </Button>
@@ -667,7 +615,7 @@ export function PortfolioComponent() {
             
             <div className="space-y-12">
               {/* Tableau Dashboard */}
-              <Card className="bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700 shadow-md overflow-hidden">
+              <Card className="border-border shadow-md overflow-hidden">
                 <CardContent className="p-6">
                   <h3 className="text-2xl font-semibold mb-4">Tableau Dashboard</h3>
                   <div className='tableauPlaceholder' id='viz1729591853089' style={{position: 'relative', width: '100%', height: '600px'}}>
@@ -691,7 +639,7 @@ export function PortfolioComponent() {
               </Card>
 
               {/* Power BI Dashboard */}
-              <Card className="bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700 shadow-md overflow-hidden">
+              <Card className="border-border shadow-md overflow-hidden">
                 <CardContent className="p-6">
                   <h3 className="text-2xl font-semibold mb-4">Power BI Dashboard</h3>
                   <div style={{width: '100%', height: '600px'}}>
@@ -709,7 +657,7 @@ export function PortfolioComponent() {
             </div>
             
             <div className="mt-8">
-              <p className="text-sm text-gray-600 dark:text-gray-400 italic">
+              <p className="text-sm text-muted-foreground italic">
                 Disclaimer: These are interactive dashboards that showcase my proficiency in Tableau and Power BI. They use publicly available data and serve as examples of my data visualization skills.
               </p>
             </div>
@@ -718,12 +666,12 @@ export function PortfolioComponent() {
           <section id="contact" ref={sectionRefs.contact} className="py-20">
             <h2 ref={el => { if (el) sectionHeaderRefs.current.contact = el }} className="text-3xl font-bold mb-8 text-center section-header">Get in Touch</h2>
             <div className="flex flex-col md:flex-row gap-8 items-start">
-              <Card className="bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700 shadow-md card-hover flex-1">
+              <Card className="border-border shadow-md card-hover flex-1">
                 <CardContent className="p-8">
                   <h3 className="text-xl font-semibold mb-6">Contact Form</h3>
                   <form onSubmit={handleSubmit} className="space-y-4">
                     <div>
-                      <label htmlFor="email" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                      <label htmlFor="email" className="block text-sm font-medium text-muted-foreground mb-2">
                         Email
                       </label>
                       <input
@@ -731,12 +679,12 @@ export function PortfolioComponent() {
                         id="email"
                         name="email"
                         required
-                        className="w-full px-3 py-2 bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-md text-gray-700 dark:text-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-500 dark:focus:ring-blue-400"
+                        className="w-full px-3 py-2 bg-background border border-input rounded-md text-foreground focus:outline-none focus:ring-2 focus:ring-blue-500"
                         placeholder="your@email.com"
                       />
                     </div>
                     <div>
-                      <label htmlFor="message" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                      <label htmlFor="message" className="block text-sm font-medium text-muted-foreground mb-2">
                         Message
                       </label>
                       <textarea
@@ -744,7 +692,7 @@ export function PortfolioComponent() {
                         name="message"
                         rows={4}
                         required
-                        className="w-full px-3 py-2 bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-md text-gray-700 dark:text-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-500 dark:focus:ring-blue-400"
+                        className="w-full px-3 py-2 bg-background border border-input rounded-md text-foreground focus:outline-none focus:ring-2 focus:ring-blue-500"
                         placeholder="Your message..."
                       ></textarea>
                     </div>
@@ -758,16 +706,16 @@ export function PortfolioComponent() {
                 </CardContent>
               </Card>
               
-              <Card className="bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700 shadow-md card-hover flex-1">
+              <Card className="border-border shadow-md card-hover flex-1">
                 <CardContent className="p-8">
                   <h3 className="text-xl font-semibold mb-6">Connect with Me</h3>
-                  <p className="text-gray-600 dark:text-gray-300 mb-6">
+                  <p className="text-muted-foreground mb-6">
                     Feel free to reach out for collaborations, job opportunities, or just to say hello. I&apos;m always interested in new projects and connections.
                   </p>
                   <div className="space-y-4">
                     <a
                       href="mailto:ysr.kaan.kaya@outlook.com"
-                      className="flex items-center p-3 bg-gray-100 dark:bg-gray-700 rounded-md hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors"
+                      className="flex items-center p-3 bg-secondary rounded-md hover:bg-secondary/80 transition-colors"
                       target="_blank"
                       rel="noopener noreferrer"
                     >
@@ -776,7 +724,7 @@ export function PortfolioComponent() {
                     </a>
                     <a
                       href="https://linkedin.com/in/yasarkaankaya"
-                      className="flex items-center p-3 bg-gray-100 dark:bg-gray-700 rounded-md hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors"
+                      className="flex items-center p-3 bg-secondary rounded-md hover:bg-secondary/80 transition-colors"
                       target="_blank"
                       rel="noopener noreferrer"
                     >
@@ -785,7 +733,7 @@ export function PortfolioComponent() {
                     </a>
                     <a
                       href="https://github.com/YKaanKaya"
-                      className="flex items-center p-3 bg-gray-100 dark:bg-gray-700 rounded-md hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors"
+                      className="flex items-center p-3 bg-secondary rounded-md hover:bg-secondary/80 transition-colors"
                       target="_blank"
                       rel="noopener noreferrer"
                     >
@@ -799,8 +747,8 @@ export function PortfolioComponent() {
           </section>
         </main>
         
-        <footer className="bg-gray-100 dark:bg-gray-800 py-6 mt-10">
-          <div className="max-w-6xl mx-auto px-4 text-center text-gray-600 dark:text-gray-400">
+        <footer className="bg-secondary py-6 mt-10">
+          <div className="max-w-6xl mx-auto px-4 text-center text-muted-foreground">
             <p>© {new Date().getFullYear()} Kaan KAYA. All rights reserved.</p>
           </div>
         </footer>
