@@ -371,6 +371,13 @@ export function PortfolioComponent() {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
               {[
                 {
+                  title: 'AI Code Arena Quest',
+                  description: 'An educational platform at PractAI.life designed to help people practice Machine Learning and AI concepts through interactive exercises and challenges. Created to bridge the gap between theoretical knowledge and practical application in AI education.',
+                  link: '/showcase/AICodeArena',
+                  demoLink: 'https://www.practai.life/',
+                  tags: ['React', 'Machine Learning', 'AI Education', 'JavaScript', 'Interactive Learning']
+                },
+                {
                   title: 'Machine Learning Specialization',
                   description: 'A comprehensive showcase of my journey through Andrew Ng\'s Machine Learning Specialization, featuring implementations of algorithms from basic regression to advanced reinforcement learning with practical demos like the Lunar Lander.',
                   link: 'https://github.com/YKaanKaya/Machine-learning',
@@ -389,24 +396,6 @@ export function PortfolioComponent() {
                   description: 'Developed an application for demonstrating, visualizing, and interacting with various stock performance indicators and ESG scores.',
                   link: 'https://gsinfo.streamlit.app/',
                   tags: ['Streamlit', 'Python', 'Financial Analytics', 'ESG']
-                },
-                {
-                  title: 'Team Performance Dashboard',
-                  description: 'Developed and presented a comprehensive Team Performance Dashboard to the CTO for strategic team planning purposes.',
-                  link: '#',
-                  tags: ['Power BI', 'Data Visualization', 'KPI Tracking']
-                },
-                {
-                  title: 'System Performance Improvement',
-                  description: 'Spearheaded performance analysis, identified bottlenecks, and created system performance dashboards using Power BI. Achieved a 36% performance improvement, resulting in £50,000 in savings.',
-                  link: '#',
-                  tags: ['Performance Optimization', 'Power BI', 'Cost Saving']
-                },
-                {
-                  title: 'Automation of Daily Audit Report',
-                  description: 'Led a successful transformation project leveraging Python for ETL processes and Power BI for dashboard creation.',
-                  link: '#',
-                  tags: ['Automation', 'Python', 'Power BI', 'ETL']
                 }
               ].map((project, index) => (
                 <Card key={index} className="border-border shadow-md card-hover">
