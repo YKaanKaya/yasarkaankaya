@@ -10,33 +10,33 @@ export function TechStack() {
       category: 'Frontend',
       technologies: [
         { name: 'React', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg' },
-        { name: 'JavaScript', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg' },
-        { name: 'CSS3', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg' },
-        { name: 'HTML5', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg' }
+        { name: 'TypeScript', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg' },
+        { name: 'Tailwind CSS', icon: 'https://upload.wikimedia.org/wikipedia/commons/d/d5/Tailwind_CSS_Logo.svg' },
+        { name: 'Vite', icon: 'https://vitejs.dev/logo.svg' }
       ]
     },
     {
       category: 'Backend',
       technologies: [
-        { name: 'Node.js', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg' },
-        { name: 'Express', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/express/express-original.svg' },
-        { name: 'MongoDB', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mongodb/mongodb-original.svg' }
+        { name: 'Python', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg' },
+        { name: 'FastAPI', icon: 'https://cdn.worldvectorlogo.com/logos/fastapi-1.svg' },
+        { name: 'Supabase', icon: 'https://seeklogo.com/images/S/supabase-logo-DCC676FFE2-seeklogo.com.png' }
       ]
     },
     {
       category: 'AI & ML',
       technologies: [
+        { name: 'scikit-learn', icon: 'https://upload.wikimedia.org/wikipedia/commons/0/05/Scikit_learn_logo_small.svg' },
         { name: 'TensorFlow', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tensorflow/tensorflow-original.svg' },
-        { name: 'Python', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg' },
-        { name: 'Jupyter', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/jupyter/jupyter-original.svg' }
+        { name: 'NumPy', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/numpy/numpy-original.svg' }
       ]
     },
     {
       category: 'Tools & Deployment',
       technologies: [
         { name: 'Git', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg' },
-        { name: 'Docker', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg' },
-        { name: 'AWS', icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/amazonwebservices/amazonwebservices-original.svg' }
+        { name: 'Netlify', icon: 'https://www.netlify.com/v3/img/components/logomark.png' },
+        { name: 'Vite', icon: 'https://vitejs.dev/logo.svg' }
       ]
     }
   ]
@@ -80,15 +80,16 @@ export function TechStack() {
           <CardContent className="p-6">
             <div className="prose dark:prose-invert max-w-none">
               <p className="mb-4">
-                The AI Code Arena Quest platform was designed with a modern architecture that separates concerns while maintaining optimal performance:
+                The AI Code Arena Quest platform was built with a modern architecture that separates concerns while ensuring optimal performance and user experience:
               </p>
               
               <ul className="list-disc pl-6 mb-6 space-y-2">
-                <li><strong>React Frontend:</strong> Responsive and interactive UI that handles user interactions and presents challenges</li>
-                <li><strong>Node.js Backend:</strong> RESTful API that manages user progression, authentication, and serves challenge content</li>
-                <li><strong>MongoDB Database:</strong> Stores user data, challenge configurations, and tracks user progress</li>
-                <li><strong>ML Evaluation System:</strong> Assesses user code submissions against expected outcomes using TensorFlow</li>
-                <li><strong>Cloud Deployment:</strong> Scalable infrastructure on AWS to handle varying loads and ensure consistent performance</li>
+                <li><strong>React + TypeScript Frontend:</strong> Responsive and interactive UI built with modern React patterns, TypeScript for type safety, and Tailwind CSS for styling</li>
+                <li><strong>Python Backend:</strong> FastAPI service that handles code execution, evaluation of ML solutions, and provides challenge data</li>
+                <li><strong>Supabase Integration:</strong> Handles authentication, user progress tracking, and data storage with PostgreSQL</li>
+                <li><strong>Interactive Code Editor:</strong> Custom code editor with syntax highlighting and execution capabilities for Python ML code</li>
+                <li><strong>ML Evaluation System:</strong> Evaluates user code submissions against expected outcomes using scikit-learn and TensorFlow</li>
+                <li><strong>Netlify Deployment:</strong> Continuous deployment pipeline that ensures the latest features are always available</li>
               </ul>
               
               <p>
