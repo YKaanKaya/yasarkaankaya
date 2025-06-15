@@ -11,6 +11,9 @@ const nextConfig = {
     // Disable ESLint during builds for production
     ignoreDuringBuilds: true,
   },
+  // Enhanced build options for static export
+  trailingSlash: true,
+  distDir: 'out',
 }
 
 module.exports = nextConfig
