@@ -1,9 +1,6 @@
-'use client'
-
 import { notFound } from 'next/navigation'
-import { NotebookViewer } from '@/app/showcase/NvidiaMultimodalAI/components/NotebookViewer'
-import AnalyticsScript from '@/app/showcase/NvidiaMultimodalAI/components/AnalyticsScript'
 import type { Metadata } from 'next'
+import NotebookClientWrapper from './NotebookClientWrapper'
 
 // Map slug to notebook details
 const notebooks: Record<string, { title: string; file: string }> = {
@@ -64,10 +61,10 @@ export default function NotebookPage({ params }: { params: { slug: string } }) {
   }
 
   return (
-    <div className="container mx-auto px-4 py-12 max-w-4xl">
-      <AnalyticsScript type="notebook" slug={params.slug} title={nb.title} />
-      <h1 className="text-3xl font-bold mb-6">{nb.title}</h1>
-      <NotebookViewer src={nb.file} />
-    </div>
+    <NotebookClientWrapper 
+      slug={params.slug}
+      title={nb.title}
+      file={nb.file}
+    />
   )
 }
