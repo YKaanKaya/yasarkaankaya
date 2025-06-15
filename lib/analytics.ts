@@ -1,7 +1,33 @@
 'use client';
 
-// Simple analytics utilities without external dependencies
-// Uses the globally loaded Datadog script from layout.tsx
+import { datadogRum } from '@datadog/browser-rum';
+
+// Initialize Datadog RUM using environment variables
+try {
+  const applicationId = process.env.NEXT_PUBLIC_DATADOG_APPLICATION_ID;
+  const clientToken = process.env.NEXT_PUBLIC_DATADOG_CLIENT_TOKEN;
+  
+  if (!applicationId || !clientToken) {
+    console.warn('Datadog RUM credentials missing. Please set NEXT_PUBLIC_DATADOG_APPLICATION_ID and NEXT_PUBLIC_DATADOG_CLIENT_TOKEN environment variables.');
+  } else {
+    datadogRum.init({
+      applicationId: applicationId,
+      clientToken: clientToken,
+      site: 'us5.datadoghq.com',
+      service: 'portfolio',
+      env: process.env.NODE_ENV || 'development',
+      sessionSampleRate: 100,
+      sessionReplaySampleRate: 20,
+      defaultPrivacyLevel: 'mask-user-input',
+      trackUserInteractions: true,
+      trackResources: true,
+      trackLongTasks: true
+    });
+    console.log('Datadog RUM initialized from analytics.ts');
+  }
+} catch (error) {
+  console.error('Failed to initialize Datadog RUM:', error);
+}
 
 // Generic page view tracking
 export const trackPageView = (routePath: string, pageTitle: string) => {
