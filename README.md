@@ -1,4 +1,4 @@
-# Yaşar Kaan Kaya - Portfolio Website
+# Kaan Kaya - Portfolio Website
 
 ## Overview
 
