@@ -1,24 +1,7 @@
 'use client';
 
-// Import types for Datadog RUM
-// We'll use dynamic imports to prevent build errors
-
-// Variable to hold the Datadog RUM API when loaded
-let datadogRumAPI: any = null;
-
-// Initialize Datadog RUM if available
-if (typeof window !== 'undefined') {
-  try {
-    // Dynamic import to prevent build errors
-    import('@datadog/browser-rum').then((module) => {
-      datadogRumAPI = module.datadogRum;
-    }).catch(err => {
-      console.warn('Datadog RUM not available:', err);
-    });
-  } catch (error) {
-    console.warn('Failed to initialize Datadog RUM:', error);
-  }
-}
+// Simple analytics utilities without external dependencies
+// Uses the globally loaded Datadog script from layout.tsx
 
 // Generic page view tracking
 export const trackPageView = (routePath: string, pageTitle: string) => {
