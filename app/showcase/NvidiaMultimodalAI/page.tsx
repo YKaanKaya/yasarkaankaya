@@ -18,6 +18,7 @@ import { Progress } from '@/components/ui/progress'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 
 import { NotebookSection } from './components/NotebookSection'
+import { ShowcaseAnalytics } from './components/ShowcaseAnalytics'
 
 // Custom NVIDIA colors
 const nvidiaGreen = '#76b900'
@@ -65,6 +66,7 @@ export const metadata: Metadata = {
 export default function NvidiaMultimodalAIShowcase() {
   return (
     <div className="container mx-auto px-4 py-8 space-y-12">
+      <ShowcaseAnalytics />
       {/* Hero Section */}
       <section className="relative bg-gradient-to-b from-black to-green-950 text-white rounded-xl overflow-hidden mb-8 pb-16">
         <div className="absolute inset-0 bg-grid-pattern opacity-10"></div>
@@ -116,7 +118,7 @@ export default function NvidiaMultimodalAIShowcase() {
       </section>
       
       {/* Course Notebooks Section - Moved to top for immediate accessibility */}
-      <section className="space-y-4 mb-8">
+      <section className="space-y-4 mb-12 relative p-6 bg-black/5 dark:bg-white/5 rounded-xl border border-[#76b900]/20">
         <div className="flex items-center justify-between">
           <h2 className="text-3xl font-bold flex items-center">
             <Book className="mr-2 h-6 w-6 text-[#76b900]" /> Course Notebooks
@@ -126,12 +128,12 @@ export default function NvidiaMultimodalAIShowcase() {
           </Button>
         </div>
         
-        <Tabs defaultValue="foundations" className="w-full">
-          <TabsList className="grid w-full grid-cols-2 md:grid-cols-4 bg-black/5">
-            <TabsTrigger value="foundations" className="data-[state=active]:bg-[#76b900] data-[state=active]:text-white">Foundations</TabsTrigger>
-            <TabsTrigger value="intermediate" className="data-[state=active]:bg-[#76b900] data-[state=active]:text-white">Intermediate</TabsTrigger>
-            <TabsTrigger value="advanced" className="data-[state=active]:bg-[#76b900] data-[state=active]:text-white">Advanced</TabsTrigger>
-            <TabsTrigger value="applications" className="data-[state=active]:bg-[#76b900] data-[state=active]:text-white">Applications</TabsTrigger>
+        <Tabs defaultValue="foundations" className="w-full transition-all duration-300">
+          <TabsList className="grid w-full grid-cols-2 md:grid-cols-4 bg-black/5 dark:bg-white/5 rounded-lg p-1 gap-1">
+            <TabsTrigger value="foundations" className="transition-all duration-200 data-[state=active]:bg-[#76b900] data-[state=active]:text-white data-[state=active]:shadow-md">Foundations</TabsTrigger>
+            <TabsTrigger value="intermediate" className="transition-all duration-200 data-[state=active]:bg-[#76b900] data-[state=active]:text-white data-[state=active]:shadow-md">Intermediate</TabsTrigger>
+            <TabsTrigger value="advanced" className="transition-all duration-200 data-[state=active]:bg-[#76b900] data-[state=active]:text-white data-[state=active]:shadow-md">Advanced</TabsTrigger>
+            <TabsTrigger value="applications" className="transition-all duration-200 data-[state=active]:bg-[#76b900] data-[state=active]:text-white data-[state=active]:shadow-md">Applications</TabsTrigger>
           </TabsList>
           
           <TabsContent value="foundations" className="mt-6 space-y-6">
@@ -249,7 +251,7 @@ export default function NvidiaMultimodalAIShowcase() {
       </section>
       
       {/* Course Overview */}
-      <section id="course-overview" className="mb-8">
+      <section id="course-overview" className="mb-10 p-6 bg-black/5 dark:bg-white/5 rounded-xl border border-[#76b900]/20">
         <h2 className="text-3xl font-bold mb-6 flex items-center">
           <Layers className="mr-2 h-6 w-6 text-[#76b900]" /> Course Overview
         </h2>
@@ -277,7 +279,7 @@ export default function NvidiaMultimodalAIShowcase() {
       </section>
       
       {/* Course Info Section */}
-      <section className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+      <section className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-10">
         <Card>
           <CardHeader className="pb-2">
             <CardTitle className="flex items-center">
@@ -325,11 +327,11 @@ export default function NvidiaMultimodalAIShowcase() {
       </section>
       
       {/* Skills Section */}
-      <section>
+      <section className="p-6 bg-black/5 dark:bg-white/5 rounded-xl border border-[#76b900]/20 mb-10">
         <h2 className="text-3xl font-bold mb-6 flex items-center">
           <Trophy className="mr-2 h-6 w-6 text-[#76b900]" /> Skills Acquired
         </h2>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mt-6">
           <Card className="border-l-4 border-l-[#76b900]">
             <CardHeader>
               <CardTitle className="text-lg">Multimodal Fusion Techniques</CardTitle>
@@ -374,12 +376,12 @@ export default function NvidiaMultimodalAIShowcase() {
 
       
       {/* Certificate Section */}
-      <section className="relative rounded-xl overflow-hidden bg-gradient-to-br from-green-800 to-green-950 text-white p-8">
+      <section className="relative rounded-xl overflow-hidden bg-gradient-to-br from-green-800 to-green-950 text-white p-8 shadow-lg">
         <div className="flex flex-col md:flex-row gap-8 items-center">
           <div className="md:w-2/3 space-y-4">
             <h2 className="text-3xl font-bold">NVIDIA DLI Certification</h2>
             <p className="text-lg">Successfully completed NVIDIA's Deep Learning Institute certification in "Building AI Agents with Multimodal Models" with hands-on expertise in multimodal fusion, vector search systems, and graph-based RAG.</p>
-            <Button size="lg" className="bg-white text-[#1a1a1a] hover:bg-white/90 border border-white" asChild>
+            <Button size="lg" className="bg-white text-[#1a1a1a] hover:bg-white/90 border border-white transition-all duration-300 hover:shadow-lg hover:translate-y-[-2px]" asChild>
               <a href="https://learn.nvidia.com/certificates?id=kpMpsOlPTBKph9g3PLBXpw#" target="_blank" rel="noopener noreferrer">
                 View Certificate
               </a>

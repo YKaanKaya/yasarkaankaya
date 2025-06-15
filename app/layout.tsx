@@ -3,6 +3,7 @@ import localFont from "next/font/local";
 import "./globals.css";
 import { ThemeProvider } from "next-themes";
 import { ThemeToggle } from "@/components/ui/theme-toggle";
+import { DatadogProvider } from "@/components/analytics/DatadogProvider";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -38,6 +39,7 @@ export default function RootLayout({
           disableTransitionOnChange
           forcedTheme={undefined}
         >
+          <DatadogProvider />
           {children}
         </ThemeProvider>
       </body>
