@@ -1,113 +1,44 @@
 'use client';
 
-import { datadogRum } from '@datadog/browser-rum';
+// Simple analytics utilities
+// No external analytics service integrated
 
-// Initialize Datadog RUM using environment variables
-try {
-  const applicationId = process.env.NEXT_PUBLIC_DATADOG_APPLICATION_ID;
-  const clientToken = process.env.NEXT_PUBLIC_DATADOG_CLIENT_TOKEN;
-  
-  if (!applicationId || !clientToken) {
-    console.warn('Datadog RUM credentials missing. Please set NEXT_PUBLIC_DATADOG_APPLICATION_ID and NEXT_PUBLIC_DATADOG_CLIENT_TOKEN environment variables.');
-  } else {
-    datadogRum.init({
-      applicationId: applicationId,
-      clientToken: clientToken,
-      site: 'us5.datadoghq.com',
-      service: 'portfolio',
-      env: process.env.NODE_ENV || 'development',
-      sessionSampleRate: 100,
-      sessionReplaySampleRate: 20,
-      defaultPrivacyLevel: 'mask-user-input',
-      trackUserInteractions: true,
-      trackResources: true,
-      trackLongTasks: true
-    });
-    console.log('Datadog RUM initialized from analytics.ts');
-  }
-} catch (error) {
-  console.error('Failed to initialize Datadog RUM:', error);
-}
-
-// Generic page view tracking
+// Generic page view tracking - placeholder for future analytics integration
 export const trackPageView = (routePath: string, pageTitle: string) => {
-  if (typeof window !== 'undefined' && window.DD_RUM) {
-    try {
-      (window.DD_RUM as any).onReady(() => {
-        (window.DD_RUM as any).addAction('page_view', {
-          page_path: routePath,
-          page_title: pageTitle,
-          timestamp: new Date().toISOString()
-        });
-      });
-    } catch (err) {
-      console.warn('Error tracking page view:', err);
-    }
+  // Analytics service removed - placeholder for future integration
+  if (process.env.NODE_ENV === 'development') {
+    console.debug(`[Analytics] Page view: ${pageTitle} (${routePath})`);
   }
 };
 
-// Section view tracking
+// Section view tracking - placeholder for future analytics integration
 export const trackSectionView = (sectionName: string) => {
-  if (typeof window !== 'undefined' && window.DD_RUM) {
-    try {
-      (window.DD_RUM as any).onReady(() => {
-        (window.DD_RUM as any).addAction('section_view', {
-          section_name: sectionName,
-          timestamp: new Date().toISOString()
-        });
-      });
-    } catch (err) {
-      console.warn('Error tracking section view:', err);
-    }
+  // Analytics service removed - placeholder for future integration
+  if (process.env.NODE_ENV === 'development') {
+    console.debug(`[Analytics] Section view: ${sectionName}`);
   }
 };
 
-// Project interaction tracking
+// Project interaction tracking - placeholder for future analytics integration
 export const trackProjectInteraction = (projectName: string, interactionType: string) => {
-  if (typeof window !== 'undefined' && window.DD_RUM) {
-    try {
-      (window.DD_RUM as any).onReady(() => {
-        (window.DD_RUM as any).addAction('project_interaction', {
-          project_name: projectName,
-          interaction_type: interactionType,
-          timestamp: new Date().toISOString()
-        });
-      });
-    } catch (err) {
-      console.warn('Error tracking project interaction:', err);
-    }
+  // Analytics service removed - placeholder for future integration
+  if (process.env.NODE_ENV === 'development') {
+    console.debug(`[Analytics] Project interaction: ${projectName} (${interactionType})`);
   }
 };
 
-// Custom event tracking functions for portfolio sections
+// Custom event tracking functions for portfolio sections - placeholders for future analytics integration
 export const trackNotebookView = (notebookSlug: string, notebookTitle: string) => {
-  if (typeof window !== 'undefined' && window.DD_RUM) {
-    try {
-      (window.DD_RUM as any).onReady(() => {
-        (window.DD_RUM as any).addAction('notebook_view', {
-          notebook_slug: notebookSlug,
-          notebook_title: notebookTitle,
-          section: 'nvidia_multimodal_ai'
-        });
-      });
-    } catch (err) {
-      console.warn('Error tracking notebook view:', err);
-    }
+  // Analytics service removed - placeholder for future integration
+  if (process.env.NODE_ENV === 'development') {
+    console.debug(`[Analytics] Notebook view: ${notebookTitle} (${notebookSlug})`);
   }
 };
 
 export const trackShowcaseView = (showcaseName: string = 'NVIDIA Multimodal AI') => {
-  if (typeof window !== 'undefined' && window.DD_RUM) {
-    try {
-      (window.DD_RUM as any).onReady(() => {
-        (window.DD_RUM as any).addAction('showcase_view', {
-          showcase_name: showcaseName,
-          timestamp: new Date().toISOString()
-        });
-      });
-    } catch (err) {
-      console.warn('Error tracking showcase view:', err);
-    }
+  // Analytics service removed - placeholder for future integration 
+  if (process.env.NODE_ENV === 'development') {
+    console.debug(`[Analytics] Showcase view: ${showcaseName}`);
   }
 };
 
