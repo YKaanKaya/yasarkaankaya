@@ -18,7 +18,7 @@ import { Progress } from '@/components/ui/progress'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 
 import { NotebookSection } from './components/NotebookSection'
-import { ShowcaseAnalytics } from './components/ShowcaseAnalytics'
+import AnalyticsScript from './components/AnalyticsScript'
 
 // Custom NVIDIA colors
 const nvidiaGreen = '#76b900'
@@ -66,7 +66,7 @@ export const metadata: Metadata = {
 export default function NvidiaMultimodalAIShowcase() {
   return (
     <div className="container mx-auto px-4 py-8 space-y-12">
-      <ShowcaseAnalytics />
+      <AnalyticsScript type="showcase" />
       {/* Hero Section */}
       <section className="relative bg-gradient-to-b from-black to-green-950 text-white rounded-xl overflow-hidden mb-8 pb-16">
         <div className="absolute inset-0 bg-grid-pattern opacity-10"></div>
