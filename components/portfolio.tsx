@@ -396,6 +396,12 @@ export function PortfolioComponent() {
                   description: 'Developed an application for demonstrating, visualizing, and interacting with various stock performance indicators and ESG scores.',
                   link: 'https://gsinfo.streamlit.app/',
                   tags: ['Streamlit', 'Python', 'Financial Analytics', 'ESG']
+                },
+                {
+                  title: 'NVIDIA Multimodal AI Agents',
+                  description: 'Showcase for NVIDIA’s “Building AI Agents with Multimodal Models” course, including project notebooks and certification.',
+                  link: '/showcase/NvidiaMultimodalAI',
+                  tags: ['NVIDIA', 'Multimodal', 'AI Agents', 'Deep Learning', 'Jupyter']
                 }
               ].map((project, index) => (
                 <Card key={index} className="border-border shadow-md card-hover">
@@ -411,7 +417,11 @@ export function PortfolioComponent() {
                     </div>
                     <div className="flex space-x-2">
                       <Button variant="outline" asChild>
-                        <a href={project.link} target="_blank" rel="noopener noreferrer">View Project</a>
+                        {project.title === 'NVIDIA Multimodal AI Agents' ? (
+                          <a href={project.link}>View Project</a>
+                        ) : (
+                          <a href={project.link} target="_blank" rel="noopener noreferrer">View Project</a>
+                        )}
                       </Button>
                       {project.demoLink && (
                         <Button variant="default" asChild>
