@@ -1,15 +1,15 @@
 import type { Metadata } from 'next'
 import Image from 'next/image'
 import { 
-  GraduationCap, 
-  Code, 
-  Book, 
-  Trophy, 
   ArrowRight, 
-  BarChart2, 
+  Book, 
   Brain, 
+  Code, 
+  ExternalLink,
+  GraduationCap, 
   Layers, 
-  Rocket 
+  Rocket, 
+  Trophy 
 } from 'lucide-react'
 import { Badge } from '@/components/ui/badge'
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card'
@@ -66,25 +66,36 @@ export default function NvidiaMultimodalAIShowcase() {
   return (
     <div className="container mx-auto px-4 py-8 space-y-12">
       {/* Hero Section */}
-      <section className="relative rounded-xl overflow-hidden bg-[#76b900] h-[300px]">
-        <div className="absolute inset-0 z-10 bg-gradient-to-r from-[#1a1a1a] to-[#1a1a1a]/80"></div>
-        <div className="relative z-20 py-12 px-8 flex flex-col items-center justify-center h-full text-white text-center">
-          <Badge className="mb-4 bg-[#76b900] hover:bg-[#76b900]/90 text-white px-4 py-1 text-sm font-semibold">NVIDIA DLI Course</Badge>
-          <h1 className="text-4xl md:text-5xl font-extrabold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-white to-green-200">
+      <section className="relative bg-gradient-to-b from-black to-green-950 text-white rounded-xl overflow-hidden mb-8 pb-16">
+        <div className="absolute inset-0 bg-grid-pattern opacity-10"></div>
+        <div className="absolute right-0 top-0 w-64 h-64 bg-[url('/nvidia-logo-outline.svg')] bg-contain bg-no-repeat opacity-5"></div>
+        
+        <div className="relative z-10 p-8 pt-6 pb-12 space-y-6 text-center">
+          <div className="inline-block bg-[#76b900] text-black font-medium px-3 py-1 rounded-full text-sm">
+            NVIDIA DLI Course
+          </div>
+          
+          <h1 className="text-5xl font-bold tracking-tight bg-clip-text text-transparent bg-gradient-to-b from-white to-gray-300 px-4 mb-4 leading-relaxed">
             Building AI Agents with Multimodal Models
           </h1>
-          <p className="text-lg md:text-xl max-w-2xl mb-6 text-green-100">
-            A comprehensive showcase of advanced multimodal techniques for combining vision, language, and structured data
+          
+          <p className="text-xl text-gray-300 max-w-3xl mx-auto">
+            A comprehensive showcase of advanced multimodal techniques for<br />
+            combining vision, language, and structured data
           </p>
-          <div className="flex flex-wrap justify-center gap-4">
-            <Button size="lg" className="bg-[#76b900] hover:bg-[#76b900]/90 text-white" asChild>
-              <a href="https://learn.nvidia.com/certificates?id=kpMpsOlPTBKph9g3PLBXpw#" target="_blank" rel="noopener noreferrer">
-                View Certification
-              </a>
-            </Button>
-            <Button size="lg" variant="outline" className="border-white text-white hover:bg-white/10">
-              Course Overview <ArrowRight className="ml-2 h-4 w-4" />
-            </Button>
+          
+          <div className="flex justify-center gap-4 pt-4 pb-2">
+            <a href="https://learn.nvidia.com/certificates?id=kpMpsOlPTBKph9g3PLBXpw#" target="_blank" rel="noopener noreferrer">
+              <Button className="bg-[#76b900] hover:bg-[#86c900] text-black font-medium px-6">
+                <ExternalLink className="mr-2 h-4 w-4" /> View Certification
+              </Button>
+            </a>
+            
+            <a href="#course-overview">
+              <Button variant="outline" className="border-gray-400 text-white hover:bg-white/10">
+                Course Overview <ArrowRight className="ml-2 h-4 w-4" />
+              </Button>
+            </a>
           </div>
         </div>
         <div className="absolute inset-0 z-0 flex items-center justify-center">
@@ -104,129 +115,8 @@ export default function NvidiaMultimodalAIShowcase() {
         </div>
       </section>
       
-      {/* Course Info Section */}
-      <section className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-        <Card>
-          <CardHeader className="pb-2">
-            <CardTitle className="flex items-center">
-              <Book className="mr-2 h-5 w-5 text-[#76b900]" /> Course Structure
-            </CardTitle>
-          </CardHeader>
-          <CardContent>
-            <p className="text-muted-foreground">8 comprehensive notebooks spanning theory and practical implementation</p>
-            <Progress value={100} className="h-2 mt-4 bg-gray-200 [&>div]:bg-[#76b900]" />
-          </CardContent>
-        </Card>
-        
-        <Card>
-          <CardHeader className="pb-2">
-            <CardTitle className="flex items-center">
-              <Code className="mr-2 h-5 w-5 text-[#76b900]" /> Technologies
-            </CardTitle>
-          </CardHeader>
-          <CardContent>
-            <p className="text-muted-foreground">PyTorch, TensorRT, NVIDIA NeMo, Triton Inference Server</p>
-          </CardContent>
-        </Card>
-        
-        <Card>
-          <CardHeader className="pb-2">
-            <CardTitle className="flex items-center">
-              <Brain className="mr-2 h-5 w-5 text-[#76b900]" /> Key Skills
-            </CardTitle>
-          </CardHeader>
-          <CardContent>
-            <p className="text-muted-foreground">Multimodal fusion, LLM integration, vector search, Graph RAG</p>
-          </CardContent>
-        </Card>
-        
-        <Card>
-          <CardHeader className="pb-2">
-            <CardTitle className="flex items-center">
-              <GraduationCap className="mr-2 h-5 w-5 text-[#76b900]" /> Certification
-            </CardTitle>
-          </CardHeader>
-          <CardContent>
-            <p className="text-muted-foreground">NVIDIA Deep Learning Institute certified - June 2025</p>
-          </CardContent>
-        </Card>
-      </section>
-      
-      {/* Skills Section */}
-      <section>
-        <h2 className="text-3xl font-bold mb-6 flex items-center">
-          <Trophy className="mr-2 h-6 w-6 text-[#76b900]" /> Skills Acquired
-        </h2>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-          <Card className="border-l-4 border-l-[#76b900]">
-            <CardHeader>
-              <CardTitle className="text-lg">Multimodal Fusion Techniques</CardTitle>
-              <CardDescription>Early, Late, and Intermediate approaches</CardDescription>
-            </CardHeader>
-          </Card>
-          <Card className="border-l-4 border-l-[#76b900]">
-            <CardHeader>
-              <CardTitle className="text-lg">Contrastive Learning</CardTitle>
-              <CardDescription>Cross-modal representation alignment</CardDescription>
-            </CardHeader>
-          </Card>
-          <Card className="border-l-4 border-l-[#76b900]">
-            <CardHeader>
-              <CardTitle className="text-lg">Vector Search Systems</CardTitle>
-              <CardDescription>Fast similarity search for multimodal data</CardDescription>
-            </CardHeader>
-          </Card>
-          <Card className="border-l-4 border-l-[#76b900]">
-            <CardHeader>
-              <CardTitle className="text-lg">Graph RAG Integration</CardTitle>
-              <CardDescription>Knowledge graphs with retrieval augmentation</CardDescription>
-            </CardHeader>
-          </Card>
-          <Card className="border-l-4 border-l-[#76b900]">
-            <CardHeader>
-              <CardTitle className="text-lg">OCR Pipelines</CardTitle>
-              <CardDescription>Text extraction from visual data</CardDescription>
-            </CardHeader>
-          </Card>
-          <Card className="border-l-4 border-l-[#76b900]">
-            <CardHeader>
-              <CardTitle className="text-lg">Projection Methods</CardTitle>
-              <CardDescription>Dimensionality reduction for multimodal data</CardDescription>
-            </CardHeader>
-          </Card>
-        </div>
-      </section>
-      
-      {/* Course Overview */}
-      <section>
-        <h2 className="text-3xl font-bold mb-6 flex items-center">
-          <Layers className="mr-2 h-6 w-6 text-[#76b900]" /> Course Overview
-        </h2>
-        <Card className="mb-8">
-          <CardContent className="pt-6">
-            <p className="text-lg leading-relaxed mb-4">
-              This comprehensive NVIDIA Deep Learning Institute course explores the cutting-edge intersection of multiple data modalities in AI systems. Through hands-on notebooks and practical exercises, I've gained expertise in building systems that can process, understand, and generate across text, images, audio, and other data types.
-            </p>
-            <p className="text-lg leading-relaxed">
-              The course progresses from foundational fusion techniques to advanced vector search systems with graph-based retrieval augmented generation, providing both theoretical understanding and practical implementation skills for building sophisticated multimodal AI agents.            
-            </p>
-          </CardContent>
-        </Card>
-        
-        <div className="relative pl-6 border-l-2 border-[#76b900] mb-8">
-          <h3 className="text-xl font-semibold mb-2">Course Progression</h3>
-          <ol className="space-y-4 list-decimal list-inside">
-            <li><span className="font-medium">Fundamentals of Multimodal Fusion</span> - Early and late fusion techniques</li>
-            <li><span className="font-medium">Modality Exploration</span> - Understanding different data types</li>
-            <li><span className="font-medium">Advanced Integration</span> - Intermediate fusion and contrastive learning</li>
-            <li><span className="font-medium">Specialized Techniques</span> - Projection methods and OCR pipelines</li>
-            <li><span className="font-medium">Production Systems</span> - Vector search and Graph RAG implementation</li>
-          </ol>
-        </div>
-      </section>
-      
-      {/* Course Materials Section */}
-      <section className="space-y-8">
+      {/* Course Notebooks Section - Moved to top for immediate accessibility */}
+      <section className="space-y-4 mb-8">
         <div className="flex items-center justify-between">
           <h2 className="text-3xl font-bold flex items-center">
             <Book className="mr-2 h-6 w-6 text-[#76b900]" /> Course Notebooks
@@ -357,6 +247,131 @@ export default function NvidiaMultimodalAIShowcase() {
           </TabsContent>
         </Tabs>
       </section>
+      
+      {/* Course Overview */}
+      <section id="course-overview" className="mb-8">
+        <h2 className="text-3xl font-bold mb-6 flex items-center">
+          <Layers className="mr-2 h-6 w-6 text-[#76b900]" /> Course Overview
+        </h2>
+        <Card className="mb-6">
+          <CardContent className="pt-6">
+            <p className="text-lg leading-relaxed mb-4">
+              This comprehensive NVIDIA Deep Learning Institute course explores the cutting-edge intersection of multiple data modalities in AI systems. Through hands-on notebooks and practical exercises, I've gained expertise in building systems that can process, understand, and generate across text, images, audio, and other data types.
+            </p>
+            <p className="text-lg leading-relaxed">
+              The course progresses from foundational fusion techniques to advanced vector search systems with graph-based retrieval augmented generation, providing both theoretical understanding and practical implementation skills for building sophisticated multimodal AI agents.            
+            </p>
+          </CardContent>
+        </Card>
+        
+        <div className="relative pl-6 border-l-2 border-[#76b900] mb-6">
+          <h3 className="text-xl font-semibold mb-2">Course Progression</h3>
+          <ol className="space-y-3 list-decimal list-inside">
+            <li><span className="font-medium">Fundamentals of Multimodal Fusion</span> - Early and late fusion techniques</li>
+            <li><span className="font-medium">Modality Exploration</span> - Understanding different data types</li>
+            <li><span className="font-medium">Advanced Integration</span> - Intermediate fusion and contrastive learning</li>
+            <li><span className="font-medium">Specialized Techniques</span> - Projection methods and OCR pipelines</li>
+            <li><span className="font-medium">Production Systems</span> - Vector search and Graph RAG implementation</li>
+          </ol>
+        </div>
+      </section>
+      
+      {/* Course Info Section */}
+      <section className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <Card>
+          <CardHeader className="pb-2">
+            <CardTitle className="flex items-center">
+              <Book className="mr-2 h-5 w-5 text-[#76b900]" /> Course Structure
+            </CardTitle>
+          </CardHeader>
+          <CardContent>
+            <p className="text-muted-foreground">8 comprehensive notebooks spanning theory and practical implementation</p>
+            <Progress value={100} className="h-2 mt-4 bg-gray-200 [&>div]:bg-[#76b900]" />
+          </CardContent>
+        </Card>
+        
+        <Card>
+          <CardHeader className="pb-2">
+            <CardTitle className="flex items-center">
+              <Code className="mr-2 h-5 w-5 text-[#76b900]" /> Technologies
+            </CardTitle>
+          </CardHeader>
+          <CardContent>
+            <p className="text-muted-foreground">PyTorch, TensorRT, NVIDIA NeMo, Triton Inference Server</p>
+          </CardContent>
+        </Card>
+        
+        <Card>
+          <CardHeader className="pb-2">
+            <CardTitle className="flex items-center">
+              <Brain className="mr-2 h-5 w-5 text-[#76b900]" /> Key Skills
+            </CardTitle>
+          </CardHeader>
+          <CardContent>
+            <p className="text-muted-foreground">Multimodal fusion, LLM integration, vector search, Graph RAG</p>
+          </CardContent>
+        </Card>
+        
+        <Card>
+          <CardHeader className="pb-2">
+            <CardTitle className="flex items-center">
+              <GraduationCap className="mr-2 h-5 w-5 text-[#76b900]" /> Certification
+            </CardTitle>
+          </CardHeader>
+          <CardContent>
+            <p className="text-muted-foreground">NVIDIA Deep Learning Institute certified - June 2025</p>
+          </CardContent>
+        </Card>
+      </section>
+      
+      {/* Skills Section */}
+      <section>
+        <h2 className="text-3xl font-bold mb-6 flex items-center">
+          <Trophy className="mr-2 h-6 w-6 text-[#76b900]" /> Skills Acquired
+        </h2>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+          <Card className="border-l-4 border-l-[#76b900]">
+            <CardHeader>
+              <CardTitle className="text-lg">Multimodal Fusion Techniques</CardTitle>
+              <CardDescription>Early, Late, and Intermediate approaches</CardDescription>
+            </CardHeader>
+          </Card>
+          <Card className="border-l-4 border-l-[#76b900]">
+            <CardHeader>
+              <CardTitle className="text-lg">Contrastive Learning</CardTitle>
+              <CardDescription>Cross-modal representation alignment</CardDescription>
+            </CardHeader>
+          </Card>
+          <Card className="border-l-4 border-l-[#76b900]">
+            <CardHeader>
+              <CardTitle className="text-lg">Vector Search Systems</CardTitle>
+              <CardDescription>Fast similarity search for multimodal data</CardDescription>
+            </CardHeader>
+          </Card>
+          <Card className="border-l-4 border-l-[#76b900]">
+            <CardHeader>
+              <CardTitle className="text-lg">Graph RAG Integration</CardTitle>
+              <CardDescription>Knowledge graphs with retrieval augmentation</CardDescription>
+            </CardHeader>
+          </Card>
+          <Card className="border-l-4 border-l-[#76b900]">
+            <CardHeader>
+              <CardTitle className="text-lg">OCR Pipelines</CardTitle>
+              <CardDescription>Text extraction from visual data</CardDescription>
+            </CardHeader>
+          </Card>
+          <Card className="border-l-4 border-l-[#76b900]">
+            <CardHeader>
+              <CardTitle className="text-lg">Projection Methods</CardTitle>
+              <CardDescription>Dimensionality reduction for multimodal data</CardDescription>
+            </CardHeader>
+          </Card>
+        </div>
+      </section>
+      
+
+      
+
       
       {/* Certificate Section */}
       <section className="relative rounded-xl overflow-hidden bg-gradient-to-br from-green-800 to-green-950 text-white p-8">
