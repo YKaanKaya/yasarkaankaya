@@ -92,7 +92,7 @@ export default function NvidiaMultimodalAIShowcase() {
             </a>
             
             <a href="#course-overview">
-              <Button variant="outline" className="border-[#76b900] bg-transparent text-foreground hover:bg-[#76b900]/10">
+              <Button variant="outline" className="border-[#76b900] bg-transparent text-white hover:bg-white/80">
                 Course Overview <ArrowRight className="ml-2 h-4 w-4" />
               </Button>
             </a>
