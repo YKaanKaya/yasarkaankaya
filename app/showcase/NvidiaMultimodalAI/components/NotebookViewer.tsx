@@ -65,7 +65,23 @@ export function NotebookViewer({ src }: NotebookViewerProps) {
         const execCount = cell.execution_count ?? idx + 1;
         if (cell.cell_type === 'markdown') {
           // Process markdown content
-          const markdownContent = cell.source.join('');
+          let markdownContent = cell.source.join('');
+          
+          // Fix image paths for Jupyter notebook format
+          markdownContent = markdownContent.replace(/src="images\//g, 'src="/notebooks/nvidia-multimodal/images/');
+          markdownContent = markdownContent.replace(/src=\"images\//g, 'src=\"/notebooks/nvidia-multimodal/images/');
+          
+          // Handle image references in markdown format ![alt](images/file.png)
+          markdownContent = markdownContent.replace(/!\[(.*?)\]\(images\/(.*?)\)/g, '![$1](/notebooks/nvidia-multimodal/images/$2)');
+          
+          // Handle <center><img src="images/file.png"...</center> pattern
+          markdownContent = markdownContent.replace(/<img([^>]*)src="images\/(.*?)"([^>]*)>/g, '<img$1src="/notebooks/nvidia-multimodal/images/$2"$3>');
+          
+          // Remove any absolute file paths that might have been accidentally added
+          markdownContent = markdownContent.replace(/src=".*?\\.*?\.png/g, (match: string) => {
+            const filename = match.split('\\').pop();
+            return `src="/notebooks/nvidia-multimodal/images/${filename}`;
+          });
           
           // Special handling for missing resources
           
