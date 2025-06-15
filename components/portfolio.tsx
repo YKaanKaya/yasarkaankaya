@@ -400,7 +400,7 @@ export function PortfolioComponent() {
                 {
                   title: 'NVIDIA Multimodal AI Agents',
                   description: 'Showcase for NVIDIA’s “Building AI Agents with Multimodal Models” course, including project notebooks and certification.',
-                  link: '/showcase/NvidiaMultimodalAI',
+                  link: './showcase/NvidiaMultimodalAI/index.html',
                   tags: ['NVIDIA', 'Multimodal', 'AI Agents', 'Deep Learning', 'Jupyter']
                 }
               ].map((project, index) => (
