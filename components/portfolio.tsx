@@ -167,50 +167,52 @@ export function PortfolioComponent() {
   return (
     <div className="min-h-screen">
       <div className="bg-background text-foreground min-h-screen transition-colors duration-300">
-        <style>{`
-          @keyframes fadeInUp {
-            from {
+        <style dangerouslySetInnerHTML={{
+          __html: `
+            @keyframes fadeInUp {
+              from {
+                opacity: 0;
+                transform: translateY(20px);
+              }
+              to {
+                opacity: 1;
+                transform: translateY(0);
+              }
+            }
+            .animate-fade-in-up {
+              animation: fadeInUp 0.6s ease-out forwards;
+            }
+            .section-header {
               opacity: 0;
               transform: translateY(20px);
+              transition: opacity 0.6s ease-out, transform 0.6s ease-out;
             }
-            to {
+            .section-header.visible {
               opacity: 1;
               transform: translateY(0);
             }
-          }
-          .animate-fade-in-up {
-            animation: fadeInUp 0.6s ease-out forwards;
-          }
-          .section-header {
-            opacity: 0;
-            transform: translateY(20px);
-            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
-          }
-          .section-header.visible {
-            opacity: 1;
-            transform: translateY(0);
-          }
-          .button-outline {
-            color: inherit;
-            background-color: transparent;
-            border-color: currentColor;
-          }
-          .button-outline:hover {
-            background-color: rgba(127, 127, 127, 0.1);
-          }
-          .gradient-text {
-            background: linear-gradient(90deg, #3b82f6 0%, #8b5cf6 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-          }
-          .card-hover {
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-          }
-          .card-hover:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
-          }
-        `}</style>
+            .button-outline {
+              color: inherit;
+              background-color: transparent;
+              border-color: currentColor;
+            }
+            .button-outline:hover {
+              background-color: rgba(127, 127, 127, 0.1);
+            }
+            .gradient-text {
+              background: linear-gradient(90deg, #3b82f6 0%, #8b5cf6 100%);
+              -webkit-background-clip: text;
+              -webkit-text-fill-color: transparent;
+            }
+            .card-hover {
+              transition: transform 0.3s ease, box-shadow 0.3s ease;
+            }
+            .card-hover:hover {
+              transform: translateY(-5px);
+              box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+            }
+          `
+        }} />
         <nav className="sticky top-0 z-50 bg-background/90 backdrop-blur-md shadow-sm">
           <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="flex justify-between items-center h-16">
