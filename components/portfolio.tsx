@@ -167,7 +167,7 @@ export function PortfolioComponent() {
   return (
     <div className="min-h-screen">
       <div className="bg-background text-foreground min-h-screen transition-colors duration-300">
-        <style jsx global>{`
+        <style>{`
           @keyframes fadeInUp {
             from {
               opacity: 0;
