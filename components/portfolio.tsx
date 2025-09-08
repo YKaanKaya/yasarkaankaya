@@ -399,9 +399,16 @@ export function PortfolioComponent() {
                 },
                 {
                   title: 'NVIDIA Multimodal AI Agents',
-                  description: 'Showcase for NVIDIA’s “Building AI Agents with Multimodal Models” course, including project notebooks and certification.',
+                  description: 'Showcase for NVIDIA's "Building AI Agents with Multimodal Models" course, including project notebooks and certification.',
                   link: 'showcase/NvidiaMultimodalAI/',
                   tags: ['NVIDIA', 'Multimodal', 'AI Agents', 'Deep Learning', 'Jupyter']
+                },
+                {
+                  title: 'LectureNotes RAG System',
+                  description: 'GPU-accelerated Retrieval-Augmented Generation system for intelligent Q&A over lecture notes and academic documents. Features FAISS vector search with RTX 5090 optimization, multi-format document support, and LM Studio integration for private LLM inference.',
+                  link: 'showcase/LectureNotesRAG',
+                  demoLink: 'https://github.com/YKaanKaya/LectureNotes-RAG-System',
+                  tags: ['Python', 'FAISS', 'GPU Acceleration', 'RAG', 'Vector Database', 'PyTorch', 'NLP']
                 }
               ].map((project, index) => (
                 <Card key={index} className="border-border shadow-md card-hover">
@@ -417,7 +424,7 @@ export function PortfolioComponent() {
                     </div>
                     <div className="flex space-x-2">
                       <Button variant="outline" asChild>
-                        {project.title === 'NVIDIA Multimodal AI Agents' ? (
+                        {project.title === 'NVIDIA Multimodal AI Agents' || project.title === 'LectureNotes RAG System' ? (
                           <a href={project.link}>View Project</a>
                         ) : (
                           <a href={project.link} target="_blank" rel="noopener noreferrer">View Project</a>
