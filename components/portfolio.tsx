@@ -212,7 +212,7 @@ export function PortfolioComponent() {
               box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
             }
           `
-        }} />
+        }}></style>
         <nav className="sticky top-0 z-50 bg-background/90 backdrop-blur-md shadow-sm">
           <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="flex justify-between items-center h-16">
@@ -401,7 +401,7 @@ export function PortfolioComponent() {
                 },
                 {
                   title: 'NVIDIA Multimodal AI Agents',
-                  description: 'Showcase for NVIDIA's "Building AI Agents with Multimodal Models" course, including project notebooks and certification.',
+                  description: 'Showcase for NVIDIA\'s "Building AI Agents with Multimodal Models" course, including project notebooks and certification.',
                   link: 'showcase/NvidiaMultimodalAI/',
                   tags: ['NVIDIA', 'Multimodal', 'AI Agents', 'Deep Learning', 'Jupyter']
                 },
