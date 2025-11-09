@@ -72,7 +72,8 @@ export function PortfolioComponent() {
     })
 
     return () => observer.disconnect()
-  }, [sectionRefs])
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
 
   useEffect(() => {
     const handleScroll = () => {
@@ -385,6 +386,13 @@ export function PortfolioComponent() {
                   link: 'https://github.com/YKaanKaya/Machine-learning',
                   demoLink: '/showcase/MachineLearning',
                   tags: ['Python', 'TensorFlow', 'scikit-learn', 'Deep Learning', 'Reinforcement Learning']
+                },
+                {
+                  title: 'PyTorch for Deep Learning',
+                  description: 'Professional certificate from DeepLearning.AI covering production-ready deep learning with PyTorch. From neural network fundamentals to advanced architectures, computer vision, NLP, and model deployment with ONNX and MLflow.',
+                  link: 'https://github.com/YKaanKaya/deeplearning-ai-pytorch',
+                  demoLink: '/showcase/PyTorchDeepLearning',
+                  tags: ['PyTorch', 'Deep Learning', 'Computer Vision', 'NLP', 'MLOps', 'ONNX']
                 },
                 {
                   title: 'DeFtunes Data Pipeline',
