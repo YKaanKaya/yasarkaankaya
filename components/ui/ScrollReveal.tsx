@@ -1,5 +1,6 @@
 "use client"
 
+import React, { Children } from 'react'
 import { motion, useInView, Variants } from 'framer-motion'
 import { useRef, ReactNode } from 'react'
 
