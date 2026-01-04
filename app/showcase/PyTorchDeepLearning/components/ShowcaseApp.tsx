@@ -1341,14 +1341,14 @@ class SelfAttention(nn.Module):
         attn = F.softmax(scores, dim=-1)
         return torch.matmul(attn, V)`,
       projectsList: [
-        { name: "Siamese Networks", description: "Similarity learning for verification", path: "Course-3-Advanced-Architectures/Module%201" },
-        { name: "ResNet & DenseNet", description: "Advanced CNN architectures", path: "Course-3-Advanced-Architectures/Module%201" },
-        { name: "Model Interpretation", description: "Saliency maps & visualization", path: "Course-3-Advanced-Architectures/Module%202" },
-        { name: "Stable Diffusion", description: "Generative AI with diffusion models", path: "Course-3-Advanced-Architectures/Module%202" },
-        { name: "Transformer Encoder", description: "Self-attention from scratch", path: "Course-3-Advanced-Architectures/Module%203" },
-        { name: "Transformer Decoder", description: "Complete transformer architecture", path: "Course-3-Advanced-Architectures/Module%203" },
-        { name: "MLflow Tracking", description: "Experiment versioning & logging", path: "Course-3-Advanced-Architectures/Module%204" },
-        { name: "ONNX & Optimization", description: "Pruning, quantization, export", path: "Course-3-Advanced-Architectures/Module%204" }
+        { name: "Siamese Networks", description: "Similarity learning for verification", path: "Course-3-Advanced-Architectures/Module%201/C3_M1_Lab_1_siamese_network.ipynb" },
+        { name: "ResNet & DenseNet", description: "Advanced CNN architectures", path: "Course-3-Advanced-Architectures/Module%201/C3_M1_Lab_2_resnet.ipynb" },
+        { name: "Model Interpretation", description: "Saliency maps & visualization", path: "Course-3-Advanced-Architectures/Module%202/C3_M2_Lab_2_saliency_and_class_map.ipynb" },
+        { name: "Stable Diffusion", description: "Generative AI with diffusion models", path: "Course-3-Advanced-Architectures/Module%202/C3_M2_Lab_3_stable_diffusion.ipynb" },
+        { name: "Transformer Encoder", description: "Self-attention from scratch", path: "Course-3-Advanced-Architectures/Module%203/C3M3_Lab_2_encoder.ipynb" },
+        { name: "Transformer Decoder", description: "Complete transformer architecture", path: "Course-3-Advanced-Architectures/Module%203/C3M3_Lab_3_decoder.ipynb" },
+        { name: "MLflow Tracking", description: "Experiment versioning & logging", path: "Course-3-Advanced-Architectures/Module%204/C3_M4_Lab_1_mlflow.ipynb" },
+        { name: "ONNX & Optimization", description: "Pruning, quantization, export", path: "Course-3-Advanced-Architectures/Module%204/C3_M4_Lab_2_onnx.ipynb" }
       ]
     }
   ]
@@ -1559,7 +1559,7 @@ export function ShowcaseApp() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8 }}
             >
-              <Badge className="mb-6 px-4 py-2 bg-white/5 border-white/10">
+              <Badge className="mb-6 px-4 py-2 bg-slate-100 dark:bg-white/5 border-slate-300 dark:border-white/10 text-slate-700 dark:text-white">
                 <Sparkles className="w-4 h-4 mr-2 text-amber-400" />
                 DeepLearning.AI Professional Certificate
               </Badge>
@@ -1735,14 +1735,14 @@ export function ShowcaseApp() {
             </motion.div>
 
             <RevealText delay={0.2}>
-              <h2 className="text-4xl md:text-5xl font-bold mb-6 text-white">
+              <h2 className="text-4xl md:text-5xl font-bold mb-6 text-slate-900 dark:text-white">
                 Explore the
                 <span className="bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent"> Code</span>
               </h2>
             </RevealText>
 
             <RevealText delay={0.3}>
-              <p className="text-zinc-400 text-lg mb-8">
+              <p className="text-slate-500 dark:text-zinc-400 text-lg mb-8">
                 All 44 notebooks, implementations, and experiments are open source
               </p>
             </RevealText>
