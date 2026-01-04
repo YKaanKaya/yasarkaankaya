@@ -33,6 +33,46 @@ html {
   .text-gradient {
     @apply bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 bg-clip-text text-transparent;
   }
+
+  /* Safe area padding for mobile bottom nav */
+  .safe-area-pb {
+    padding-bottom: env(safe-area-inset-bottom, 0);
+  }
+
+  /* SVG path animation class */
+  .svg-animate path,
+  .svg-animate line,
+  .svg-animate circle {
+    animation: svg-draw 1.5s ease-out forwards;
+  }
+
+  .svg-animate rect {
+    animation: svg-fade 0.8s ease-out forwards;
+  }
+}
+
+/* SVG path drawing animation */
+@keyframes svg-draw {
+  from {
+    stroke-dasharray: 1000;
+    stroke-dashoffset: 1000;
+    opacity: 0;
+  }
+  to {
+    stroke-dashoffset: 0;
+    opacity: 1;
+  }
+}
+
+@keyframes svg-fade {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
 }
 
 @layer base {

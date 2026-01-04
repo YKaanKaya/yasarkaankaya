@@ -31,8 +31,8 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <ThemeProvider 
-          attribute="class" 
+        <ThemeProvider
+          attribute="class"
           defaultTheme="system"
           themes={["light", "dark", "system", "read"]}
           enableSystem
@@ -41,8 +41,6 @@ export default function RootLayout({
         >
           {children}
         </ThemeProvider>
-        {/* Analytics removed */}
-        {/* No analytics scripts */}
       </body>
     </html>
   );

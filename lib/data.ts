@@ -177,10 +177,10 @@ export const projects = [
   },
   {
     title: 'PyTorch for Deep Learning',
-    description: 'Professional certificate from DeepLearning.AI covering production-ready deep learning with PyTorch. From neural network fundamentals to advanced architectures, computer vision, NLP, and model deployment.',
+    description: 'Professional Certificate from DeepLearning.AI ✅ completed January 2026. All 3 courses complete: PyTorch Exploration (neural networks, CNNs, image classification), Techniques & Ecosystem (optimization, Optuna, transfer learning), and Advanced Architectures (Siamese Networks, ResNet, DenseNet, Stable Diffusion, ONNX deployment).',
     link: 'https://github.com/YKaanKaya/deeplearning-ai-pytorch',
     demoLink: '/showcase/PyTorchDeepLearning',
-    tags: ['PyTorch', 'Deep Learning', 'MLOps', 'ONNX']
+    tags: ['PyTorch', 'Deep Learning', 'TorchVision', 'Optuna', 'MLOps', 'Transfer Learning', 'ONNX']
   },
   {
     title: 'Stock Performance & ESG Scores',
@@ -237,6 +237,7 @@ export const skillCategories = [
 ]
 
 export const certificates = [
+  { name: 'PyTorch for Deep Learning Professional Certificate', issuer: 'DeepLearning.AI', link: 'https://learn.deeplearning.ai/certificates/2a9c2778-7424-4379-b34a-384272c9303c', year: '2026' },
   { name: 'Machine Learning Specialization', issuer: 'Stanford University', link: 'https://www.coursera.org/account/accomplishments/specialization/U89AFBFR4NMM', year: '2023' },
   { name: 'Data Engineering and AWS', issuer: 'DeepLearning.AI', link: 'https://www.coursera.org/account/accomplishments/specialization/OUGD3WNPRZ1I', year: '2024' },
   { name: 'Advanced Data Analytics Professional Certificate', issuer: 'Google', link: 'https://www.coursera.org/account/accomplishments/professional-cert/AALR5T4XSEY6', year: '2023' },
