@@ -394,13 +394,13 @@ function AnimatedCounter({
       initial={{ opacity: 0, y: 20 }}
       animate={isInView ? { opacity: 1, y: 0 } : {}}
       transition={{ delay: delay / 1000, duration: 0.5 }}
-      className="p-4 rounded-2xl bg-white/5 border border-white/10 backdrop-blur-sm"
+      className="p-4 rounded-2xl bg-slate-100 dark:bg-white/5 border border-slate-200 dark:border-white/10 backdrop-blur-sm"
     >
-      <div className="text-4xl font-bold bg-gradient-to-r from-white to-white/60 bg-clip-text text-transparent tabular-nums">
+      <div className="text-4xl font-bold bg-gradient-to-r from-slate-900 to-slate-600 dark:from-white dark:to-white/60 bg-clip-text text-transparent tabular-nums">
         {displayValue}
       </div>
-      <div className="text-white/80 font-medium">{label}</div>
-      <div className="text-white/40 text-sm">{sublabel}</div>
+      <div className="text-slate-700 dark:text-white/80 font-medium">{label}</div>
+      <div className="text-slate-500 dark:text-white/40 text-sm">{sublabel}</div>
     </motion.div>
   )
 }
@@ -504,7 +504,7 @@ function ResultsSection() {
             Measurable
             <span className="bg-gradient-to-r from-emerald-400 to-cyan-400 bg-clip-text text-transparent"> Impact</span>
           </h2>
-          <p className="text-zinc-400 text-lg max-w-2xl mx-auto">
+          <p className="text-slate-500 dark:text-zinc-400 text-lg max-w-2xl mx-auto">
             Actual metrics from my notebook experiments — not theoretical, but proven
           </p>
         </motion.div>
@@ -517,16 +517,16 @@ function ResultsSection() {
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ delay: i * 0.15 }}
             >
-              <Card className="h-full bg-zinc-900/70 border-zinc-700 overflow-hidden group hover:border-zinc-500 transition-all duration-500">
+              <Card className="h-full bg-slate-100 dark:bg-zinc-900/70 border-slate-200 dark:border-zinc-700 overflow-hidden group hover:border-slate-400 dark:hover:border-zinc-500 transition-all duration-500">
                 <div className={`h-2 bg-gradient-to-r ${result.color}`} />
                 <div className="p-6">
-                  <h3 className="text-lg font-bold mb-2 text-white group-hover:text-blue-400 transition-colors">{result.title}</h3>
-                  <p className="text-zinc-400 text-sm mb-6">{result.description}</p>
+                  <h3 className="text-lg font-bold mb-2 text-slate-900 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">{result.title}</h3>
+                  <p className="text-slate-500 dark:text-zinc-400 text-sm mb-6">{result.description}</p>
 
                   <div className="flex items-center justify-between gap-4">
                     <div className="text-center">
-                      <div className="text-xs text-zinc-400 uppercase tracking-wider mb-1">Before</div>
-                      <div className="text-lg font-mono text-zinc-300">{result.before}</div>
+                      <div className="text-xs text-slate-500 dark:text-zinc-400 uppercase tracking-wider mb-1">Before</div>
+                      <div className="text-lg font-mono text-slate-600 dark:text-zinc-300">{result.before}</div>
                     </div>
                     <div className="flex-1 flex items-center justify-center">
                       <motion.div
@@ -539,7 +539,7 @@ function ResultsSection() {
                       </motion.div>
                     </div>
                     <div className="text-center">
-                      <div className="text-xs text-zinc-400 uppercase tracking-wider mb-1">After</div>
+                      <div className="text-xs text-slate-500 dark:text-zinc-400 uppercase tracking-wider mb-1">After</div>
                       <div className="text-lg font-mono text-emerald-400 font-bold">{result.after}</div>
                     </div>
                   </div>
@@ -1582,7 +1582,7 @@ export function ShowcaseApp() {
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.2 }}
-              className="text-xl text-white/50 mb-12 max-w-2xl mx-auto leading-relaxed"
+              className="text-xl text-slate-600 dark:text-white/50 mb-12 max-w-2xl mx-auto leading-relaxed"
             >
               A deep dive into PyTorch — building neural networks, optimizing for production, and implementing state-of-the-art architectures
             </motion.p>
@@ -1649,7 +1649,7 @@ export function ShowcaseApp() {
                 The Building Blocks of
                 <span className="bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent"> Deep Learning</span>
               </h2>
-              <p className="text-white/50 text-lg max-w-2xl mx-auto">
+              <p className="text-slate-500 dark:text-white/50 text-lg max-w-2xl mx-auto">
                 Each concept builds on the last — from tensors to production-ready architectures
               </p>
             </motion.div>
@@ -1759,7 +1759,7 @@ export function ShowcaseApp() {
                   View Repository
                 </a>
               </Button>
-              <Button asChild size="lg" variant="outline" className="rounded-full px-8 border-zinc-600 text-white hover:bg-zinc-800">
+              <Button asChild size="lg" variant="outline" className="rounded-full px-8 border-slate-300 dark:border-zinc-600 text-slate-700 dark:text-white hover:bg-slate-100 dark:hover:bg-zinc-800">
                 <Link href="/">
                   <ArrowLeft className="mr-2 w-5 h-5" />
                   Back to Portfolio
