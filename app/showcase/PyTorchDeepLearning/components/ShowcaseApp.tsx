@@ -986,26 +986,39 @@ study.optimize(objective, n_trials=100)`,
 ]
 
 // Learning path data
-const learningPath = [
-  {
-    title: "Neural Network Fundamentals",
-    course: "Course 1",
-    description: "Built my first neural networks from scratch, understanding how tensors, gradients, and optimization work together.",
-    status: "completed" as const,
-    gradient: "from-blue-600/80 to-indigo-700/80",
-    icon: <Brain className="w-8 h-8 text-blue-400" />,
-    notebooks: 12,
-    projects: 4,
-    learnings: [
-      "PyTorch tensors and GPU acceleration",
-      "Automatic differentiation with autograd",
-      "Building networks with nn.Module",
-      "Training loops and batch processing",
-      "MNIST digit classification (99% accuracy)",
-      "Data augmentation strategies"
-    ],
-    deepDive: "The biggest revelation was understanding how autograd tracks operations to build a computational graph. When you call .backward(), PyTorch walks this graph in reverse, computing gradients via the chain rule. This elegant design is what makes PyTorch so flexible for research.",
-    codeExample: `# The magic of autograd
+const learningPath: Array<{
+  title: string;
+  course: string;
+  description: string;
+  status: "completed" | "in-progress";
+  gradient: string;
+  icon: React.ReactNode;
+  notebooks: number;
+  projects: number;
+  learnings: string[];
+  deepDive: string;
+  codeExample: string;
+  projectsList: Array<{ name: string; description: string; path: string }>;
+}> = [
+    {
+      title: "Neural Network Fundamentals",
+      course: "Course 1",
+      description: "Built my first neural networks from scratch, understanding how tensors, gradients, and optimization work together.",
+      status: "completed" as const,
+      gradient: "from-blue-600/80 to-indigo-700/80",
+      icon: <Brain className="w-8 h-8 text-blue-400" />,
+      notebooks: 12,
+      projects: 4,
+      learnings: [
+        "PyTorch tensors and GPU acceleration",
+        "Automatic differentiation with autograd",
+        "Building networks with nn.Module",
+        "Training loops and batch processing",
+        "MNIST digit classification (99% accuracy)",
+        "Data augmentation strategies"
+      ],
+      deepDive: "The biggest revelation was understanding how autograd tracks operations to build a computational graph. When you call .backward(), PyTorch walks this graph in reverse, computing gradients via the chain rule. This elegant design is what makes PyTorch so flexible for research.",
+      codeExample: `# The magic of autograd
 x = torch.randn(100, 10, requires_grad=True)
 W = torch.randn(10, 5, requires_grad=True)
 b = torch.randn(5, requires_grad=True)
@@ -1017,32 +1030,32 @@ loss = y.pow(2).mean()
 # Backward: gradients computed automatically
 loss.backward()
 # W.grad now contains ∂loss/∂W`,
-    projectsList: [
-      { name: "MNIST Classifier", description: "Fully connected network achieving 99% accuracy", path: "Course-1-PyTorch-Exploration/Module%202" },
-      { name: "Letter Detective", description: "Extended MNIST with letter recognition", path: "Course-1-PyTorch-Exploration/Module%202" },
-      { name: "Nature CNN", description: "CIFAR-100 multi-class classification", path: "Course-1-PyTorch-Exploration/Module%204" },
-      { name: "Robust CNN", description: "Data augmentation and regularization", path: "Course-1-PyTorch-Exploration/Module%204" }
-    ]
-  },
-  {
-    title: "Production Optimization",
-    course: "Course 2",
-    description: "Moved beyond accuracy to production concerns: hyperparameter tuning, transfer learning, NLP, and performance profiling.",
-    status: "completed" as const,
-    gradient: "from-emerald-600/80 to-teal-700/80",
-    icon: <Zap className="w-8 h-8 text-emerald-400" />,
-    notebooks: 19,
-    projects: 5,
-    learnings: [
-      "Optuna for automated hyperparameter search",
-      "Learning rate schedulers (Cosine, OneCycle)",
-      "Transfer learning with frozen layers",
-      "Text tokenization and embeddings",
-      "PyTorch Profiler for bottleneck detection",
-      "DataLoader optimization (workers, pinning)"
-    ],
-    deepDive: "Optuna completely changed how I approach model development. Instead of manually tuning, I define a search space and let Bayesian optimization find configurations I never would have tried. The pruning feature stops bad trials early, making 100-trial searches practical.",
-    codeExample: `# Optuna finds what intuition misses
+      projectsList: [
+        { name: "MNIST Classifier", description: "Fully connected network achieving 99% accuracy", path: "Course-1-PyTorch-Exploration/Module%202" },
+        { name: "Letter Detective", description: "Extended MNIST with letter recognition", path: "Course-1-PyTorch-Exploration/Module%202" },
+        { name: "Nature CNN", description: "CIFAR-100 multi-class classification", path: "Course-1-PyTorch-Exploration/Module%204" },
+        { name: "Robust CNN", description: "Data augmentation and regularization", path: "Course-1-PyTorch-Exploration/Module%204" }
+      ]
+    },
+    {
+      title: "Production Optimization",
+      course: "Course 2",
+      description: "Moved beyond accuracy to production concerns: hyperparameter tuning, transfer learning, NLP, and performance profiling.",
+      status: "completed" as const,
+      gradient: "from-emerald-600/80 to-teal-700/80",
+      icon: <Zap className="w-8 h-8 text-emerald-400" />,
+      notebooks: 19,
+      projects: 5,
+      learnings: [
+        "Optuna for automated hyperparameter search",
+        "Learning rate schedulers (Cosine, OneCycle)",
+        "Transfer learning with frozen layers",
+        "Text tokenization and embeddings",
+        "PyTorch Profiler for bottleneck detection",
+        "DataLoader optimization (workers, pinning)"
+      ],
+      deepDive: "Optuna completely changed how I approach model development. Instead of manually tuning, I define a search space and let Bayesian optimization find configurations I never would have tried. The pruning feature stops bad trials early, making 100-trial searches practical.",
+      codeExample: `# Optuna finds what intuition misses
 def objective(trial):
     # Search space definition
     lr = trial.suggest_float('lr', 1e-5, 1e-1, log=True)
@@ -1056,54 +1069,52 @@ def objective(trial):
             raise optuna.TrialPruned()
     
     return accuracy`,
-    projectsList: [
-      { name: "Hyperparameter Search", description: "Optuna-optimized model configuration", path: "Course-2-Techniques-and-Ecosystem/Module_1" },
-      { name: "Transfer Learning", description: "Fine-tuned ResNet for custom dataset", path: "Course-2-Techniques-and-Ecosystem/Module_2" },
-      { name: "Text Classifier", description: "Sentiment analysis with embeddings", path: "Course-2-Techniques-and-Ecosystem/Module_3" },
-      { name: "Fine-tuned BERT", description: "Pre-trained transformer fine-tuning", path: "Course-2-Techniques-and-Ecosystem/Module_3" },
-      { name: "Performance Profiling", description: "Optimized training pipeline", path: "Course-2-Techniques-and-Ecosystem/Module_4" }
-    ]
-  },
-  {
-    title: "Advanced Architectures",
-    course: "Course 3",
-    description: "Implementing state-of-the-art architectures: Siamese networks for similarity, ResNet's skip connections, and DenseNet's feature reuse.",
-    status: "in-progress" as const,
-    gradient: "from-purple-600/80 to-pink-700/80",
-    icon: <Layers className="w-8 h-8 text-purple-400" />,
-    notebooks: 4,
-    projects: 3,
-    learnings: [
-      "Siamese networks for similarity learning",
-      "Skip connections and residual learning",
-      "Dense connections for feature reuse",
-      "Contrastive loss functions"
-    ],
-    deepDive: "Skip connections in ResNet solved the vanishing gradient problem elegantly. By adding the input directly to the output (x + F(x)), the network only needs to learn the residual difference. This seemingly simple change enabled training 152-layer networks.",
-    codeExample: `# DenseNet: every layer connected to every other
-class DenseBlock(nn.Module):
-    def __init__(self, n_layers, in_features, growth_rate):
-        super().__init__()
-        self.layers = nn.ModuleList()
-        for i in range(n_layers):
-            self.layers.append(
-                nn.Conv2d(in_features + i * growth_rate, 
-                         growth_rate, kernel_size=3, padding=1)
-            )
-    
-    def forward(self, x):
-        features = [x]
-        for layer in self.layers:
-            out = layer(torch.cat(features, dim=1))
-            features.append(out)
-        return torch.cat(features, dim=1)`,
-    projectsList: [
-      { name: "Siamese Network", description: "Image similarity with contrastive loss", path: "Course-3-Advanced-Architectures/Module%201" },
-      { name: "ResNet Implementation", description: "Building residual networks from scratch", path: "Course-3-Advanced-Architectures/Module%201" },
-      { name: "DenseNet", description: "Dense connections and feature reuse", path: "Course-3-Advanced-Architectures/Module%201" }
-    ]
-  }
-]
+      projectsList: [
+        { name: "Hyperparameter Search", description: "Optuna-optimized model configuration", path: "Course-2-Techniques-and-Ecosystem/Module_1" },
+        { name: "Transfer Learning", description: "Fine-tuned ResNet for custom dataset", path: "Course-2-Techniques-and-Ecosystem/Module_2" },
+        { name: "Text Classifier", description: "Sentiment analysis with embeddings", path: "Course-2-Techniques-and-Ecosystem/Module_3" },
+        { name: "Fine-tuned BERT", description: "Pre-trained transformer fine-tuning", path: "Course-2-Techniques-and-Ecosystem/Module_3" },
+        { name: "Performance Profiling", description: "Optimized training pipeline", path: "Course-2-Techniques-and-Ecosystem/Module_4" }
+      ]
+    },
+    {
+      title: "Advanced Architectures",
+      course: "Course 3",
+      description: "Implementing state-of-the-art architectures: Siamese networks, ResNet, DenseNet, and generative models with Stable Diffusion and ONNX deployment.",
+      status: "completed" as const,
+      gradient: "from-purple-600/80 to-pink-700/80",
+      icon: <Layers className="w-8 h-8 text-purple-400" />,
+      notebooks: 6,
+      projects: 4,
+      learnings: [
+        "Siamese networks for similarity learning",
+        "Skip connections and residual learning",
+        "Dense connections for feature reuse",
+        "Contrastive loss functions",
+        "Stable Diffusion with Hugging Face Diffusers",
+        "ONNX export for production deployment"
+      ],
+      deepDive: "Skip connections in ResNet solved the vanishing gradient problem elegantly. By adding the input directly to the output (x + F(x)), the network only needs to learn the residual difference. Combined with Stable Diffusion for generative AI and ONNX for deployment, this course covered the full production AI pipeline.",
+      codeExample: `# ONNX export for production deployment
+model.eval()
+dummy_input = torch.randn(1, 3, 224, 224)
+
+torch.onnx.export(
+    model, dummy_input, "model.onnx",
+    input_names=['input'],
+    output_names=['output'],
+    dynamic_axes={'input': {0: 'batch'}},
+    opset_version=14
+)`,
+      projectsList: [
+        { name: "Siamese Networks", description: "Similarity learning for signature verification", path: "Course-3-Advanced-Architectures/Module%201" },
+        { name: "ResNet Implementation", description: "Deep residual networks with skip connections", path: "Course-3-Advanced-Architectures/Module%201" },
+        { name: "DenseNet", description: "Dense connections for feature reuse", path: "Course-3-Advanced-Architectures/Module%201" },
+        { name: "Stable Diffusion", description: "Generative AI with diffusion models", path: "Course-3-Advanced-Architectures/Module%202" },
+        { name: "ONNX Export", description: "Model export for production deployment", path: "Course-3-Advanced-Architectures/Module%202" }
+      ]
+    }
+  ]
 
 // Stats for hero
 const stats = [

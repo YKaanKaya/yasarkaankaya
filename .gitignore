@@ -64,3 +64,6 @@ yarn-error.log*
 /deftunes-data-pipeline/
 /temp-deftunes/
 /temp-repo/
+
+# Local Netlify folder
+.netlify
