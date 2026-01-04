@@ -1119,8 +1119,8 @@ torch.onnx.export(
 // Stats for hero
 const stats = [
   { value: "3", label: "Courses", sublabel: "Professional Certificate" },
-  { value: "35", label: "Notebooks", sublabel: "Hands-on Practice" },
-  { value: "12", label: "Projects", sublabel: "Real Applications" },
+  { value: "37", label: "Notebooks", sublabel: "Hands-on Practice" },
+  { value: "13", label: "Projects", sublabel: "Real Applications" },
   { value: "100+", label: "Hours", sublabel: "Deep Learning" }
 ]
 
@@ -1270,7 +1270,7 @@ export function ShowcaseApp() {
             <div className="flex items-center gap-3">
               <Badge variant="outline" className="hidden sm:flex border-slate-300 dark:border-white/20">
                 <span className="w-2 h-2 bg-emerald-500 rounded-full mr-2" />
-                2/3 Complete
+                3/3 Complete
               </Badge>
               {/* Theme toggle */}
               {mounted && (
