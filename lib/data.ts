@@ -238,6 +238,7 @@ export const skillCategories = [
 
 export const certificates = [
   { name: 'PyTorch for Deep Learning Professional Certificate', issuer: 'DeepLearning.AI', link: 'https://learn.deeplearning.ai/certificates/2a9c2778-7424-4379-b34a-384272c9303c', year: '2026' },
+  { name: 'Building AI Agents with Multimodal Models', issuer: 'NVIDIA DLI', link: 'https://learn.nvidia.com/certificates?id=kpMpsOlPTBKph9g3PLBXpw', year: '2025' },
   { name: 'Machine Learning Specialization', issuer: 'Stanford University', link: 'https://www.coursera.org/account/accomplishments/specialization/U89AFBFR4NMM', year: '2023' },
   { name: 'Data Engineering and AWS', issuer: 'DeepLearning.AI', link: 'https://www.coursera.org/account/accomplishments/specialization/OUGD3WNPRZ1I', year: '2024' },
   { name: 'Advanced Data Analytics Professional Certificate', issuer: 'Google', link: 'https://www.coursera.org/account/accomplishments/professional-cert/AALR5T4XSEY6', year: '2023' },
