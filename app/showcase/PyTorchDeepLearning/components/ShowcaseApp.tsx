@@ -16,6 +16,240 @@ import {
 import Link from 'next/link'
 import Script from 'next/script'
 
+// ============================================================================
+// SCROLLYTELLING COMPONENTS
+// ============================================================================
+
+// ScrollSection: Wrapper with scroll-triggered reveal and staggered children
+function ScrollSection({
+  children,
+  className = "",
+  staggerChildren = true,
+  delay = 0
+}: {
+  children: React.ReactNode;
+  className?: string;
+  staggerChildren?: boolean;
+  delay?: number;
+}) {
+  const ref = useRef(null)
+  const isInView = useInView(ref, { once: true, margin: "-100px" })
+
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        delay,
+        staggerChildren: staggerChildren ? 0.1 : 0,
+        delayChildren: delay
+      }
+    }
+  }
+
+  const itemVariants = {
+    hidden: { opacity: 0, y: 30 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: { duration: 0.6, ease: "easeOut" }
+    }
+  }
+
+  return (
+    <motion.div
+      ref={ref}
+      variants={containerVariants}
+      initial="hidden"
+      animate={isInView ? "visible" : "hidden"}
+      className={className}
+    >
+      {React.Children.map(children, (child) => {
+        if (React.isValidElement(child)) {
+          return (
+            <motion.div variants={staggerChildren ? itemVariants : undefined}>
+              {child}
+            </motion.div>
+          )
+        }
+        return child
+      })}
+    </motion.div>
+  )
+}
+
+// TypewriterCode: Animated code typing effect
+function TypewriterCode({
+  code,
+  language = "python",
+  typingSpeed = 20,
+  startDelay = 0
+}: {
+  code: string;
+  language?: string;
+  typingSpeed?: number;
+  startDelay?: number;
+}) {
+  const ref = useRef(null)
+  const isInView = useInView(ref, { once: true, margin: "-50px" })
+  const [displayedCode, setDisplayedCode] = useState("")
+  const [isComplete, setIsComplete] = useState(false)
+
+  useEffect(() => {
+    if (!isInView) return
+
+    let currentIndex = 0
+    const timeout = setTimeout(() => {
+      const interval = setInterval(() => {
+        if (currentIndex < code.length) {
+          setDisplayedCode(code.slice(0, currentIndex + 1))
+          currentIndex++
+        } else {
+          setIsComplete(true)
+          clearInterval(interval)
+        }
+      }, typingSpeed)
+
+      return () => clearInterval(interval)
+    }, startDelay)
+
+    return () => clearTimeout(timeout)
+  }, [isInView, code, typingSpeed, startDelay])
+
+  return (
+    <div ref={ref} className="rounded-lg bg-zinc-950 border border-zinc-800 overflow-hidden">
+      <div className="flex items-center justify-between px-3 py-2 bg-zinc-900 border-b border-zinc-800">
+        <div className="flex items-center gap-2">
+          <FileCode className="w-4 h-4 text-zinc-400" />
+          <span className="text-xs text-zinc-400">{language}</span>
+        </div>
+        <div className="flex gap-1.5">
+          <div className="w-2.5 h-2.5 rounded-full bg-red-500" />
+          <div className="w-2.5 h-2.5 rounded-full bg-yellow-500" />
+          <div className="w-2.5 h-2.5 rounded-full bg-green-500" />
+        </div>
+      </div>
+      <pre className="p-4 text-xs overflow-x-auto min-h-[100px]">
+        <code className="text-emerald-400 font-mono leading-relaxed whitespace-pre">
+          {displayedCode}
+          {!isComplete && (
+            <motion.span
+              animate={{ opacity: [1, 0] }}
+              transition={{ duration: 0.5, repeat: Infinity }}
+              className="inline-block w-2 h-4 bg-emerald-400 ml-0.5"
+            />
+          )}
+        </code>
+      </pre>
+    </div>
+  )
+}
+
+// ParallaxContainer: Creates depth effect on scroll
+function ParallaxContainer({
+  children,
+  speed = 0.5,
+  className = ""
+}: {
+  children: React.ReactNode;
+  speed?: number;
+  className?: string;
+}) {
+  const ref = useRef(null)
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ["start end", "end start"]
+  })
+  const y = useTransform(scrollYProgress, [0, 1], [100 * speed, -100 * speed])
+
+  return (
+    <motion.div ref={ref} style={{ y }} className={className}>
+      {children}
+    </motion.div>
+  )
+}
+
+// RevealText: Animated text reveal with gradient sweep
+function RevealText({
+  children,
+  className = "",
+  delay = 0
+}: {
+  children: React.ReactNode;
+  className?: string;
+  delay?: number;
+}) {
+  const ref = useRef(null)
+  const isInView = useInView(ref, { once: true, margin: "-50px" })
+
+  return (
+    <motion.div
+      ref={ref}
+      initial={{ opacity: 0, y: 20, filter: "blur(10px)" }}
+      animate={isInView ? { opacity: 1, y: 0, filter: "blur(0px)" } : {}}
+      transition={{ duration: 0.8, delay, ease: "easeOut" }}
+      className={className}
+    >
+      {children}
+    </motion.div>
+  )
+}
+
+// Confetti celebration effect for CTA section
+function ConfettiCelebration({ trigger }: { trigger: boolean }) {
+  const [particles, setParticles] = useState<Array<{
+    id: number;
+    x: number;
+    color: string;
+    delay: number;
+    duration: number;
+  }>>([])
+
+  useEffect(() => {
+    if (trigger) {
+      const colors = ['#3b82f6', '#10b981', '#8b5cf6', '#f59e0b', '#ef4444', '#ec4899']
+      const newParticles = Array.from({ length: 50 }, (_, i) => ({
+        id: i,
+        x: Math.random() * 100,
+        color: colors[Math.floor(Math.random() * colors.length)],
+        delay: Math.random() * 0.5,
+        duration: 2 + Math.random() * 2
+      }))
+      setParticles(newParticles)
+    }
+  }, [trigger])
+
+  if (!trigger || particles.length === 0) return null
+
+  return (
+    <div className="fixed inset-0 pointer-events-none z-50 overflow-hidden">
+      {particles.map((particle) => (
+        <motion.div
+          key={particle.id}
+          initial={{ y: -20, x: `${particle.x}vw`, opacity: 1, scale: 1 }}
+          animate={{
+            y: '110vh',
+            opacity: 0,
+            rotate: 360 * (Math.random() > 0.5 ? 1 : -1),
+            scale: 0.5
+          }}
+          transition={{
+            duration: particle.duration,
+            delay: particle.delay,
+            ease: "easeIn"
+          }}
+          style={{ backgroundColor: particle.color }}
+          className="absolute w-3 h-3 rounded-sm"
+        />
+      ))}
+    </div>
+  )
+}
+
+// ============================================================================
+// END SCROLLYTELLING COMPONENTS
+// ============================================================================
+
 // Simple code display (removed complex highlighting that was breaking)
 
 // Floating Table of Contents
@@ -1135,6 +1369,16 @@ export function ShowcaseApp() {
   const { theme, setTheme, resolvedTheme } = useTheme()
   const [copied, setCopied] = useState(false)
   const [mounted, setMounted] = useState(false)
+  const [showConfetti, setShowConfetti] = useState(false)
+  const ctaRef = useRef<HTMLDivElement>(null)
+  const ctaInView = useInView(ctaRef, { once: true, margin: "-100px" })
+
+  // Trigger confetti when CTA section comes into view
+  useEffect(() => {
+    if (ctaInView && !showConfetti) {
+      setShowConfetti(true)
+    }
+  }, [ctaInView, showConfetti])
 
   // Expanded modules state with localStorage persistence
   const [expandedModules, setExpandedModules] = useState<Set<number>>(() => {
@@ -1457,32 +1701,91 @@ export function ShowcaseApp() {
           </div>
         </section>
 
-        {/* CTA */}
-        <section id="cta" className="py-32 px-6">
-          <div className="max-w-3xl mx-auto text-center">
+        {/* CTA - Celebration Finale */}
+        <section id="cta" ref={ctaRef} className="py-32 px-6 relative overflow-hidden">
+          <ConfettiCelebration trigger={showConfetti} />
+
+          <div className="max-w-3xl mx-auto text-center relative z-10">
+            {/* Animated Certificate Badge */}
             <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
+              initial={{ opacity: 0, scale: 0.8, rotateY: -30 }}
+              animate={ctaInView ? { opacity: 1, scale: 1, rotateY: 0 } : {}}
+              transition={{ duration: 0.8, type: "spring", stiffness: 100 }}
+              className="mb-8"
             >
-              <h2 className="text-4xl font-bold mb-6 text-white">Explore the Code</h2>
-              <p className="text-zinc-400 text-lg mb-8">
-                All 35 notebooks, implementations, and experiments are open source
-              </p>
-              <div className="flex flex-wrap justify-center gap-4">
-                <Button asChild size="lg" className="rounded-full px-8 bg-white text-black hover:bg-white/90">
-                  <a href="https://github.com/YKaanKaya/deeplearning-ai-pytorch" target="_blank">
-                    <Github className="mr-2 w-5 h-5" />
-                    View Repository
-                  </a>
-                </Button>
-                <Button asChild size="lg" variant="outline" className="rounded-full px-8 border-zinc-600 text-white hover:bg-zinc-800">
-                  <Link href="/">
-                    <ArrowLeft className="mr-2 w-5 h-5" />
-                    Back to Portfolio
-                  </Link>
-                </Button>
+              <div className="inline-flex items-center gap-3 px-6 py-4 rounded-2xl bg-gradient-to-r from-emerald-500/20 to-blue-500/20 border border-emerald-500/30">
+                <motion.div
+                  animate={{ rotate: [0, 10, -10, 0] }}
+                  transition={{ duration: 2, repeat: Infinity, repeatDelay: 3 }}
+                >
+                  <Award className="w-8 h-8 text-emerald-400" />
+                </motion.div>
+                <div className="text-left">
+                  <div className="text-sm text-emerald-400 font-medium">Certificate Completed</div>
+                  <div className="text-white font-bold">January 2026</div>
+                </div>
+                <a
+                  href="https://learn.deeplearning.ai/certificates/2a9c2778-7424-4379-b34a-384272c9303c"
+                  target="_blank"
+                  className="ml-2 text-emerald-400 hover:text-emerald-300 transition-colors"
+                >
+                  <ExternalLink className="w-5 h-5" />
+                </a>
               </div>
+            </motion.div>
+
+            <RevealText delay={0.2}>
+              <h2 className="text-4xl md:text-5xl font-bold mb-6 text-white">
+                Explore the
+                <span className="bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent"> Code</span>
+              </h2>
+            </RevealText>
+
+            <RevealText delay={0.3}>
+              <p className="text-zinc-400 text-lg mb-8">
+                All 44 notebooks, implementations, and experiments are open source
+              </p>
+            </RevealText>
+
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={ctaInView ? { opacity: 1, y: 0 } : {}}
+              transition={{ delay: 0.4, duration: 0.6 }}
+              className="flex flex-wrap justify-center gap-4"
+            >
+              <Button asChild size="lg" className="rounded-full px-8 bg-gradient-to-r from-blue-500 to-purple-500 text-white hover:from-blue-600 hover:to-purple-600 shadow-lg shadow-blue-500/25">
+                <a href="https://github.com/YKaanKaya/deeplearning-ai-pytorch" target="_blank">
+                  <Github className="mr-2 w-5 h-5" />
+                  View Repository
+                </a>
+              </Button>
+              <Button asChild size="lg" variant="outline" className="rounded-full px-8 border-zinc-600 text-white hover:bg-zinc-800">
+                <Link href="/">
+                  <ArrowLeft className="mr-2 w-5 h-5" />
+                  Back to Portfolio
+                </Link>
+              </Button>
+            </motion.div>
+
+            {/* Floating achievement badges */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={ctaInView ? { opacity: 1 } : {}}
+              transition={{ delay: 0.6, duration: 0.8 }}
+              className="mt-12 flex flex-wrap justify-center gap-3"
+            >
+              {['PyTorch', 'Deep Learning', 'Transformers', 'MLOps', 'ONNX'].map((skill, i) => (
+                <motion.div
+                  key={skill}
+                  initial={{ opacity: 0, scale: 0.8 }}
+                  animate={ctaInView ? { opacity: 1, scale: 1 } : {}}
+                  transition={{ delay: 0.7 + i * 0.1 }}
+                  whileHover={{ scale: 1.1, y: -2 }}
+                  className="px-4 py-2 rounded-full bg-zinc-800/50 border border-zinc-700 text-sm text-zinc-300"
+                >
+                  {skill}
+                </motion.div>
+              ))}
             </motion.div>
           </div>
         </section>
