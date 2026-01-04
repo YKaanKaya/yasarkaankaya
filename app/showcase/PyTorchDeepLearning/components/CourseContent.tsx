@@ -212,7 +212,7 @@ DataLoader(dataset, batch_size=32,
       id: 3,
       title: "Course 3: Advanced Architectures and Deployment",
       status: "completed",
-      description: "Modern architectures, generative models, and production deployment strategies",
+      description: "Modern architectures, transformers, generative models, and production deployment",
       icon: <Layers className="h-5 w-5" />,
       modules: [
         {
@@ -223,12 +223,12 @@ DataLoader(dataset, batch_size=32,
             "Siamese Networks for similarity learning",
             "Skip connections in ResNet",
             "Dense connections in DenseNet",
-            "When to use which architecture"
+            "Contrastive loss functions"
           ],
           notebooks: [
-            { name: "Siamese Networks", path: "Course-3-Advanced-Architectures/Module 1/C3_M1_Lab_1_siamese_network.ipynb", description: "Learning similarity with twin networks" },
-            { name: "ResNet", path: "Course-3-Advanced-Architectures/Module 1/C3_M1_Lab_2_resnet.ipynb", description: "Residual connections for deep networks" },
-            { name: "DenseNet", path: "Course-3-Advanced-Architectures/Module 1/C3_M1_Lab_3_densenet.ipynb", description: "Dense feature reuse" }
+            { name: "Siamese Networks", path: "Course-3-Advanced-Architectures/Module%201/C3_M1_Lab_1_siamese_network.ipynb", description: "Learning similarity with twin networks" },
+            { name: "ResNet", path: "Course-3-Advanced-Architectures/Module%201/C3_M1_Lab_2_resnet.ipynb", description: "Residual connections for deep networks" },
+            { name: "DenseNet", path: "Course-3-Advanced-Architectures/Module%201/C3_M1_Lab_3_densenet.ipynb", description: "Dense feature reuse" }
           ],
           codeHighlight: `# ResNet skip connection
 class ResidualBlock(nn.Module):
@@ -238,24 +238,75 @@ class ResidualBlock(nn.Module):
         return out + identity  # Skip connection`
         },
         {
-          title: "Module 2: Generative Models & Deployment",
-          description: "Generative AI with Stable Diffusion, model export with ONNX, and production deployment.",
+          title: "Module 2: Model Interpretation & Generative AI",
+          description: "Visualizing neural networks, saliency maps, and generative AI with Stable Diffusion.",
           keyConceptsTitle: "What You'll Learn",
           keyConcepts: [
+            "Visualizing feature maps",
+            "Saliency maps & class activation",
             "Stable Diffusion architecture",
-            "Hugging Face Diffusers library",
-            "Model export with ONNX",
-            "Production deployment strategies"
+            "Hugging Face Diffusers library"
           ],
           notebooks: [
-            { name: "Stable Diffusion", path: "Course-3-Advanced-Architectures/Module 2/C3_M2_Lab_1_stable_diffusion.ipynb", description: "Generative AI with diffusion models" },
-            { name: "ONNX Export", path: "Course-3-Advanced-Architectures/Module 2/C3_M2_Lab_2_onnx_export.ipynb", description: "Model export for production" }
+            { name: "Visualizing Networks", path: "Course-3-Advanced-Architectures/Module%202/C3_M2_Lab_1_visualizing_and_interpreting.ipynb", description: "Understanding what networks learn" },
+            { name: "Saliency Maps", path: "Course-3-Advanced-Architectures/Module%202/C3_M2_Lab_2_saliency_and_class_map.ipynb", description: "Class activation mapping" },
+            { name: "Stable Diffusion", path: "Course-3-Advanced-Architectures/Module%202/C3_M2_Lab_3_stable_diffusion.ipynb", description: "Generative AI with diffusion models" }
+          ],
+          codeHighlight: `# Stable Diffusion pipeline
+from diffusers import StableDiffusionPipeline
+
+pipe = StableDiffusionPipeline.from_pretrained(
+    "stabilityai/stable-diffusion-2"
+)
+image = pipe("a sunset over mountains").images[0]`
+        },
+        {
+          title: "Module 3: Transformer Architecture",
+          description: "Build transformers from scratch: attention mechanisms, encoders, and decoders.",
+          keyConceptsTitle: "What You'll Learn",
+          keyConcepts: [
+            "Self-attention mechanisms",
+            "Multi-head attention",
+            "Transformer encoder blocks",
+            "Transformer decoder blocks"
+          ],
+          notebooks: [
+            { name: "Attention Mechanism", path: "Course-3-Advanced-Architectures/Module%203/C3M3_Lab_1_attention.ipynb", description: "Self-attention from scratch" },
+            { name: "Transformer Encoder", path: "Course-3-Advanced-Architectures/Module%203/C3M3_Lab_2_encoder.ipynb", description: "Building encoder blocks" },
+            { name: "Transformer Decoder", path: "Course-3-Advanced-Architectures/Module%203/C3M3_Lab_3_decoder.ipynb", description: "Building decoder blocks" }
+          ],
+          codeHighlight: `# Self-attention mechanism
+class SelfAttention(nn.Module):
+    def forward(self, Q, K, V):
+        scores = torch.matmul(Q, K.transpose(-2, -1))
+        scores = scores / math.sqrt(self.d_k)
+        attn = F.softmax(scores, dim=-1)
+        return torch.matmul(attn, V)`
+        },
+        {
+          title: "Module 4: MLOps & Deployment",
+          description: "Production deployment with MLflow, ONNX export, model pruning, and quantization.",
+          keyConceptsTitle: "What You'll Learn",
+          keyConcepts: [
+            "MLflow experiment tracking",
+            "ONNX model export",
+            "Model pruning techniques",
+            "Quantization for efficiency"
+          ],
+          notebooks: [
+            { name: "MLflow Tracking", path: "Course-3-Advanced-Architectures/Module%204/C3_M4_Lab_1_mlflow.ipynb", description: "Experiment tracking & versioning" },
+            { name: "ONNX Export", path: "Course-3-Advanced-Architectures/Module%204/C3_M4_Lab_2_onnx.ipynb", description: "Model export for production" },
+            { name: "Model Pruning", path: "Course-3-Advanced-Architectures/Module%204/C3_M4_Lab_3_pruning.ipynb", description: "Reducing model size" },
+            { name: "Quantization", path: "Course-3-Advanced-Architectures/Module%204/C3_M4_Lab_4_quantization.ipynb", description: "INT8 quantization for speed" }
           ],
           codeHighlight: `# ONNX export for production
-torch.onnx.export(model, dummy_input, "model.onnx",
-                  input_names=['input'],
-                  output_names=['output'],
-                  dynamic_axes={'input': {0: 'batch'}})`
+torch.onnx.export(
+    model, dummy_input, "model.onnx",
+    input_names=['input'],
+    output_names=['output'],
+    dynamic_axes={'input': {0: 'batch'}},
+    opset_version=14
+)`
         }
       ]
     }
@@ -284,10 +335,10 @@ torch.onnx.export(model, dummy_input, "model.onnx",
           <Card
             key={course.id}
             className={`transition-all duration-300 ${course.status === "completed"
-                ? "border-green-200 dark:border-green-900"
-                : course.status === "in-progress"
-                  ? "border-orange-200 dark:border-orange-900"
-                  : ""
+              ? "border-green-200 dark:border-green-900"
+              : course.status === "in-progress"
+                ? "border-orange-200 dark:border-orange-900"
+                : ""
               }`}
           >
             <CardHeader
@@ -298,10 +349,10 @@ torch.onnx.export(model, dummy_input, "model.onnx",
                 <div className="flex-1">
                   <div className="flex items-center gap-3 mb-2">
                     <div className={`p-2 rounded-lg ${course.status === "completed"
-                        ? "bg-green-100 dark:bg-green-900/30 text-green-600"
-                        : course.status === "in-progress"
-                          ? "bg-orange-100 dark:bg-orange-900/30 text-orange-600"
-                          : "bg-gray-100 dark:bg-gray-900/30 text-gray-600"
+                      ? "bg-green-100 dark:bg-green-900/30 text-green-600"
+                      : course.status === "in-progress"
+                        ? "bg-orange-100 dark:bg-orange-900/30 text-orange-600"
+                        : "bg-gray-100 dark:bg-gray-900/30 text-gray-600"
                       }`}>
                       {course.icon}
                     </div>

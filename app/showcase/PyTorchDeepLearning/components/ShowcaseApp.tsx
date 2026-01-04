@@ -1080,38 +1080,41 @@ def objective(trial):
     {
       title: "Advanced Architectures",
       course: "Course 3",
-      description: "Implementing state-of-the-art architectures: Siamese networks, ResNet, DenseNet, and generative models with Stable Diffusion and ONNX deployment.",
+      description: "State-of-the-art architectures, transformers, generative AI, and production deployment with MLOps.",
       status: "completed" as const,
       gradient: "from-purple-600/80 to-pink-700/80",
       icon: <Layers className="w-8 h-8 text-purple-400" />,
-      notebooks: 6,
-      projects: 4,
+      notebooks: 13,
+      projects: 8,
       learnings: [
         "Siamese networks for similarity learning",
         "Skip connections and residual learning",
         "Dense connections for feature reuse",
-        "Contrastive loss functions",
+        "Model interpretation & saliency maps",
         "Stable Diffusion with Hugging Face Diffusers",
-        "ONNX export for production deployment"
+        "Transformer architecture from scratch",
+        "Self-attention & multi-head attention",
+        "MLflow experiment tracking",
+        "ONNX export for production",
+        "Model pruning & quantization"
       ],
-      deepDive: "Skip connections in ResNet solved the vanishing gradient problem elegantly. By adding the input directly to the output (x + F(x)), the network only needs to learn the residual difference. Combined with Stable Diffusion for generative AI and ONNX for deployment, this course covered the full production AI pipeline.",
-      codeExample: `# ONNX export for production deployment
-model.eval()
-dummy_input = torch.randn(1, 3, 224, 224)
-
-torch.onnx.export(
-    model, dummy_input, "model.onnx",
-    input_names=['input'],
-    output_names=['output'],
-    dynamic_axes={'input': {0: 'batch'}},
-    opset_version=14
-)`,
+      deepDive: "This course covered the full modern deep learning stack: from advanced architectures (Siamese, ResNet, DenseNet) through model interpretation and generative AI (Stable Diffusion), to transformers built from scratch (attention, encoder, decoder), and finally production MLOps (MLflow, ONNX, pruning, quantization).",
+      codeExample: `# Self-attention mechanism
+class SelfAttention(nn.Module):
+    def forward(self, Q, K, V):
+        scores = torch.matmul(Q, K.transpose(-2, -1))
+        scores = scores / math.sqrt(self.d_k)
+        attn = F.softmax(scores, dim=-1)
+        return torch.matmul(attn, V)`,
       projectsList: [
-        { name: "Siamese Networks", description: "Similarity learning for signature verification", path: "Course-3-Advanced-Architectures/Module%201" },
-        { name: "ResNet Implementation", description: "Deep residual networks with skip connections", path: "Course-3-Advanced-Architectures/Module%201" },
-        { name: "DenseNet", description: "Dense connections for feature reuse", path: "Course-3-Advanced-Architectures/Module%201" },
+        { name: "Siamese Networks", description: "Similarity learning for verification", path: "Course-3-Advanced-Architectures/Module%201" },
+        { name: "ResNet & DenseNet", description: "Advanced CNN architectures", path: "Course-3-Advanced-Architectures/Module%201" },
+        { name: "Model Interpretation", description: "Saliency maps & visualization", path: "Course-3-Advanced-Architectures/Module%202" },
         { name: "Stable Diffusion", description: "Generative AI with diffusion models", path: "Course-3-Advanced-Architectures/Module%202" },
-        { name: "ONNX Export", description: "Model export for production deployment", path: "Course-3-Advanced-Architectures/Module%202" }
+        { name: "Transformer Encoder", description: "Self-attention from scratch", path: "Course-3-Advanced-Architectures/Module%203" },
+        { name: "Transformer Decoder", description: "Complete transformer architecture", path: "Course-3-Advanced-Architectures/Module%203" },
+        { name: "MLflow Tracking", description: "Experiment versioning & logging", path: "Course-3-Advanced-Architectures/Module%204" },
+        { name: "ONNX & Optimization", description: "Pruning, quantization, export", path: "Course-3-Advanced-Architectures/Module%204" }
       ]
     }
   ]
@@ -1119,8 +1122,8 @@ torch.onnx.export(
 // Stats for hero
 const stats = [
   { value: "3", label: "Courses", sublabel: "Professional Certificate" },
-  { value: "37", label: "Notebooks", sublabel: "Hands-on Practice" },
-  { value: "13", label: "Projects", sublabel: "Real Applications" },
+  { value: "44", label: "Notebooks", sublabel: "Hands-on Practice" },
+  { value: "17", label: "Projects", sublabel: "Real Applications" },
   { value: "100+", label: "Hours", sublabel: "Deep Learning" }
 ]
 
