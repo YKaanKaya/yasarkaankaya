@@ -41,6 +41,19 @@ export default function RootLayout({
         >
           {children}
         </ThemeProvider>
+        {/* 100% privacy-first analytics */}
+        <Script
+          data-collect-dnt="true"
+          src="https://scripts.simpleanalyticscdn.com/latest.js"
+          strategy="afterInteractive"
+        />
+        <noscript>
+          <img
+            src="https://queue.simpleanalyticscdn.com/noscript.gif?collect-dnt=true"
+            alt=""
+            referrerPolicy="no-referrer-when-downgrade"
+          />
+        </noscript>
       </body>
     </html>
   );
