@@ -90,8 +90,9 @@ const summaries: Record<string, string> = {
 
 }
 
-export default function InsightsPage({ params }: { params: { slug: string } }) {
-  const md = summaries[params.slug]
+export default async function InsightsPage({ params }: { params: Promise<{ slug: string }> }) {
+  const { slug } = await params
+  const md = summaries[slug]
   if (!md) {
     return <p className="text-center mt-12">No insights available for this notebook.</p>
   }

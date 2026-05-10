@@ -38,8 +38,9 @@ const notebooks: Record<string, { title: string; file: string }> = {
   },
 }
 
-export function generateMetadata({ params }: { params: { slug: string } }): Metadata | undefined {
-  const nb = notebooks[params.slug]
+export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata | undefined> {
+  const { slug } = await params
+  const nb = notebooks[slug]
   if (!nb) return {}
   return {
     title: `${nb.title} | NVIDIA Multimodal AI Agents Notebook`,
@@ -54,15 +55,16 @@ export function generateStaticParams() {
   return params
 }
 
-export default function NotebookPage({ params }: { params: { slug: string } }) {
-  const nb = notebooks[params.slug]
+export default async function NotebookPage({ params }: { params: Promise<{ slug: string }> }) {
+  const { slug } = await params
+  const nb = notebooks[slug]
   if (!nb) {
     notFound()
   }
 
   return (
-    <NotebookClientWrapper 
-      slug={params.slug}
+    <NotebookClientWrapper
+      slug={slug}
       title={nb.title}
       file={nb.file}
     />
