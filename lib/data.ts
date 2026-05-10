@@ -156,7 +156,7 @@ export const projects = [
     title: 'AI Code Arena Quest',
     description: 'An educational platform at PractAI.life designed to help people practice Machine Learning and AI concepts through interactive exercises and challenges. Created to bridge the gap between theoretical knowledge and practical application in AI education.',
     link: '/showcase/AICodeArena',
-    demoLink: 'https://www.practai.life/',
+    demoLink: 'https://practai-8qr1e.netlify.app/',
     tags: ['React', 'Machine Learning', 'AI Education', 'Full-Stack'],
     featured: true
   },

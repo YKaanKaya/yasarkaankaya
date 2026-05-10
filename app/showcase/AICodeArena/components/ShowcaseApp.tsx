@@ -34,7 +34,7 @@ export function ShowcaseApp() {
             </Button>
             <Button asChild>
               <a 
-                href="https://www.practai.life/" 
+                href="https://practai-8qr1e.netlify.app/"
                 target="_blank" 
                 rel="noopener noreferrer"
                 className="flex items-center"
