@@ -43,17 +43,17 @@ export function NotebookSection({
 
         {viewLink && (
           <Button asChild className="mr-3">
-            <a href={viewLink} className="flex items-center">
+            <Link href={viewLink} className="flex items-center">
               <Eye className="w-4 h-4 mr-2" /> View Notebook
-            </a>
+            </Link>
           </Button>
         )}
 
         {insightsLink && (
           <Button asChild variant="secondary" className="mr-3">
-            <a href={insightsLink} className="flex items-center">
+            <Link href={insightsLink} className="flex items-center">
               <Eye className="w-4 h-4 mr-2" /> Findings & Insights
-            </a>
+            </Link>
           </Button>
         )}
 

@@ -7,9 +7,7 @@ import { Card, CardContent } from '@/components/ui/card'
 import { ArrowLeft, Github, Award, BookOpen, Code, Sparkles, Brain, HelpCircle } from 'lucide-react'
 import Link from 'next/link'
 import { CourseContent } from './CourseContent'
-import { TechStack } from './TechStack'
 import { ProjectDemo } from './ProjectDemo'
-import { GitHubRepo } from './GitHubRepo'
 import { CodeShowcase } from './CodeShowcase'
 import { motion } from 'framer-motion'
 import { Badge } from '@/components/ui/badge'
@@ -121,7 +119,7 @@ export function ShowcaseApp() {
           <div className="absolute inset-0 bg-gradient-to-r from-blue-500/30 to-purple-500/30 rounded-xl" />
           <div className="relative z-10 p-8 md:p-12">
             <Badge variant="outline" className="mb-4 border-white/20 backdrop-blur-sm bg-white/10 text-primary-foreground">
-              Andrew Ng's Coursera Specialization
+              Andrew Ng&apos;s Coursera Specialization
             </Badge>
             <h2 id="hero-heading" className="text-3xl md:text-4xl font-bold mb-4 text-primary-foreground">
               Machine Learning Journey
@@ -555,7 +553,7 @@ export function ShowcaseApp() {
               </a>
             </Button>
             <Button asChild variant="outline" size="sm">
-              <Link href="/contact" className="flex items-center gap-2">
+              <Link href="/#contact" className="flex items-center gap-2">
                 Contact Me
               </Link>
             </Button>
@@ -564,4 +562,4 @@ export function ShowcaseApp() {
       </div>
     </>
   )
-} 
+}

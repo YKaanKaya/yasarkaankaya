@@ -24,24 +24,15 @@ export const metadata: Metadata = {
     title: 'LectureNotes RAG System | Kaan Kaya',
     description: 'GPU-accelerated RAG system for intelligent Q&A over academic documents with FAISS vector search.',
     type: 'website',
-    url: 'https://kaankaya.dev/showcase/LectureNotesRAG',
-    images: [
-      {
-        url: '/images/hero-bg.jpg',
-        width: 1200,
-        height: 630,
-        alt: 'LectureNotes RAG System by Kaan Kaya'
-      }
-    ]
+    url: 'https://yasarkaankaya.com/showcase/LectureNotesRAG'
   },
   twitter: {
     card: 'summary_large_image',
     title: 'LectureNotes RAG System | Kaan Kaya',
-    description: 'GPU-accelerated RAG system for intelligent Q&A over academic documents.',
-    images: ['/images/hero-bg.jpg']
+    description: 'GPU-accelerated RAG system for intelligent Q&A over academic documents.'
   },
   alternates: {
-    canonical: 'https://kaankaya.dev/showcase/LectureNotesRAG'
+    canonical: 'https://yasarkaankaya.com/showcase/LectureNotesRAG'
   }
 }
 

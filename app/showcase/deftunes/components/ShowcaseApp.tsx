@@ -77,7 +77,7 @@ export function ShowcaseApp() {
         transition={{ duration: 0.5 }}
         className="flex justify-between items-center"
       >
-        <Link href="/projects" className="inline-flex items-center hover:text-muted-foreground text-sm">
+        <Link href="/#work" className="inline-flex items-center hover:text-muted-foreground text-sm">
           <ArrowLeft className="mr-2 h-4 w-4" />
           Back to Portfolio
         </Link>
@@ -156,4 +156,4 @@ export function ShowcaseApp() {
       </Section>
     </div>
   )
-} 
+}

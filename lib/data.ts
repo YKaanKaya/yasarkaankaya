@@ -1,38 +1,28 @@
 import {
   Database,
   BarChart3,
-  CircuitBoard,
-  Code,
-  BookOpen,
-  Linkedin,
-  Mail,
-  Github,
-  MapPin,
-  Phone,
-  Brain,
-  Sparkles,
-  Globe
+  Brain
 } from 'lucide-react'
 
 export const personalInfo = {
   name: "Kaan KAYA",
-  title: "Senior Data & Analytics Engineer | Data Platforms & AI",
+  title: "Data Scientist | Decision Intelligence, Causal ML & Data Platforms",
   email: "kaankaya@live.com",
   phone: "+352 621 748 595",
   location: "Luxembourg",
   linkedin: "https://linkedin.com/in/yasarkaankaya",
   github: "https://github.com/YKaanKaya",
   roles: [
-    { label: "Data Engineer", icon: Database, color: "blue" },
-    { label: "AI Engineer", icon: Brain, color: "purple" },
-    { label: "Analytics Engineer", icon: BarChart3, color: "green" },
+    { label: "Data Scientist", icon: Brain, color: "blue" },
+    { label: "Platform Builder", icon: Database, color: "purple" },
+    { label: "Causal ML", icon: BarChart3, color: "green" },
   ],
-  tagline: "Building data-driven solutions with code and creativity",
+  tagline: "Building data products that connect prediction, causality, and operational decisions.",
   bio: [
-    "Senior data and analytics engineer with experience designing and operating data platforms for risk, compliance, and financial reporting in banking, asset management, and big tech.",
-    "Built end-to-end, production-grade data pipelines and GenAI-driven analytics applications at Amazon to support regulatory and compliance use cases in the EU.",
-    "Partnered with finance, risk, and business stakeholders to define data requirements, improve data quality, and standardize reporting across multiple teams.",
-    "Strong focus on data reliability, documentation, and scalable architectures using AWS, Spark, Airflow, dbt, and modern BI tools."
+    "Data scientist and platform builder working at the intersection of machine learning, causal inference, and decision intelligence.",
+    "Currently building analytics platforms and models that support operational decision-making, with an emphasis on explainability and causal inference.",
+    "I translate ambiguous operational questions into reliable data products: from the data foundation and modelling strategy to explainability, validation, and decision-ready interfaces.",
+    "My background spans big tech, banking, asset management, and fintech, with a consistent focus on trustworthy analysis and production-grade systems."
   ],
   languages: [
     { name: "Turkish", level: "Native" },
@@ -46,17 +36,17 @@ export const personalInfo = {
 
 export const experience = [
   {
-    title: 'Senior Business Intelligence Engineer (AI Engineer)',
+    title: 'Data Scientist',
     company: 'Amazon',
     period: 'Jan 2025 - Present',
     location: 'Luxembourg',
-    description: 'Leading AI-driven analytics initiatives for compliance and risk management in the EU.',
+    description: 'Building data products and analytical tools for operational decision support.',
     highlights: [
-      'Designed and implemented an AI-ready content pipeline that reverse-engineered SCORM learning packages into a structured, object-store-backed knowledge base of slide-level assets',
-      'Built a full-stack, multimodal GenAI application enabling on-demand analytics on large volumes of structured and unstructured compliance data',
-      'Built a coordinate-based validation and visualization layer to pinpoint submissions on a map, detect anomalies, and provide dashboards for compliance stakeholders'
+      'Building reusable analytics foundations that support modelling, evaluation, and decision workflows',
+      'Developing explainable machine-learning workflows that turn complex signals into clear, actionable insights',
+      'Applying causal-inference methods and robust validation to strengthen analytical decision support'
     ],
-    tags: ['GenAI', 'AWS Bedrock', 'Python', 'Data Pipelines', 'Compliance Analytics']
+    tags: ['Data Science', 'Machine Learning', 'Explainable AI', 'Causal Inference', 'Platform Engineering']
   },
   {
     title: 'Senior Data Analyst (Head of Data)',

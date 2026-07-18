@@ -25,21 +25,12 @@ export const metadata: Metadata = {
     title: 'PyTorch for Deep Learning Professional Certificate | Kaan Kaya',
     description: 'View my implementation of the PyTorch for Deep Learning Professional Certificate with real-world projects and deployment strategies.',
     type: 'website',
-    url: 'https://yasarkaankaya.com/showcase/PyTorchDeepLearning',
-    images: [
-      {
-        url: '/images/hero-bg.jpg',
-        width: 1200,
-        height: 630,
-        alt: 'PyTorch for Deep Learning by Kaan Kaya'
-      }
-    ]
+    url: 'https://yasarkaankaya.com/showcase/PyTorchDeepLearning'
   },
   twitter: {
     card: 'summary_large_image',
     title: 'PyTorch for Deep Learning | Kaan Kaya',
-    description: 'My journey through the PyTorch for Deep Learning Professional Certificate with practical implementations.',
-    images: ['/images/hero-bg.jpg']
+    description: 'My journey through the PyTorch for Deep Learning Professional Certificate with practical implementations.'
   },
   alternates: {
     canonical: 'https://yasarkaankaya.com/showcase/PyTorchDeepLearning'
@@ -52,7 +43,7 @@ export const metadata: Metadata = {
 
 export default function PyTorchDeepLearningPage() {
   return (
-    <article className="pytorch-showcase" itemScope itemType="https://schema.org/TechArticle">
+    <article className="pytorch-showcase dark" itemScope itemType="https://schema.org/TechArticle">
       <meta itemProp="name" content="PyTorch for Deep Learning Professional Certificate Showcase" />
       <meta itemProp="description" content="My implementation of the PyTorch for Deep Learning Professional Certificate by DeepLearning.AI" />
       <meta itemProp="author" content="Kaan Kaya" />

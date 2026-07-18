@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
 import { ThemeProvider } from "next-themes";
-import { ThemeToggle } from "@/components/ui/theme-toggle";
 import Script from "next/script";
 
 const geistSans = localFont({
@@ -17,8 +16,9 @@ const geistMono = localFont({
 });
 
 export const metadata: Metadata = {
-  title: "Yasar Kaan Kaya",
-  description: "Personal website of Yasar Kaan Kaya",
+  metadataBase: new URL("https://yasarkaankaya.com"),
+  title: "Kaan Kaya — Data Scientist",
+  description: "Data scientist and platform builder working across machine learning, causal inference, explainability, and decision intelligence.",
 };
 
 export default function RootLayout({
@@ -27,7 +27,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang="en" suppressHydrationWarning data-scroll-behavior="smooth">
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >

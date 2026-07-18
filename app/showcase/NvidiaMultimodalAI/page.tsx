@@ -1,5 +1,4 @@
 import type { Metadata } from 'next'
-import Image from 'next/image'
 import { 
   ArrowRight, 
   Book, 
@@ -11,18 +10,13 @@ import {
   Rocket, 
   Trophy 
 } from 'lucide-react'
-import { Badge } from '@/components/ui/badge'
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card'
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { Progress } from '@/components/ui/progress'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 
 import { NotebookSection } from './components/NotebookSection'
 import AnalyticsScript from './components/AnalyticsScript'
-
-// Custom NVIDIA colors
-const nvidiaGreen = '#76b900'
-const nvidiaDark = '#1a1a1a'
 
 export const metadata: Metadata = {
   title: 'NVIDIA Multimodal AI Agents Showcase | Kaan Kaya',
@@ -42,7 +36,7 @@ export const metadata: Metadata = {
     title: 'NVIDIA Multimodal AI Agents Showcase | Kaan Kaya',
     description: 'Comprehensive showcase of NVIDIA\'s "Building AI Agents with Multimodal Models" course featuring projects, technologies, and certification.',
     type: 'website',
-    url: 'https://kaankaya.dev/showcase/NvidiaMultimodalAI',
+    url: 'https://yasarkaankaya.com/showcase/NvidiaMultimodalAI',
     images: [
       {
         url: '/notebooks/nvidia-multimodal/images/nvidia-tensorrt-llm-enhancements-deliver-massive-large-language-model-speedups-on-nvidia-h200.png',
@@ -59,7 +53,7 @@ export const metadata: Metadata = {
     images: ['/notebooks/nvidia-multimodal/images/nvidia-tensorrt-llm-enhancements-deliver-massive-large-language-model-speedups-on-nvidia-h200.png']
   },
   alternates: {
-    canonical: 'https://kaankaya.dev/showcase/NvidiaMultimodalAI'
+    canonical: 'https://yasarkaankaya.com/showcase/NvidiaMultimodalAI'
   }
 }
 
@@ -70,7 +64,6 @@ export default function NvidiaMultimodalAIShowcase() {
       {/* Hero Section */}
       <section className="relative bg-gradient-to-b from-black to-green-950 text-white rounded-xl overflow-hidden mb-8 pb-16">
         <div className="absolute inset-0 bg-grid-pattern opacity-10"></div>
-        <div className="absolute right-0 top-0 w-64 h-64 bg-[url('/nvidia-logo-outline.svg')] bg-contain bg-no-repeat opacity-5"></div>
         
         <div className="relative z-10 p-8 pt-6 pb-12 space-y-6 text-center">
           <div className="inline-block bg-[#76b900] text-black font-medium px-3 py-1 rounded-full text-sm">
@@ -87,17 +80,17 @@ export default function NvidiaMultimodalAIShowcase() {
           </p>
           
           <div className="flex justify-center gap-4 pt-4 pb-2">
-            <a href="https://learn.nvidia.com/certificates?id=kpMpsOlPTBKph9g3PLBXpw#" target="_blank" rel="noopener noreferrer">
-              <Button className="bg-[#76b900] hover:bg-[#86c900] text-black font-medium px-6">
+            <Button asChild className="bg-[#76b900] hover:bg-[#86c900] text-black font-medium px-6">
+              <a href="https://learn.nvidia.com/certificates?id=kpMpsOlPTBKph9g3PLBXpw#" target="_blank" rel="noopener noreferrer">
                 <ExternalLink className="mr-2 h-4 w-4" /> View Certification
-              </Button>
-            </a>
+              </a>
+            </Button>
             
-            <a href="#course-overview">
-              <Button variant="outline" className="border-[#76b900] bg-transparent text-white hover:bg-white/80">
+            <Button asChild variant="outline" className="border-[#76b900] bg-transparent text-white hover:bg-white/80">
+              <a href="#course-overview">
                 Course Overview <ArrowRight className="ml-2 h-4 w-4" />
-              </Button>
-            </a>
+              </a>
+            </Button>
           </div>
         </div>
         <div className="absolute inset-0 z-0 flex items-center justify-center">
@@ -123,8 +116,8 @@ export default function NvidiaMultimodalAIShowcase() {
           <h2 className="text-3xl font-bold flex items-center">
             <Book className="mr-2 h-6 w-6 text-[#76b900]" /> Course Notebooks
           </h2>
-          <Button variant="outline" className="flex items-center border-[#76b900] text-[#76b900] hover:bg-[#76b900]/10">
-            <Rocket className="mr-2 h-4 w-4" /> View All Projects
+          <Button asChild variant="outline" className="flex items-center border-[#76b900] text-[#76b900] hover:bg-[#76b900]/10">
+            <a href="#course-overview"><Rocket className="mr-2 h-4 w-4" /> Course Overview</a>
           </Button>
         </div>
         
@@ -175,7 +168,6 @@ export default function NvidiaMultimodalAIShowcase() {
                 'Optimize fusion points for specific tasks',
               ]}
               viewLink="/showcase/NvidiaMultimodalAI/notebook/02a-intermediate-fusion"
-              insightsLink="/showcase/NvidiaMultimodalAI/notebook/02a-intermediate-fusion/insights"
             />
             
             <NotebookSection
@@ -188,7 +180,6 @@ export default function NvidiaMultimodalAIShowcase() {
                 'Evaluate model performance on zero-shot tasks',
               ]}
               viewLink="/showcase/NvidiaMultimodalAI/notebook/02b-contrastive-pretraining"
-              insightsLink="/showcase/NvidiaMultimodalAI/notebook/02b-contrastive-pretraining/insights"
             />
           </TabsContent>
           
@@ -203,7 +194,6 @@ export default function NvidiaMultimodalAIShowcase() {
                 'Evaluate retrieval quality across modalities',
               ]}
               viewLink="/showcase/NvidiaMultimodalAI/notebook/03a-projection"
-              insightsLink="/showcase/NvidiaMultimodalAI/notebook/03a-projection/insights"
             />
             
             <NotebookSection
@@ -216,7 +206,6 @@ export default function NvidiaMultimodalAIShowcase() {
                 'Handle various document formats and layouts',
               ]}
               viewLink="/showcase/NvidiaMultimodalAI/notebook/03b-ocr-pipelines"
-              insightsLink="/showcase/NvidiaMultimodalAI/notebook/03b-ocr-pipelines/insights"
             />
           </TabsContent>
           
@@ -231,7 +220,6 @@ export default function NvidiaMultimodalAIShowcase() {
                 'Compare different vector database solutions',
               ]}
               viewLink="/showcase/NvidiaMultimodalAI/notebook/04a-vss"
-              insightsLink="/showcase/NvidiaMultimodalAI/notebook/04a-vss/insights"
             />
             
             <NotebookSection
@@ -244,7 +232,6 @@ export default function NvidiaMultimodalAIShowcase() {
                 'Evaluate retrieval relevance and contextual awareness',
               ]}
               viewLink="/showcase/NvidiaMultimodalAI/notebook/04b-vss-graphrag"
-              insightsLink="/showcase/NvidiaMultimodalAI/notebook/04b-vss-graphrag/insights"
             />
           </TabsContent>
         </Tabs>
@@ -258,7 +245,7 @@ export default function NvidiaMultimodalAIShowcase() {
         <Card className="mb-6">
           <CardContent className="pt-6">
             <p className="text-lg leading-relaxed mb-4">
-              This comprehensive NVIDIA Deep Learning Institute course explores the cutting-edge intersection of multiple data modalities in AI systems. Through hands-on notebooks and practical exercises, I've gained expertise in building systems that can process, understand, and generate across text, images, audio, and other data types.
+              This comprehensive NVIDIA Deep Learning Institute course explores the cutting-edge intersection of multiple data modalities in AI systems. Through hands-on notebooks and practical exercises, I&apos;ve gained expertise in building systems that can process, understand, and generate across text, images, audio, and other data types.
             </p>
             <p className="text-lg leading-relaxed">
               The course progresses from foundational fusion techniques to advanced vector search systems with graph-based retrieval augmented generation, providing both theoretical understanding and practical implementation skills for building sophisticated multimodal AI agents.            
@@ -380,7 +367,7 @@ export default function NvidiaMultimodalAIShowcase() {
         <div className="flex flex-col md:flex-row gap-8 items-center">
           <div className="md:w-2/3 space-y-4">
             <h2 className="text-3xl font-bold">NVIDIA DLI Certification</h2>
-            <p className="text-lg">Successfully completed NVIDIA's Deep Learning Institute certification in "Building AI Agents with Multimodal Models" with hands-on expertise in multimodal fusion, vector search systems, and graph-based RAG.</p>
+            <p className="text-lg">Successfully completed NVIDIA&apos;s Deep Learning Institute certification in &quot;Building AI Agents with Multimodal Models&quot; with hands-on expertise in multimodal fusion, vector search systems, and graph-based RAG.</p>
             <Button size="lg" className="bg-white text-[#1a1a1a] hover:bg-white/90 border border-white transition-all duration-300 hover:shadow-lg hover:translate-y-[-2px]" asChild>
               <a href="https://learn.nvidia.com/certificates?id=kpMpsOlPTBKph9g3PLBXpw#" target="_blank" rel="noopener noreferrer">
                 View Certificate

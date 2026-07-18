@@ -16,7 +16,7 @@ export function ShowcaseApp() {
   return (
     <div className="container mx-auto px-4 py-12 max-w-6xl">
       <div className="mb-8">
-        <Link href="/#projects" className="inline-flex items-center text-muted-foreground hover:text-foreground transition-colors mb-4">
+        <Link href="/#work" className="inline-flex items-center text-muted-foreground hover:text-foreground transition-colors mb-4">
           <ArrowLeft className="mr-2 h-4 w-4" /> Back to Portfolio
         </Link>
         <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">

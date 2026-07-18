@@ -1,17 +1,15 @@
 "use client"
 
-import React, { useRef, useState, useEffect, useMemo, useCallback } from 'react'
+import React, { useRef, useState, useEffect, useCallback } from 'react'
 import { motion, useScroll, useTransform, useSpring, useInView, AnimatePresence } from 'framer-motion'
 import { useTheme } from 'next-themes'
 import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
 import { Card } from '@/components/ui/card'
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import {
   ArrowLeft, Github, ArrowRight, ExternalLink, ChevronDown, ChevronRight,
-  Brain, Zap, Layers, Sparkles, Code2, Eye, Target, Lightbulb, BookOpen,
-  CheckCircle2, Play, FileCode, Cpu, Network, BarChart3, Wrench, Rocket,
-  TrendingUp, Award, Timer, List, Clock, Sun, Moon, Copy, Check
+  Brain, Zap, Layers, Sparkles, Code2, Target, Lightbulb, BookOpen,
+  CheckCircle2, Play, FileCode, Rocket, TrendingUp, Award, Clock, Sun, Moon, Copy, Check
 } from 'lucide-react'
 import Link from 'next/link'
 import Script from 'next/script'
@@ -21,6 +19,7 @@ import Script from 'next/script'
 // ============================================================================
 
 // ScrollSection: Wrapper with scroll-triggered reveal and staggered children
+// eslint-disable-next-line @typescript-eslint/no-unused-vars -- reserved for future narrative sections
 function ScrollSection({
   children,
   className = "",
@@ -79,6 +78,7 @@ function ScrollSection({
 }
 
 // TypewriterCode: Animated code typing effect
+// eslint-disable-next-line @typescript-eslint/no-unused-vars -- reserved for future code narratives
 function TypewriterCode({
   code,
   language = "python",
@@ -146,6 +146,7 @@ function TypewriterCode({
 }
 
 // ParallaxContainer: Creates depth effect on scroll
+// eslint-disable-next-line @typescript-eslint/no-unused-vars -- reserved for future narrative sections
 function ParallaxContainer({
   children,
   speed = 0.5,
@@ -564,6 +565,7 @@ function ResultsSection() {
               <div>
                 <h4 className="font-semibold mb-2 text-amber-400">Biggest Challenge</h4>
                 <p className="text-zinc-300 text-sm leading-relaxed">
+                  {/* eslint-disable-next-line react/no-unescaped-entities */}
                   Understanding why my gradients kept exploding in deep networks — until I realized BatchNorm wasn't just optional. The moment skip connections clicked, everything changed.
                 </p>
               </div>
@@ -575,7 +577,7 @@ function ResultsSection() {
                 <Award className="w-5 h-5 text-blue-400" />
               </div>
               <div>
-                <h4 className="font-semibold mb-2 text-blue-400">What I'd Do Differently</h4>
+                <h4 className="font-semibold mb-2 text-blue-400">What I&apos;d Do Differently</h4>
                 <p className="text-zinc-300 text-sm leading-relaxed">
                   Start with transfer learning from day one. I spent weeks training from scratch before discovering that a pre-trained backbone + small head gets you 90% of the way in 5 minutes.
                 </p>
@@ -1366,7 +1368,7 @@ export function ShowcaseApp() {
   const { scrollYProgress } = useScroll({ target: containerRef })
   const smoothProgress = useSpring(scrollYProgress, { damping: 20 })
   const [activeSection, setActiveSection] = useState('hero')
-  const { theme, setTheme, resolvedTheme } = useTheme()
+  const { setTheme, resolvedTheme } = useTheme()
   const [copied, setCopied] = useState(false)
   const [mounted, setMounted] = useState(false)
   const [showConfetti, setShowConfetti] = useState(false)
@@ -1381,7 +1383,7 @@ export function ShowcaseApp() {
   }, [ctaInView, showConfetti])
 
   // Expanded modules state with localStorage persistence
-  const [expandedModules, setExpandedModules] = useState<Set<number>>(() => {
+  const [expandedModules] = useState<Set<number>>(() => {
     if (typeof window !== 'undefined') {
       const saved = localStorage.getItem('pytorch-expanded-modules')
       return saved ? new Set(JSON.parse(saved)) : new Set()
@@ -1501,12 +1503,12 @@ export function ShowcaseApp() {
       <div ref={containerRef} className="relative text-foreground transition-colors duration-300">
         {/* Progress bar */}
         <motion.div
-          className="fixed top-0 left-0 right-0 h-1 bg-gradient-to-r from-blue-500 via-emerald-500 to-purple-500 z-50 origin-left"
+          className="fixed top-[68px] left-0 right-0 h-1 bg-gradient-to-r from-blue-500 via-emerald-500 to-purple-500 z-50 origin-left"
           style={{ scaleX: smoothProgress }}
         />
 
         {/* Navigation */}
-        <nav className="fixed top-0 left-0 right-0 z-40 bg-white/80 dark:bg-black/50 backdrop-blur-xl border-b border-slate-200 dark:border-white/5 transition-colors">
+        <nav className="sticky top-[68px] z-30 bg-black/90 backdrop-blur-xl border-b border-white/10 transition-colors">
           <div className="container mx-auto px-6 py-4 flex justify-between items-center">
             <div className="flex items-center gap-4">
               <Button asChild variant="ghost" size="icon" className="rounded-full hover:bg-slate-200 dark:hover:bg-white/10">
@@ -1542,7 +1544,7 @@ export function ShowcaseApp() {
                 {copied ? <Check className="h-4 w-4 text-emerald-400" /> : <Copy className="h-4 w-4" />}
               </Button>
               <Button asChild size="sm" className="rounded-full bg-white text-black hover:bg-white/90">
-                <a href="https://github.com/YKaanKaya/deeplearning-ai-pytorch" target="_blank">
+                <a href="https://github.com/YKaanKaya/deeplearning-ai-pytorch" target="_blank" rel="noopener noreferrer">
                   <Github className="h-4 w-4 mr-2" />
                   Code
                 </a>
@@ -1702,7 +1704,7 @@ export function ShowcaseApp() {
         </section>
 
         {/* CTA - Celebration Finale */}
-        <section id="cta" ref={ctaRef} className="py-32 px-6 relative overflow-hidden">
+        <section id="cta" ref={ctaRef} className="py-32 px-6 relative overflow-hidden bg-[#111510] text-white border-t border-zinc-800">
           <ConfettiCelebration trigger={showConfetti} />
 
           <div className="max-w-3xl mx-auto text-center relative z-10">
@@ -1727,6 +1729,7 @@ export function ShowcaseApp() {
                 <a
                   href="https://learn.deeplearning.ai/certificates/2a9c2778-7424-4379-b34a-384272c9303c"
                   target="_blank"
+                  rel="noopener noreferrer"
                   className="ml-2 text-emerald-400 hover:text-emerald-300 transition-colors"
                 >
                   <ExternalLink className="w-5 h-5" />
@@ -1735,14 +1738,14 @@ export function ShowcaseApp() {
             </motion.div>
 
             <RevealText delay={0.2}>
-              <h2 className="text-4xl md:text-5xl font-bold mb-6 text-slate-900 dark:text-white">
+              <h2 className="text-4xl md:text-5xl font-bold mb-6 text-white">
                 Explore the
                 <span className="bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent"> Code</span>
               </h2>
             </RevealText>
 
             <RevealText delay={0.3}>
-              <p className="text-slate-500 dark:text-zinc-400 text-lg mb-8">
+              <p className="text-zinc-400 text-lg mb-8">
                 All 44 notebooks, implementations, and experiments are open source
               </p>
             </RevealText>
@@ -1754,13 +1757,13 @@ export function ShowcaseApp() {
               className="flex flex-wrap justify-center gap-4"
             >
               <Button asChild size="lg" className="rounded-full px-8 bg-gradient-to-r from-blue-500 to-purple-500 text-white hover:from-blue-600 hover:to-purple-600 shadow-lg shadow-blue-500/25">
-                <a href="https://github.com/YKaanKaya/deeplearning-ai-pytorch" target="_blank">
+                <a href="https://github.com/YKaanKaya/deeplearning-ai-pytorch" target="_blank" rel="noopener noreferrer">
                   <Github className="mr-2 w-5 h-5" />
                   View Repository
                 </a>
               </Button>
-              <Button asChild size="lg" variant="outline" className="rounded-full px-8 border-slate-300 dark:border-zinc-600 text-slate-700 dark:text-white hover:bg-slate-100 dark:hover:bg-zinc-800">
-                <Link href="/">
+              <Button asChild size="lg" variant="outline" className="rounded-full px-8 border-zinc-600 bg-transparent text-white hover:bg-zinc-800 hover:text-white">
+                <Link href="/#work">
                   <ArrowLeft className="mr-2 w-5 h-5" />
                   Back to Portfolio
                 </Link>

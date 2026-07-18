@@ -22,24 +22,15 @@ export const metadata: Metadata = {
     title: 'Machine Learning Specialization Showcase | Kaan Kaya',
     description: 'View my implementation of Andrew Ng\'s Machine Learning Specialization with interactive demos and code examples.',
     type: 'website',
-    url: 'https://kaankaya.dev/showcase/MachineLearning',
-    images: [
-      {
-        url: '/images/hero-bg.jpg', // Using an existing image in your public folder
-        width: 1200,
-        height: 630,
-        alt: 'Machine Learning Specialization by Kaan Kaya'
-      }
-    ]
+    url: 'https://yasarkaankaya.com/showcase/MachineLearning'
   },
   twitter: {
     card: 'summary_large_image',
     title: 'Machine Learning Specialization | Kaan Kaya',
-    description: 'My journey through Andrew Ng\'s ML Specialization with practical implementations and projects.',
-    images: ['/images/hero-bg.jpg']
+    description: 'My journey through Andrew Ng\'s ML Specialization with practical implementations and projects.'
   },
   alternates: {
-    canonical: 'https://kaankaya.dev/showcase/MachineLearning'
+    canonical: 'https://yasarkaankaya.com/showcase/MachineLearning'
   },
   robots: {
     index: true,
@@ -56,4 +47,4 @@ export default function MachineLearningPage() {
       <ShowcaseApp />
     </article>
   )
-} 
+}
