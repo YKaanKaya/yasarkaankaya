@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
+import "@fontsource-variable/fraunces/full.css";
 import "./globals.css";
 import { ThemeProvider } from "next-themes";
 import Script from "next/script";
@@ -18,7 +19,7 @@ const geistMono = localFont({
 export const metadata: Metadata = {
   metadataBase: new URL("https://yasarkaankaya.com"),
   title: "Kaan Kaya — Data Scientist",
-  description: "Data scientist and platform builder working across machine learning, causal inference, explainability, and decision intelligence.",
+  description: "Data scientist building decision platforms across machine learning, explainability, causal inference, and analytics engineering.",
 };
 
 export default function RootLayout({

@@ -1,211 +1,584 @@
 "use client"
 
-import { useState } from "react"
+import dynamic from "next/dynamic"
 import Link from "next/link"
-import { AnimatePresence, motion } from "framer-motion"
+import { useEffect, useRef, useState, type MouseEvent as ReactMouseEvent, type ReactNode } from "react"
+import { AnimatePresence, MotionConfig, motion } from "framer-motion"
 import {
-  ArrowDownRight, ArrowUpRight, Boxes, BrainCircuit, Check, Github,
-  GitMerge, Linkedin, Mail, MapPin, Menu, Network, Orbit, X,
+  ArrowRight,
+  ArrowUpRight,
+  ChevronDown,
+  Github,
+  Linkedin,
+  Mail,
+  MapPin,
+  Menu,
+  X,
 } from "lucide-react"
-import { experience, personalInfo, projects } from "@/lib/data"
+import { certificates, education, experience, personalInfo, projects, skills } from "@/lib/data"
+import { ProjectVisual, type ProjectVisualKind } from "@/components/ui/ProjectVisual"
+import type { CapabilityKind } from "@/components/ui/CapabilityAnimation"
+
+const RetroSignal = dynamic(
+  () => import("@/components/ui/RetroSignal").then((module) => module.RetroSignal),
+  { ssr: false, loading: () => <div className="retro-signal-placeholder" aria-hidden="true" /> },
+)
+
+const CapabilityAnimation = dynamic(
+  () => import("@/components/ui/CapabilityAnimation").then((module) => module.CapabilityAnimation),
+  { ssr: false, loading: () => <div className="retro-capability-placeholder" aria-hidden="true" /> },
+)
 
 const navItems = [
-  { label: "Now", href: "#now" },
-  { label: "Approach", href: "#approach" },
-  { label: "Work", href: "#work" },
-  { label: "Journey", href: "#journey" },
+  { label: "Work", href: "#projects" },
+  { label: "Career", href: "#experience" },
+  { label: "Method", href: "#practice" },
+  { label: "Learning", href: "#archive" },
 ]
 
-const currentWork = [
-  { index: "01", title: "Decision platforms", description: "Reusable foundations connecting trusted data, modelling workflows, evaluation, and decision-facing outputs.", detail: "Platform building", icon: Boxes },
-  { index: "02", title: "Decision modelling", description: "Predictive workflows designed to support scenario analysis and informed operational choices.", detail: "Predictive analytics", icon: Orbit },
-  { index: "03", title: "Explainable ML", description: "Transparent diagnostics that help stakeholders understand important patterns and model limitations.", detail: "Interpretability", icon: BrainCircuit },
-  { index: "04", title: "Causal evidence", description: "Structured methods for reasoning about effects, assumptions, uncertainty, and robustness.", detail: "Causal inference", icon: GitMerge },
-]
-
-const principles = [
-  ["Prediction", "Learn the operational pattern", "LightGBM"],
-  ["Attribution", "Expose the model's reasoning", "SHAP / Shapley"],
-  ["Causality", "Test what may change the outcome", "DML / DoWhy"],
-  ["Decision", "Ship evidence into a usable system", "Platform"],
-]
-
-const projectDescriptions: Record<string, string> = {
-  "AI Code Arena Quest": "An interactive learning product that turns machine-learning concepts into hands-on practice.",
-  "DeFtunes Data Pipeline": "An end-to-end analytical platform built across orchestration, transformation, warehousing, and BI.",
-  "PyTorch for Deep Learning": "A practical body of work spanning modern neural architectures, optimization, and deployment.",
-  "LectureNotes RAG System": "A GPU-accelerated retrieval system for grounded question answering over technical material.",
+type PracticeStep = {
+  id: CapabilityKind
+  number: string
+  action: string
+  prompt: string
+  response: string
+  methods: string
+  tone: "coral" | "mustard" | "teal" | "orange"
 }
 
-const selectedProjects = ["DeFtunes Data Pipeline", "AI Code Arena Quest", "PyTorch for Deep Learning", "LectureNotes RAG System"]
-  .map((name) => projects.find((project) => project.title === name))
+const practiceSteps: PracticeStep[] = [
+  {
+    id: "platform",
+    number: "01",
+    action: "Build",
+    prompt: "Can the analysis survive outside the notebook?",
+    response: "I start with reusable data foundations, evaluation paths, and an interface that fits the decision.",
+    methods: "Platforms · data contracts · evaluation",
+    tone: "coral",
+  },
+  {
+    id: "predictive",
+    number: "02",
+    action: "Predict",
+    prompt: "What is likely, and how stable is the signal?",
+    response: "I favour strong tabular baselines, careful validation, and performance measured in operational context.",
+    methods: "LightGBM · validation · frontier methods",
+    tone: "mustard",
+  },
+  {
+    id: "shap",
+    number: "03",
+    action: "Explain",
+    prompt: "What is moving the result?",
+    response: "I inspect behaviour, attribution, uncertainty, and limits before a prediction reaches a decision.",
+    methods: "SHAP · Shapley values · diagnostics",
+    tone: "teal",
+  },
+  {
+    id: "causal",
+    number: "04",
+    action: "Estimate",
+    prompt: "What might change if we intervene?",
+    response: "I make the causal question and assumptions explicit, then stress-test what the evidence can support.",
+    methods: "DML · DoWhy · robustness checks",
+    tone: "orange",
+  },
+]
+
+type ProjectMeta = {
+  category: string
+  summary: string
+  primaryHref: string
+  primaryLabel: string
+  secondaryHref?: string
+  secondaryLabel?: string
+  kind: "original" | "learning"
+  visual: ProjectVisualKind
+}
+
+const projectMeta: Record<string, ProjectMeta> = {
+  "AI Code Arena Quest": {
+    category: "Learning product",
+    summary: "The machine-learning practice environment I wished I had: code-first challenges, real datasets, and immediate feedback.",
+    primaryHref: "/showcase/AICodeArena",
+    primaryLabel: "Read case study",
+    secondaryHref: "https://practai-8qr1e.netlify.app/",
+    secondaryLabel: "Try the product",
+    kind: "original",
+    visual: "code-arena",
+  },
+  "DeFtunes Data Pipeline": {
+    category: "Data platform",
+    summary: "One dataset, end to end—from ingestion and orchestration to modelling and a decision-ready dashboard.",
+    primaryHref: "/showcase/deftunes",
+    primaryLabel: "Read case study",
+    secondaryHref: "https://github.com/YKaanKaya/deftunes-data-pipeline",
+    secondaryLabel: "View source",
+    kind: "original",
+    visual: "deftunes",
+  },
+  "GraphFlow ETL Suite": {
+    category: "Data product",
+    summary: "A TypeScript workbench for turning tables into graph schemas and repeatable Neo4j loads.",
+    primaryHref: "https://github.com/YKaanKaya/graphify",
+    primaryLabel: "View source",
+    kind: "original",
+    visual: "graphflow",
+  },
+  "LectureNotes RAG System": {
+    category: "Applied AI",
+    summary: "A local-first retrieval system for grounded questions over my academic notes, using FAISS and private inference.",
+    primaryHref: "/showcase/LectureNotesRAG",
+    primaryLabel: "Read case study",
+    secondaryHref: "https://github.com/YKaanKaya/LectureNotes-RAG-System",
+    secondaryLabel: "View source",
+    kind: "original",
+    visual: "rag",
+  },
+  "Stock Performance & ESG Scores": {
+    category: "Finance experiment",
+    summary: "An early bridge between my finance background and Python, exploring company performance beside public ESG indicators.",
+    primaryHref: "https://gsinfo.streamlit.app/",
+    primaryLabel: "Open dashboard",
+    secondaryHref: "https://github.com/YKaanKaya/globalstockinfo",
+    secondaryLabel: "View source",
+    kind: "original",
+    visual: "stock-esg",
+  },
+  "PyTorch for Deep Learning": {
+    category: "Course work · clearly credited",
+    summary: "Forty-four notebooks covering fundamentals, architectures, tuning, interpretation, and ONNX deployment.",
+    primaryHref: "/showcase/PyTorchDeepLearning",
+    primaryLabel: "Browse notebooks",
+    secondaryHref: "https://github.com/YKaanKaya/deeplearning-ai-pytorch",
+    secondaryLabel: "View source",
+    kind: "learning",
+    visual: "pytorch",
+  },
+  "Machine Learning Specialization": {
+    category: "Course work · clearly credited",
+    summary: "Implementations spanning regression, neural networks, clustering, recommenders, and reinforcement learning.",
+    primaryHref: "/showcase/MachineLearning",
+    primaryLabel: "Browse notebooks",
+    secondaryHref: "https://github.com/YKaanKaya/Machine-learning",
+    secondaryLabel: "View source",
+    kind: "learning",
+    visual: "ml-labs",
+  },
+  "NVIDIA Multimodal AI Agents": {
+    category: "Course work · clearly credited",
+    summary: "Eight attributed notebooks on multimodal fusion, OCR, vector search, and Graph RAG.",
+    primaryHref: "/showcase/NvidiaMultimodalAI/",
+    primaryLabel: "Browse notebooks",
+    kind: "learning",
+    visual: "multimodal",
+  },
+}
+
+const projectOrder = [
+  "AI Code Arena Quest",
+  "DeFtunes Data Pipeline",
+  "GraphFlow ETL Suite",
+  "LectureNotes RAG System",
+  "Stock Performance & ESG Scores",
+  "PyTorch for Deep Learning",
+  "Machine Learning Specialization",
+  "NVIDIA Multimodal AI Agents",
+]
+
+const featuredProjectTitles = new Set(projectOrder.slice(0, 4))
+
+const orderedProjects = projectOrder
+  .map((title) => projects.find((project) => project.title === title))
   .filter((project): project is (typeof projects)[number] => Boolean(project))
 
-const reveal = { hidden: { opacity: 0, y: 22 }, visible: { opacity: 1, y: 0 } }
+const featuredProjects = orderedProjects.filter((project) => featuredProjectTitles.has(project.title))
+const archiveProjects = orderedProjects.filter((project) => !featuredProjectTitles.has(project.title))
+
+const skillGroups = [
+  { label: "Data platforms", items: skills.dataEngineering },
+  { label: "Machine learning", items: skills.ai },
+  { label: "Decision interfaces", items: skills.bi },
+]
+
+const recentCredentialNames = new Set([
+  "PyTorch for Deep Learning Professional Certificate",
+  "Building AI Agents with Multimodal Models",
+  "Data Engineering and AWS",
+])
+
+const recentCredentials = certificates.filter((certificate) => recentCredentialNames.has(certificate.name))
+
+function ExternalAwareLink({ href, children, className }: { href: string; children: ReactNode; className?: string }) {
+  const external = href.startsWith("http")
+  return (
+    <Link href={href} className={className} target={external ? "_blank" : undefined} rel={external ? "noreferrer" : undefined}>
+      {children}
+    </Link>
+  )
+}
 
 export function ProfilePage() {
   const [menuOpen, setMenuOpen] = useState(false)
+  const [activePractice, setActivePractice] = useState<CapabilityKind>("platform")
+  const menuButtonRef = useRef<HTMLButtonElement>(null)
+  const activeStep = practiceSteps.find((step) => step.id === activePractice) ?? practiceSteps[0]
+
+  const navigateFromMenu = (event: ReactMouseEvent<HTMLAnchorElement>, href: string) => {
+    event.preventDefault()
+    setMenuOpen(false)
+    window.setTimeout(() => {
+      const target = document.querySelector(href)
+      if (target instanceof HTMLElement) {
+        window.history.pushState(null, "", href)
+        target.scrollIntoView({ behavior: "smooth", block: "start" })
+      }
+    }, 220)
+  }
+
+  useEffect(() => {
+    const closeOnEscape = (event: KeyboardEvent) => {
+      if (event.key === "Escape" && menuOpen) {
+        setMenuOpen(false)
+        menuButtonRef.current?.focus()
+      }
+    }
+    window.addEventListener("keydown", closeOnEscape)
+    return () => window.removeEventListener("keydown", closeOnEscape)
+  }, [menuOpen])
+
+  useEffect(() => {
+    const desktopQuery = window.matchMedia("(min-width: 1121px)")
+    const closeAtDesktop = (event: MediaQueryListEvent) => {
+      if (event.matches) setMenuOpen(false)
+    }
+    desktopQuery.addEventListener("change", closeAtDesktop)
+    return () => desktopQuery.removeEventListener("change", closeAtDesktop)
+  }, [])
 
   return (
-    <div className="profile-shell min-h-screen overflow-x-hidden">
-      <header className="profile-nav">
-        <div className="profile-container flex h-[72px] items-center justify-between">
-          <a href="#top" className="profile-mark" aria-label="Back to top">K<span>/</span>K</a>
-          <nav className="hidden items-center gap-8 md:flex" aria-label="Main navigation">
-            {navItems.map((item) => <a key={item.href} href={item.href} className="profile-nav-link">{item.label}</a>)}
-          </nav>
-          <a className="profile-nav-cta hidden sm:inline-flex" href={`mailto:${personalInfo.email}`}>Start a conversation <ArrowUpRight className="h-3.5 w-3.5" /></a>
-          <button className="profile-menu-button md:hidden" onClick={() => setMenuOpen((value) => !value)} aria-expanded={menuOpen} aria-label="Toggle navigation">
-            {menuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
-          </button>
-        </div>
-        <AnimatePresence>
-          {menuOpen && (
-            <motion.nav initial={{ opacity: 0, height: 0 }} animate={{ opacity: 1, height: "auto" }} exit={{ opacity: 0, height: 0 }} className="profile-mobile-nav md:hidden">
-              {navItems.map((item) => <a key={item.href} href={item.href} onClick={() => setMenuOpen(false)}>{item.label}</a>)}
-              <a href={`mailto:${personalInfo.email}`}>Contact</a>
-            </motion.nav>
-          )}
-        </AnimatePresence>
-      </header>
+    <MotionConfig reducedMotion="user">
+      <div className="retro-profile retro-minimal-profile" id="top">
+        <a href="#main-content" className="retro-skip-link">Skip to main content</a>
 
-      <main>
-        <section id="top" className="profile-hero">
-          <div className="profile-orbit profile-orbit-one" /><div className="profile-orbit profile-orbit-two" />
-          <div className="profile-container relative z-10 grid items-center gap-14 pb-16 pt-36 lg:min-h-[800px] lg:grid-cols-[1.12fr_0.88fr] lg:pb-24 lg:pt-28">
-            <motion.div initial="hidden" animate="visible" transition={{ staggerChildren: 0.12 }}>
-              <motion.div variants={reveal} className="profile-kicker mb-7"><span className="profile-status-dot" />Data Scientist · Luxembourg</motion.div>
-              <motion.p variants={reveal} className="profile-eyebrow">Kaan Kaya / Profile 2026</motion.p>
-              <motion.h1 variants={reveal} className="profile-display mt-4 max-w-[780px] text-[clamp(3.25rem,7.4vw,7.25rem)] leading-[0.88]">Models for the <em>real</em> world.</motion.h1>
-              <motion.p variants={reveal} className="mt-8 max-w-[650px] text-lg leading-8 text-[#a9aea5] sm:text-xl">I build data products that move from prediction to explanation to causality—so operational teams can make better, defensible decisions.</motion.p>
-              <motion.div variants={reveal} className="mt-10 flex flex-wrap items-center gap-4">
-                <a href="#now" className="profile-primary-button">Explore my approach <ArrowDownRight className="h-4 w-4" /></a>
-                <a href={personalInfo.linkedin} target="_blank" rel="noreferrer" className="profile-text-link">LinkedIn <ArrowUpRight className="h-4 w-4" /></a>
-              </motion.div>
-            </motion.div>
-
-            <motion.div initial={{ opacity: 0, x: 32 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.8, delay: 0.35 }} className="model-window">
-              <div className="model-window-bar">
-                <div className="flex items-center gap-2"><span /><span /><span /></div><p>decision_model / validation</p><p className="hidden sm:block">validated</p>
-              </div>
-              <div className="p-5 sm:p-7">
-                <div className="flex items-start justify-between gap-4">
-                  <div><p className="profile-mono-label">DECISION SYSTEM</p><h2 className="mt-2 text-xl font-medium text-[#edf0e8]">From signals to evidence</h2></div>
-                  <span className="model-check"><Check className="h-3.5 w-3.5" /> live</span>
-                </div>
-                <div className="model-chart mt-8" aria-label="Stylized model diagnostic chart">
-                  <div className="model-chart-labels"><span>observed</span><span>benchmark</span></div>
-                  <svg viewBox="0 0 520 220" role="img" aria-hidden="true">
-                    <defs><linearGradient id="areaGradient" x1="0" x2="0" y1="0" y2="1"><stop offset="0%" stopColor="#d5ff45" stopOpacity="0.32" /><stop offset="100%" stopColor="#d5ff45" stopOpacity="0" /></linearGradient></defs>
-                    <path className="chart-grid" d="M0 55H520M0 110H520M0 165H520M104 0V220M208 0V220M312 0V220M416 0V220" />
-                    <path className="chart-area" d="M0 179 C45 175 57 142 101 147 C147 152 163 108 205 122 C247 136 270 84 312 91 C356 98 369 52 417 70 C458 85 480 31 520 38 L520 220 L0 220 Z" />
-                    <path className="chart-line" d="M0 179 C45 175 57 142 101 147 C147 152 163 108 205 122 C247 136 270 84 312 91 C356 98 369 52 417 70 C458 85 480 31 520 38" />
-                    <path className="chart-dash" d="M0 196 C72 181 101 170 155 156 C213 140 255 132 312 105 C377 75 435 58 520 27" /><circle cx="312" cy="91" r="6" />
-                  </svg>
-                </div>
-                <div className="model-pipeline mt-7">
-                  {[["01", "Predict", "LGBM"], ["02", "Explain", "SHAP"], ["03", "Estimate", "DML"]].map(([number, label, tool]) => (
-                    <div key={number}><span>{number}</span><p>{label}</p><strong>{tool}</strong></div>
+        <header className="retro-nav-shell">
+          <div className="retro-container retro-nav">
+            <a href="#top" className="retro-brand" aria-label="Kaan Kaya, back to top">
+              <span className="retro-brand-disc">KK</span>
+              <span><strong>Kaan Kaya</strong><small>DATA SCIENTIST</small></span>
+            </a>
+            <nav className="retro-desktop-nav" aria-label="Main navigation">
+              {navItems.map((item) => <a key={item.href} href={item.href}>{item.label}</a>)}
+            </nav>
+            <a className="retro-nav-contact" href={`mailto:${personalInfo.email}`}>Email Kaan <ArrowUpRight aria-hidden="true" /></a>
+            <button
+              ref={menuButtonRef}
+              className="retro-menu-button"
+              type="button"
+              aria-expanded={menuOpen}
+              aria-controls="retro-mobile-navigation"
+              aria-label={menuOpen ? "Close navigation" : "Open navigation"}
+              onClick={() => setMenuOpen((open) => !open)}
+            >
+              {menuOpen ? <X aria-hidden="true" /> : <Menu aria-hidden="true" />}
+            </button>
+          </div>
+          <AnimatePresence initial={false}>
+            {menuOpen && (
+              <motion.nav
+                id="retro-mobile-navigation"
+                className="retro-mobile-nav"
+                aria-label="Mobile navigation"
+                initial={{ height: 0, opacity: 0 }}
+                animate={{ height: "auto", opacity: 1 }}
+                exit={{ height: 0, opacity: 0 }}
+              >
+                <div className="retro-container">
+                  {navItems.map((item) => (
+                    <a key={item.href} href={item.href} onClick={(event) => navigateFromMenu(event, item.href)}>
+                      {item.label}<ArrowRight aria-hidden="true" />
+                    </a>
                   ))}
                 </div>
+              </motion.nav>
+            )}
+          </AnimatePresence>
+        </header>
+
+        <main id="main-content">
+          <section className="retro-band retro-hero retro-edited-hero" aria-labelledby="hero-title">
+            <div className="retro-sunburst" aria-hidden="true" />
+            <div className="retro-container retro-hero-grid">
+              <div className="retro-hero-copy">
+                <p className="retro-catalog">KAAN KAYA · DATA SCIENTIST · LUXEMBOURG</p>
+                <h1 id="hero-title">From financial controls<br /><em>to decision systems.</em></h1>
+                <p className="retro-hero-lede">
+                  I spent a decade moving upstream—from reconciling the number, to building the data platform behind it, to modelling what informs the decision. Today I work across prediction, explainability, and causal inference.
+                </p>
+                <div className="retro-hero-actions">
+                  <a href="#projects" className="retro-button retro-button-primary">See selected work <ArrowRight aria-hidden="true" /></a>
+                  <a href="#experience" className="retro-text-link">See work history <ArrowRight aria-hidden="true" /></a>
+                </div>
+                <p className="retro-focus-line"><span>Current focus</span> Platforms · LightGBM · SHAP · DML / DoWhy</p>
               </div>
-            </motion.div>
-          </div>
-          <div className="profile-container relative z-10 grid border-y border-[#293029] sm:grid-cols-3">
-            {[["10+", "years across data, finance & risk"], ["4", "linked layers: data → decision"], ["1", "principle: useful models earn trust"]].map(([value, label]) => (
-              <div key={label} className="profile-stat"><strong>{value}</strong><span>{label}</span></div>
-            ))}
-          </div>
-        </section>
 
-        <section id="now" className="profile-section bg-[#f0f1e8] text-[#111510]">
-          <div className="profile-container">
-            <div className="profile-section-heading grid gap-8 lg:grid-cols-[0.42fr_1fr]">
-              <div><p className="profile-light-label">01 / PRACTICE</p><div className="mt-5 flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.18em] text-[#566052]"><span className="profile-status-dot" /> Selected capabilities</div></div>
-              <div>
-                <h2 className="profile-display max-w-[880px] text-[clamp(2.75rem,5.8vw,5.8rem)] leading-[0.94]">Building systems for <em>evidence-led decisions.</em></h2>
-                <p className="mt-7 max-w-[720px] text-lg leading-8 text-[#596057]">Across my work and independent practice, I focus on reliable platforms, predictive modelling, explainability, and causal reasoning.</p>
-              </div>
-            </div>
-            <div className="current-work-grid mt-16">
-              {currentWork.map((item) => (
-                <article key={item.title} className="current-work-card group">
-                  <div className="flex items-start justify-between"><span className="profile-card-index">{item.index}</span><item.icon className="h-5 w-5 text-[#687264] transition-transform duration-300 group-hover:rotate-6 group-hover:scale-110" /></div>
-                  <h3 className="mt-14 text-2xl font-medium tracking-[-0.03em]">{item.title}</h3><p className="mt-4 leading-7 text-[#60675e]">{item.description}</p>
-                  <div className="mt-8 border-t border-[#cbd0c4] pt-4 text-xs font-semibold uppercase tracking-[0.16em] text-[#414a3e]">{item.detail}</div>
-                </article>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        <section id="approach" className="profile-section profile-approach">
-          <div className="profile-container grid gap-14 lg:grid-cols-[0.82fr_1.18fr] lg:gap-24">
-            <div>
-              <p className="profile-dark-label">02 / APPROACH</p><h2 className="profile-display mt-8 text-[clamp(3rem,5vw,5.7rem)] leading-[0.93]">A model is only one <em>layer.</em></h2>
-              <p className="mt-8 max-w-[570px] text-lg leading-8 text-[#a9aea5]">The useful unit is a decision system: reliable inputs, strong prediction, honest explanations, causal assumptions, and an interface people can act on.</p>
-              <div className="profile-quote mt-12"><Network className="h-5 w-5 text-[#d5ff45]" /><p>“Make uncertainty visible. Make reasoning inspectable. Make the next action clearer.”</p></div>
-            </div>
-            <div className="principle-stack">
-              {principles.map(([title, description, tool], index) => (
-                <article key={title} className="principle-row"><span>0{index + 1}</span><div><h3>{title}</h3><p>{description}</p></div><strong>{tool}</strong></article>
-              ))}
-              <div className="principle-path" aria-hidden="true" />
-            </div>
-          </div>
-        </section>
-
-        <section id="work" className="profile-section bg-[#d4ff42] text-[#10140e]">
-          <div className="profile-container">
-            <div className="flex flex-col justify-between gap-8 border-b border-[#759220] pb-10 md:flex-row md:items-end">
-              <div><p className="profile-light-label">03 / SELECTED WORK</p><h2 className="profile-display mt-6 text-[clamp(3rem,6vw,6rem)] leading-none">Built to learn.<br />Built to run.</h2></div>
-              <a href={personalInfo.github} target="_blank" rel="noreferrer" className="profile-ink-link">View GitHub <ArrowUpRight className="h-4 w-4" /></a>
-            </div>
-            <div className="project-list">
-              {selectedProjects.map((project, index) => {
-                const target = project.demoLink || project.link
-                return (
-                  <Link key={project.title} href={target} target={target.startsWith("http") ? "_blank" : undefined} rel={target.startsWith("http") ? "noreferrer" : undefined} className="project-row group">
-                    <span>0{index + 1}</span><div><h3>{project.title}</h3><p>{projectDescriptions[project.title] || project.description}</p><div className="mt-4 flex flex-wrap gap-2">{project.tags.slice(0, 4).map((tag) => <em key={tag}>{tag}</em>)}</div></div>
-                    <ArrowUpRight className="h-8 w-8 transition-transform duration-300 group-hover:-translate-y-1 group-hover:translate-x-1" />
-                  </Link>
-                )
-              })}
-            </div>
-          </div>
-        </section>
-
-        <section id="journey" className="profile-section bg-[#f0f1e8] text-[#111510]">
-          <div className="profile-container grid gap-14 lg:grid-cols-[0.38fr_1fr] lg:gap-24">
-            <div><p className="profile-light-label">04 / JOURNEY</p><h2 className="profile-display mt-7 text-5xl leading-none">Context is a feature.</h2><p className="mt-7 leading-7 text-[#62685f]">Experience across big tech, fintech, asset management, and banking shapes how I frame risk, cost, and operational decisions.</p></div>
-            <div className="journey-list">
-              {experience.slice(0, 5).map((job, index) => (
-                <article key={`${job.company}-${job.period}`} className="journey-row">
-                  <div className="journey-period">{job.period}</div>
-                  <div><div className="flex flex-wrap items-baseline justify-between gap-2"><h3>{job.title}</h3><span>{job.company}</span></div><p>{index === 0 ? job.description : job.highlights[0]}</p>
-                    {index === 0 && <div className="mt-5 flex flex-wrap gap-2">{job.tags.map((tag) => <em key={tag}>{tag}</em>)}</div>}
+              <div className="retro-receiver-wrap">
+                <div className="retro-receiver-shadow" aria-hidden="true" />
+                <div className="retro-receiver" aria-hidden="true">
+                  <div className="retro-receiver-topline">
+                    <div><span>CAREER</span><strong>SIGNAL</strong></div>
+                    <p>KAAN KAYA<br />LUXEMBOURG</p>
                   </div>
-                </article>
-              ))}
+                  <div className="retro-receiver-screen">
+                    <div className="retro-screen-labels"><span>FINANCE → DATA SCIENCE</span><span>SINCE 2015</span></div>
+                    <RetroSignal />
+                    <div className="retro-screen-scale" aria-hidden="true"><i /><i /><i /><i /><i /><i /><i /><i /><i /></div>
+                  </div>
+                  <div className="retro-console">
+                    <div className="retro-knob"><span /><small>RIGOUR</small></div>
+                    <div className="retro-station"><p>ROUTE</p><div>{["P&L", "DATA", "ML", "CAUSAL"].map((step) => <span key={step}>{step}</span>)}</div></div>
+                    <div className="retro-knob"><span /><small>USE</small></div>
+                  </div>
+                  <div className="retro-receiver-footer"><span>FINANCE TRAINED</span><span>SYSTEMS BUILDER</span><span>DECISION FOCUSED</span></div>
+                </div>
+              </div>
             </div>
-          </div>
-        </section>
+            <div className="retro-container retro-biography-strip" aria-label="Profile summary">
+              <span>Since 2015 across finance and data</span><i aria-hidden="true" />
+              <span>8 public builds</span><i aria-hidden="true" />
+              <span>2 master&apos;s degrees</span>
+            </div>
+          </section>
 
-        <section id="contact" className="profile-contact">
-          <div className="profile-container relative z-10 py-24 text-center sm:py-32">
-            <p className="profile-dark-label">05 / CONTACT</p><h2 className="profile-display mx-auto mt-8 max-w-[960px] text-[clamp(3.2rem,8vw,8rem)] leading-[0.88]">Let’s make the question <em>sharper.</em></h2>
-            <p className="mx-auto mt-8 max-w-[650px] text-lg leading-8 text-[#a9aea5]">I’m always interested in rigorous data science, causal inference, and the craft of turning complex models into useful products.</p>
-            <a href={`mailto:${personalInfo.email}`} className="profile-contact-link mt-12">{personalInfo.email} <ArrowUpRight className="h-6 w-6" /></a>
-          </div>
-        </section>
-      </main>
+          <section id="projects" className="retro-band retro-projects retro-edited-section" aria-labelledby="projects-title">
+            <div className="retro-container">
+              <header className="retro-editorial-heading">
+                <p className="retro-instrument-label">PUBLIC WORK</p>
+                <div>
+                  <h2 id="projects-title">What I can show<br /><em>in the open.</em></h2>
+                  <p>My day-to-day work is private. These projects show how I think about systems, models, and useful products.</p>
+                </div>
+              </header>
 
-      <footer className="profile-footer">
-        <div className="profile-container flex flex-col gap-6 py-8 sm:flex-row sm:items-center sm:justify-between">
-          <p>© {new Date().getFullYear()} Kaan Kaya · Luxembourg</p>
-          <div className="flex items-center gap-5"><a href={personalInfo.github} target="_blank" rel="noreferrer" aria-label="GitHub"><Github className="h-4 w-4" /></a><a href={personalInfo.linkedin} target="_blank" rel="noreferrer" aria-label="LinkedIn"><Linkedin className="h-4 w-4" /></a><a href={`mailto:${personalInfo.email}`} aria-label="Email"><Mail className="h-4 w-4" /></a><span className="flex items-center gap-1.5"><MapPin className="h-3.5 w-3.5" /> Luxembourg</span></div>
-        </div>
-      </footer>
-    </div>
+              <div className="retro-featured-work">
+                {featuredProjects.map((project, index) => {
+                  const meta = projectMeta[project.title]
+                  if (!meta) return null
+                  return (
+                    <article key={project.title} className="retro-featured-project retro-project-card" data-tone="coral">
+                      <div className="retro-featured-cover">
+                        <span className="retro-work-index">0{index + 1}</span>
+                        <ProjectVisual kind={meta.visual} />
+                      </div>
+                      <div className="retro-featured-copy">
+                        <p className="retro-project-kind">ORIGINAL BUILD · {meta.category}</p>
+                        <h3>{project.title}</h3>
+                        <p>{meta.summary}</p>
+                        <p className="retro-project-stack">{project.tags.slice(0, 3).join(" · ")}</p>
+                        <div className="retro-project-actions">
+                          <ExternalAwareLink href={meta.primaryHref} className="retro-project-link">{meta.primaryLabel} <ArrowUpRight aria-hidden="true" /></ExternalAwareLink>
+                          {meta.secondaryHref && (
+                            <ExternalAwareLink href={meta.secondaryHref} className="retro-text-link">{meta.secondaryLabel} <ArrowUpRight aria-hidden="true" /></ExternalAwareLink>
+                          )}
+                        </div>
+                      </div>
+                    </article>
+                  )
+                })}
+              </div>
+
+              <div className="retro-work-index-list">
+                <div className="retro-work-list-heading">
+                  <h3>More from the lab</h3>
+                  <a href={personalInfo.github} target="_blank" rel="noreferrer">Full GitHub profile <ArrowUpRight aria-hidden="true" /></a>
+                </div>
+                {archiveProjects.map((project) => {
+                  const meta = projectMeta[project.title]
+                  if (!meta) return null
+                  return (
+                    <article key={project.title} className="retro-work-row" data-kind={meta.kind}>
+                      <p>{meta.kind === "learning" ? "COURSE WORK · CLEARLY CREDITED" : "ORIGINAL EXPERIMENT"}</p>
+                      <div><h4>{project.title}</h4><span>{meta.summary}</span></div>
+                      <ExternalAwareLink href={meta.primaryHref}>{meta.primaryLabel}<ArrowUpRight aria-hidden="true" /></ExternalAwareLink>
+                    </article>
+                  )
+                })}
+              </div>
+            </div>
+          </section>
+
+          <section id="experience" className="retro-band retro-experience retro-edited-section" aria-labelledby="experience-title">
+            <div className="retro-container">
+              <header className="retro-editorial-heading">
+                <p className="retro-instrument-label">WORK HISTORY · 2015—PRESENT</p>
+                <div>
+                  <h2 id="experience-title">Data scientist from the start.<br /><em>Broader because of the route.</em></h2>
+                  <p>I began in e-commerce data science, then worked through P&amp;L, market risk, regulatory reporting, platforms, and data products. Each step added context I now bring to modelling and causal work.</p>
+                </div>
+              </header>
+
+              <div className="retro-career-timeline" aria-label="Full work history">
+                <div className="retro-career-timeline-head">
+                  <h3>Full work history</h3>
+                  <p>Eight roles · finance, platforms, and data science</p>
+                </div>
+                <ol>
+                  {experience.map((job, index) => (
+                    <li key={`${job.company}-${job.period}`} className={index === 0 ? "is-current" : index === experience.length - 1 ? "is-origin" : undefined}>
+                      <p className="retro-career-date">{job.period}</p>
+                      <div className="retro-career-rail" aria-hidden="true"><i /></div>
+                      <article className="retro-career-entry">
+                        <header>
+                          <div>
+                            <p>{job.company}</p>
+                            <h3>{job.title}</h3>
+                            {index === 0 && <em>CURRENT ROLE</em>}
+                            {index === experience.length - 1 && <em>FIRST DATA SCIENCE ROLE</em>}
+                          </div>
+                          <span><MapPin aria-hidden="true" /> {job.location}</span>
+                        </header>
+                        <p>{job.description}</p>
+                        <small>{job.tags.slice(0, 3).join(" · ")}</small>
+                      </article>
+                    </li>
+                  ))}
+                </ol>
+              </div>
+            </div>
+          </section>
+
+          <section id="practice" className="retro-band retro-practice retro-edited-section" aria-labelledby="practice-title">
+            <div className="retro-container">
+              <header className="retro-editorial-heading">
+                <p className="retro-instrument-label">HOW I WORK</p>
+                <div>
+                  <h2 id="practice-title">Start with the decision.<br /><em>Work backwards.</em></h2>
+                  <p>The model is only useful if the data holds up, the reasoning can be inspected, and the result fits the way people work.</p>
+                </div>
+              </header>
+
+              <div className="retro-method-console" data-tone={activeStep.tone}>
+                <div className="retro-method-nav" role="tablist" aria-label="How I work">
+                  {practiceSteps.map((step) => (
+                    <button
+                      key={step.id}
+                      type="button"
+                      role="tab"
+                      id={`method-tab-${step.id}`}
+                      aria-selected={activePractice === step.id}
+                      aria-controls="method-stage"
+                      onClick={() => setActivePractice(step.id)}
+                    >
+                      <span>{step.number}</span><strong>{step.action}</strong><small>{step.methods}</small>
+                    </button>
+                  ))}
+                </div>
+                <motion.div
+                  key={activeStep.id}
+                  id="method-stage"
+                  className="retro-method-stage"
+                  role="tabpanel"
+                  aria-labelledby={`method-tab-${activeStep.id}`}
+                  initial={{ opacity: 0, y: 8 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.22 }}
+                >
+                  <div className="retro-method-copy">
+                    <p>{activeStep.number} / {activeStep.action.toUpperCase()}</p>
+                    <h3>{activeStep.prompt}</h3>
+                    <span>{activeStep.response}</span>
+                    <strong>{activeStep.methods}</strong>
+                  </div>
+                  <CapabilityAnimation kind={activeStep.id} />
+                </motion.div>
+              </div>
+              <p className="retro-public-note">At Amazon, I build internal decision-support data products. Business context, scale, and implementation details remain private.</p>
+            </div>
+          </section>
+
+          <section id="archive" className="retro-band retro-archive retro-edited-section" aria-labelledby="archive-title">
+            <div className="retro-container">
+              <header className="retro-editorial-heading">
+                <p className="retro-instrument-label">EDUCATION & LEARNING</p>
+                <div>
+                  <h2 id="archive-title">Two disciplines.<br /><em>One practice.</em></h2>
+                  <p>Finance taught me to respect the number. Computer science is helping me build the systems around it.</p>
+                </div>
+              </header>
+
+              <div className="retro-degree-ledger">
+                {education.map((item) => (
+                  <article key={item.degree}>
+                    <p>{item.period}{item.current ? " · IN PROGRESS" : ""}</p>
+                    <h3>{item.degree}</h3>
+                    <strong>{item.school}</strong>
+                    <span>{item.description}</span>
+                  </article>
+                ))}
+              </div>
+
+              <div className="retro-learning-grid">
+                <section aria-labelledby="credentials-title">
+                  <div className="retro-minor-heading"><p>RECENT CREDENTIALS</p><h3 id="credentials-title">Selected learning</h3></div>
+                  <div className="retro-credential-ledger">
+                    {recentCredentials.map((certificate) => (
+                      <a key={certificate.name} href={certificate.link} target="_blank" rel="noreferrer">
+                        <span>{certificate.year}</span><div><strong>{certificate.name}</strong><small>{certificate.issuer}</small></div><ArrowUpRight aria-hidden="true" />
+                      </a>
+                    ))}
+                  </div>
+                  <details className="retro-disclosure retro-credential-disclosure">
+                    <summary>See all eight credentials <ChevronDown aria-hidden="true" /></summary>
+                    <div className="retro-credential-ledger">
+                      {certificates.map((certificate) => {
+                        const content = <><span>{certificate.year}</span><div><strong>{certificate.name}</strong><small>{certificate.issuer}</small></div>{certificate.link !== "#" && <ArrowUpRight aria-hidden="true" />}</>
+                        return certificate.link === "#"
+                          ? <div key={certificate.name}>{content}</div>
+                          : <a key={certificate.name} href={certificate.link} target="_blank" rel="noreferrer">{content}</a>
+                      })}
+                    </div>
+                  </details>
+                </section>
+
+                <section aria-labelledby="toolkit-title">
+                  <div className="retro-minor-heading"><p>WORKING TOOLKIT</p><h3 id="toolkit-title">Tools, in context</h3></div>
+                  <div className="retro-toolkit-ledger">
+                    {skillGroups.map((group) => (
+                      <div key={group.label}><strong>{group.label}</strong><p>{group.items.map((item) => item.name).join(" · ")}</p></div>
+                    ))}
+                  </div>
+                </section>
+              </div>
+
+              <div className="retro-personal-note">
+                <p>Based in Luxembourg. I work in English and Turkish, speak Polish conversationally, and am learning Luxembourgish and French.</p>
+                <p>Away from the screen: electric guitar, piano, and gardening.</p>
+              </div>
+            </div>
+          </section>
+
+          <section id="contact" className="retro-band retro-contact retro-final-contact" aria-labelledby="contact-title">
+            <div className="retro-container retro-contact-inner">
+              <div><p className="retro-instrument-label">CONTACT</p><h2 id="contact-title">Let&apos;s compare notes.</h2></div>
+              <div className="retro-contact-panel">
+                <p>If you are working on a messy decision problem—or simply want to compare approaches to explainable ML, causal inference, or data platforms—send me a note.</p>
+                <div>
+                  <a href={`mailto:${personalInfo.email}`}>Email Kaan <ArrowUpRight aria-hidden="true" /></a>
+                  <a href={personalInfo.linkedin} target="_blank" rel="noreferrer">Connect on LinkedIn <ArrowUpRight aria-hidden="true" /></a>
+                </div>
+              </div>
+            </div>
+          </section>
+        </main>
+
+        <footer className="retro-footer">
+          <div className="retro-container">
+            <div className="retro-brand"><span className="retro-brand-disc">KK</span><span><strong>Kaan Kaya</strong><small>DATA SCIENTIST</small></span></div>
+            <p>© {new Date().getFullYear()} · Luxembourg · Built with care</p>
+            <div><a href={personalInfo.github} target="_blank" rel="noreferrer" aria-label="GitHub"><Github aria-hidden="true" /></a><a href={personalInfo.linkedin} target="_blank" rel="noreferrer" aria-label="LinkedIn"><Linkedin aria-hidden="true" /></a><a href={`mailto:${personalInfo.email}`} aria-label="Email"><Mail aria-hidden="true" /></a></div>
+          </div>
+        </footer>
+      </div>
+    </MotionConfig>
   )
 }

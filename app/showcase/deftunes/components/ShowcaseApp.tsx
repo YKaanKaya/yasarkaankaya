@@ -1,9 +1,8 @@
 "use client"
 
 import React, { useState } from "react"
-import Link from "next/link"
 import Image from "next/image"
-import { ArrowLeft, ChevronDown, Copy, Check, Coffee } from "lucide-react"
+import { ChevronDown, Copy, Check, Coffee } from "lucide-react"
 import { motion, AnimatePresence } from "framer-motion"
 import { Badge } from "@/components/ui/badge"
 
@@ -75,12 +74,8 @@ export function ShowcaseApp() {
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5 }}
-        className="flex justify-between items-center"
+        className="flex justify-end items-center"
       >
-        <Link href="/#work" className="inline-flex items-center hover:text-muted-foreground text-sm">
-          <ArrowLeft className="mr-2 h-4 w-4" />
-          Back to Portfolio
-        </Link>
         <button 
           onClick={copyRepoLink}
           className="flex items-center text-sm hover:bg-muted p-2 rounded-md transition-colors"

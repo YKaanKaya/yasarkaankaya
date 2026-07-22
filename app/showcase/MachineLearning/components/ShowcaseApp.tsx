@@ -4,7 +4,7 @@ import React, { useState, useEffect } from 'react'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Button } from '@/components/ui/button'
 import { Card, CardContent } from '@/components/ui/card'
-import { ArrowLeft, Github, Award, BookOpen, Code, Sparkles, Brain, HelpCircle } from 'lucide-react'
+import { Github, Award, BookOpen, Code, Sparkles, Brain, HelpCircle } from 'lucide-react'
 import Link from 'next/link'
 import { CourseContent } from './CourseContent'
 import { ProjectDemo } from './ProjectDemo'
@@ -91,9 +91,6 @@ export function ShowcaseApp() {
         {/* Top Navigation */}
         <nav className="flex justify-between items-center mb-4" aria-label="Showcase navigation">
           <div className="flex items-center gap-2">
-            <Button asChild variant="ghost" size="icon" className="mr-2" aria-label="Back to home">
-              <Link href="/"><ArrowLeft className="h-5 w-5" /></Link>
-            </Button>
             <h1 id="machine-learning-title" className="text-2xl md:text-3xl font-bold">Machine Learning Specialization</h1>
           </div>
           <Button asChild variant="outline" size="sm" className="gap-2">

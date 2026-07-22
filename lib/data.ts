@@ -6,7 +6,7 @@ import {
 
 export const personalInfo = {
   name: "Kaan KAYA",
-  title: "Data Scientist | Decision Intelligence, Causal ML & Data Platforms",
+  title: "Data Scientist",
   email: "kaankaya@live.com",
   phone: "+352 621 748 595",
   location: "Luxembourg",
@@ -17,12 +17,11 @@ export const personalInfo = {
     { label: "Platform Builder", icon: Database, color: "purple" },
     { label: "Causal ML", icon: BarChart3, color: "green" },
   ],
-  tagline: "Building data products that connect prediction, causality, and operational decisions.",
+  tagline: "From financial controls to decision systems.",
   bio: [
-    "Data scientist and platform builder working at the intersection of machine learning, causal inference, and decision intelligence.",
-    "Currently building analytics platforms and models that support operational decision-making, with an emphasis on explainability and causal inference.",
-    "I translate ambiguous operational questions into reliable data products: from the data foundation and modelling strategy to explainability, validation, and decision-ready interfaces.",
-    "My background spans big tech, banking, asset management, and fintech, with a consistent focus on trustworthy analysis and production-grade systems."
+    "I spent a decade moving upstream—from reconciling financial numbers, to building the data platforms behind them, to modelling what informs a decision.",
+    "Today I work across prediction, explainability, and causal inference, with an emphasis on systems that can be understood, challenged, and used.",
+    "My path through e-commerce, banking, asset management, fintech, and data science shapes how I approach the last mile between a model and a real decision."
   ],
   languages: [
     { name: "Turkish", level: "Native" },
@@ -127,7 +126,7 @@ export const experience = [
     tags: ['P&L Reporting', 'Automation', 'Data Consistency']
   },
   {
-    title: 'Business and Big Data Analyst',
+    title: 'Data Scientist',
     company: 'FRU.PL',
     period: 'Mar 2015 - Jul 2016',
     location: 'Warsaw',
@@ -159,6 +158,12 @@ export const projects = [
     featured: true
   },
   {
+    title: 'GraphFlow ETL Suite',
+    description: 'An AI-assisted migration toolkit for turning tabular data into graph-ready models and Neo4j workflows, with schema discovery and repeatable ETL at its core.',
+    link: 'https://github.com/YKaanKaya/graphify',
+    tags: ['TypeScript', 'Neo4j', 'ETL', 'AI-Assisted']
+  },
+  {
     title: 'Machine Learning Specialization',
     description: 'A comprehensive showcase of implementations from Andrew Ng\'s Machine Learning Specialization, featuring algorithms from basic regression to advanced reinforcement learning with practical demos.',
     link: 'https://github.com/YKaanKaya/Machine-learning',
@@ -175,19 +180,20 @@ export const projects = [
   {
     title: 'Stock Performance & ESG Scores',
     description: 'Application for demonstrating, visualizing, and interacting with various stock performance indicators and ESG scores for sustainable investing analysis.',
-    link: 'https://gsinfo.streamlit.app/',
+    link: 'https://github.com/YKaanKaya/globalstockinfo',
+    demoLink: 'https://gsinfo.streamlit.app/',
     tags: ['Streamlit', 'Python', 'Financial Analytics', 'ESG']
   },
   {
     title: 'NVIDIA Multimodal AI Agents',
     description: 'Showcase for NVIDIA\'s "Building AI Agents with Multimodal Models" course, demonstrating advanced multimodal techniques combining vision, language, and structured data.',
-    link: 'showcase/NvidiaMultimodalAI/',
+    link: '/showcase/NvidiaMultimodalAI/',
     tags: ['NVIDIA', 'Multimodal AI', 'AI Agents', 'Deep Learning']
   },
   {
     title: 'LectureNotes RAG System',
     description: 'GPU-accelerated Retrieval-Augmented Generation system for intelligent Q&A over lecture notes. Features FAISS vector search, multi-format document support, and LM Studio integration.',
-    link: 'showcase/LectureNotesRAG',
+    link: '/showcase/LectureNotesRAG',
     demoLink: 'https://github.com/YKaanKaya/LectureNotes-RAG-System',
     tags: ['RAG', 'FAISS', 'GPU Acceleration', 'PyTorch', 'NLP']
   }
@@ -233,7 +239,7 @@ export const certificates = [
   { name: 'Data Engineering and AWS', issuer: 'DeepLearning.AI', link: 'https://www.coursera.org/account/accomplishments/specialization/OUGD3WNPRZ1I', year: '2024' },
   { name: 'Advanced Data Analytics Professional Certificate', issuer: 'Google', link: 'https://www.coursera.org/account/accomplishments/professional-cert/AALR5T4XSEY6', year: '2023' },
   { name: 'AZ-900: Microsoft Azure Fundamentals', issuer: 'Microsoft', link: 'https://learn.microsoft.com/api/achievements/share/en-us/YasarKAYA-5240/JY5EYETG?sharingId=7FE4C6AF70E73B72', year: '2023' },
-  { name: 'Professional Scrum Master (PSM 1)', issuer: 'Scrum.org', link: 'https://www.scrum.org/certificates/1021848', year: '2022' },
+  { name: 'Professional Scrum Master (PSM I)', issuer: 'Scrum.org', link: 'https://www.scrum.org/certificates/1021848', year: '2022' },
   { name: 'Certified Scrum Product Owner', issuer: 'Scrum Alliance', link: '#', year: '2022' },
 ]
 
@@ -241,8 +247,8 @@ export const education = [
   {
     degree: "MSc in Computer Science",
     period: "2024 - 2027",
-    school: "Heriot Watt University",
-    description: "Focused on advanced software development methodologies, machine learning algorithms, and AI applications for building innovative technical solutions.",
+    school: "Heriot-Watt University",
+    description: "Studying computer science alongside my data-science practice, with a focus on the software and machine-learning foundations behind reliable systems.",
     tags: ["Machine Learning", "Software Engineering", "AI Systems", "Algorithms"],
     current: true
   },
@@ -250,7 +256,7 @@ export const education = [
     degree: "Master in Finance and Accounting",
     period: "2015 - 2017",
     school: "Kozminski University",
-    description: "Comprehensive foundation in financial analysis, accounting principles, and corporate finance - forming the analytical backbone for data-driven financial solutions.",
+    description: "Where I learned to reconcile numbers, understand P&L, and treat analytical outputs as something that must stand up to scrutiny.",
     tags: ["Finance", "Accounting", "Financial Analysis", "Corporate Finance"],
     current: false
   }

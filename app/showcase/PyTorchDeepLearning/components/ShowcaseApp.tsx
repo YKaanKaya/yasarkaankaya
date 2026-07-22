@@ -1512,7 +1512,7 @@ export function ShowcaseApp() {
           <div className="container mx-auto px-6 py-4 flex justify-between items-center">
             <div className="flex items-center gap-4">
               <Button asChild variant="ghost" size="icon" className="rounded-full hover:bg-slate-200 dark:hover:bg-white/10">
-                <Link href="/"><ArrowLeft className="h-5 w-5" /></Link>
+                <Link href="/#projects" aria-label="Back to portfolio"><ArrowLeft className="h-5 w-5" /></Link>
               </Button>
               <span className="font-medium hidden sm:inline">PyTorch Deep Learning Journey</span>
             </div>
@@ -1763,7 +1763,7 @@ export function ShowcaseApp() {
                 </a>
               </Button>
               <Button asChild size="lg" variant="outline" className="rounded-full px-8 border-zinc-600 bg-transparent text-white hover:bg-zinc-800 hover:text-white">
-                <Link href="/#work">
+                <Link href="/#projects" className="showcase-inline-back">
                   <ArrowLeft className="mr-2 w-5 h-5" />
                   Back to Portfolio
                 </Link>

@@ -3,15 +3,22 @@
 import Link from "next/link"
 import { usePathname } from "next/navigation"
 import { ArrowLeft, ArrowUpRight, Github } from "lucide-react"
-import { personalInfo } from "@/lib/data"
 
 const caseFiles = [
-  { match: "/showcase/deftunes", code: "DE.01", category: "Data platform", title: "DeFtunes Data Pipeline" },
-  { match: "/showcase/AICodeArena", code: "ML.02", category: "Applied learning", title: "AI Code Arena Quest" },
-  { match: "/showcase/MachineLearning", code: "ML.03", category: "Machine learning", title: "Machine Learning Specialization" },
-  { match: "/showcase/PyTorchDeepLearning", code: "DL.04", category: "Deep learning", title: "PyTorch for Deep Learning" },
-  { match: "/showcase/LectureNotesRAG", code: "AI.05", category: "Retrieval systems", title: "LectureNotes RAG System" },
-  { match: "/showcase/NvidiaMultimodalAI", code: "MM.06", category: "Multimodal AI", title: "NVIDIA Multimodal AI" },
+  { match: "/showcase/deftunes", code: "DE.01", category: "Data platform", kind: "Original build", tone: "coral", repository: "https://github.com/YKaanKaya/deftunes-data-pipeline" },
+  { match: "/showcase/AICodeArena", code: "ML.02", category: "Learning product", kind: "Original build", tone: "mustard", repository: "https://github.com/YKaanKaya/ai-code-arena-quest" },
+  { match: "/showcase/MachineLearning", code: "ML.03", category: "Machine learning", kind: "Course work · clearly credited", tone: "teal", repository: "https://github.com/YKaanKaya/Machine-learning" },
+  { match: "/showcase/PyTorchDeepLearning", code: "DL.04", category: "Deep learning", kind: "Course work · clearly credited", tone: "coral", repository: "https://github.com/YKaanKaya/deeplearning-ai-pytorch" },
+  { match: "/showcase/LectureNotesRAG", code: "AI.05", category: "Retrieval systems", kind: "Original build", tone: "orange", repository: "https://github.com/YKaanKaya/LectureNotes-RAG-System" },
+  {
+    match: "/showcase/NvidiaMultimodalAI",
+    code: "MM.06",
+    category: "Multimodal AI",
+    kind: "Course work · clearly credited",
+    tone: "nvidia",
+    repository: "https://learn.nvidia.com/certificates?id=kpMpsOlPTBKph9g3PLBXpw",
+    sourceLabel: "Course credential",
+  },
 ]
 
 export function ShowcaseChrome({ children }: { children: React.ReactNode }) {
@@ -20,30 +27,24 @@ export function ShowcaseChrome({ children }: { children: React.ReactNode }) {
   const isNotebook = pathname.includes("/notebook/")
 
   return (
-    <div className="showcase-system">
+    <div className="showcase-system" data-tone={activeCase.tone}>
       <header className="showcase-chrome-nav">
         <div className="showcase-chrome-container flex h-[68px] items-center justify-between gap-6">
-          <Link href="/" className="showcase-back-link">
-            <ArrowLeft className="h-3.5 w-3.5" /> K/K · Profile
+          <Link href="/#projects" className="showcase-back-link">
+            <ArrowLeft className="h-3.5 w-3.5" /> Back to portfolio
           </Link>
-          <div className="showcase-chrome-wordmark">CASE FILES <span>/ 06</span></div>
-          <a href={personalInfo.github} target="_blank" rel="noreferrer" className="showcase-github-link">
-            <Github className="h-3.5 w-3.5" /> GitHub <ArrowUpRight className="h-3.5 w-3.5" />
+          <div className="showcase-chrome-wordmark">KAAN KAYA <span>/ PUBLIC WORK</span></div>
+          <a href={activeCase.repository} target="_blank" rel="noreferrer" className="showcase-github-link">
+            <Github className="h-3.5 w-3.5" /> {"sourceLabel" in activeCase ? activeCase.sourceLabel : "Project source"} <ArrowUpRight className="h-3.5 w-3.5" />
           </a>
         </div>
       </header>
 
       <div className="showcase-case-band">
-        <div className="showcase-chrome-container grid gap-5 py-7 md:grid-cols-[0.35fr_1fr_auto] md:items-end">
-          <div>
-            <p className="showcase-case-label">{isNotebook ? "Research notebook" : "Project record"}</p>
-            <p className="showcase-case-code">{activeCase.code}</p>
-          </div>
-          <div>
-            <p className="showcase-case-label">{activeCase.category}</p>
-            <h1 className="showcase-case-title">{activeCase.title}</h1>
-          </div>
-          <div className="showcase-case-status"><span /> documented · working artifact</div>
+        <div className="showcase-chrome-container showcase-case-strip">
+          <span>{isNotebook ? "Research notebook" : activeCase.kind}</span>
+          <span>{activeCase.category}</span>
+          <strong>{activeCase.code}</strong>
         </div>
       </div>
 
@@ -52,7 +53,7 @@ export function ShowcaseChrome({ children }: { children: React.ReactNode }) {
       <footer className="showcase-chrome-footer">
         <div className="showcase-chrome-container flex flex-col gap-4 py-8 sm:flex-row sm:items-center sm:justify-between">
           <p>Kaan Kaya · Data Scientist · Luxembourg</p>
-          <Link href="/#work">Return to selected work <ArrowUpRight className="h-3.5 w-3.5" /></Link>
+          <Link href="/#projects">Browse all projects <ArrowUpRight className="h-3.5 w-3.5" /></Link>
         </div>
       </footer>
     </div>
