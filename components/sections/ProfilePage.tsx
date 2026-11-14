@@ -97,6 +97,16 @@ type ProjectMeta = {
 }
 
 const projectMeta: Record<string, ProjectMeta> = {
+  "Evaluating and Improving Agentic Applications": {
+    category: "Course work · clearly credited",
+    summary: "From Phoenix traces to case-aligned comparisons: a documented journey through trustworthy agent evaluation.",
+    primaryHref: "/showcase/agentic-evaluation/",
+    primaryLabel: "Explore the evaluation journey",
+    secondaryHref: "https://github.com/YKaanKaya/deeplearning-ai-agentic-evaluation",
+    secondaryLabel: "View source",
+    kind: "learning",
+    visual: "ml-labs",
+  },
   "AI Code Arena Quest": {
     category: "Learning product",
     summary: "The machine-learning practice environment I wished I had: code-first challenges, real datasets, and immediate feedback.",
@@ -181,6 +191,7 @@ const projectOrder = [
   "GraphFlow ETL Suite",
   "LectureNotes RAG System",
   "Stock Performance & ESG Scores",
+  "Evaluating and Improving Agentic Applications",
   "PyTorch for Deep Learning",
   "Machine Learning Specialization",
   "NVIDIA Multimodal AI Agents",
@@ -202,6 +213,7 @@ const skillGroups = [
 ]
 
 const recentCredentialNames = new Set([
+  "Evaluating and Improving Agentic Applications",
   "PyTorch for Deep Learning Professional Certificate",
   "Building AI Agents with Multimodal Models",
   "Data Engineering and AWS",
@@ -345,7 +357,7 @@ export function ProfilePage() {
             </div>
             <div className="retro-container retro-biography-strip" aria-label="Profile summary">
               <span>Since 2015 across finance and data</span><i aria-hidden="true" />
-              <span>8 public builds</span><i aria-hidden="true" />
+              <span>{orderedProjects.length} public builds</span><i aria-hidden="true" />
               <span>2 master&apos;s degrees</span>
             </div>
           </section>
@@ -528,7 +540,7 @@ export function ProfilePage() {
                     ))}
                   </div>
                   <details className="retro-disclosure retro-credential-disclosure">
-                    <summary>See all eight credentials <ChevronDown aria-hidden="true" /></summary>
+                    <summary>See all {certificates.length} credentials <ChevronDown aria-hidden="true" /></summary>
                     <div className="retro-credential-ledger">
                       {certificates.map((certificate) => {
                         const content = <><span>{certificate.year}</span><div><strong>{certificate.name}</strong><small>{certificate.issuer}</small></div>{certificate.link !== "#" && <ArrowUpRight aria-hidden="true" />}</>

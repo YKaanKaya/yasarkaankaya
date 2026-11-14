@@ -5,6 +5,7 @@ import { usePathname } from "next/navigation"
 import { ArrowLeft, ArrowUpRight, Github } from "lucide-react"
 
 const caseFiles = [
+  { match: "/showcase/agentic-evaluation", code: "AE.07", category: "Agent evaluation", kind: "Course work · clearly credited", tone: "mustard", repository: "https://github.com/YKaanKaya/deeplearning-ai-agentic-evaluation" },
   { match: "/showcase/deftunes", code: "DE.01", category: "Data platform", kind: "Original build", tone: "coral", repository: "https://github.com/YKaanKaya/deftunes-data-pipeline" },
   { match: "/showcase/AICodeArena", code: "ML.02", category: "Learning product", kind: "Original build", tone: "mustard", repository: "https://github.com/YKaanKaya/ai-code-arena-quest" },
   { match: "/showcase/MachineLearning", code: "ML.03", category: "Machine learning", kind: "Course work · clearly credited", tone: "teal", repository: "https://github.com/YKaanKaya/Machine-learning" },

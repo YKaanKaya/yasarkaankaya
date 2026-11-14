@@ -142,6 +142,13 @@ export const experience = [
 
 export const projects = [
   {
+    title: 'Evaluating and Improving Agentic Applications',
+    description: 'Documented DeepLearning.AI coursework on Phoenix tracing, benchmark design, evaluator validation, layered agent checks and case-aligned regression analysis.',
+    link: 'https://github.com/YKaanKaya/deeplearning-ai-agentic-evaluation',
+    demoLink: '/showcase/agentic-evaluation/',
+    tags: ['Python', 'Phoenix', 'Agent Evaluation', 'LLM Judges', 'Regression Testing']
+  },
+  {
     title: 'AI Code Arena Quest',
     description: 'An educational platform at PractAI.life designed to help people practice Machine Learning and AI concepts through interactive exercises and challenges. Created to bridge the gap between theoretical knowledge and practical application in AI education.',
     link: '/showcase/AICodeArena',
@@ -233,6 +240,7 @@ export const skillCategories = [
 ]
 
 export const certificates = [
+  { name: 'Evaluating and Improving Agentic Applications', issuer: 'DeepLearning.AI', link: 'https://learn.deeplearning.ai/certificates/03976233-64c4-4195-a504-d5676a73f825', year: '2026' },
   { name: 'PyTorch for Deep Learning Professional Certificate', issuer: 'DeepLearning.AI', link: 'https://learn.deeplearning.ai/certificates/2a9c2778-7424-4379-b34a-384272c9303c', year: '2026' },
   { name: 'Building AI Agents with Multimodal Models', issuer: 'NVIDIA DLI', link: 'https://learn.nvidia.com/certificates?id=kpMpsOlPTBKph9g3PLBXpw', year: '2025' },
   { name: 'Machine Learning Specialization', issuer: 'Stanford University', link: 'https://www.coursera.org/account/accomplishments/specialization/U89AFBFR4NMM', year: '2023' },
