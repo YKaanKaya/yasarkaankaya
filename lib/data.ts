@@ -143,7 +143,7 @@ export const experience = [
 export const projects = [
   {
     title: 'Evaluating and Improving Agentic Applications',
-    description: 'Documented DeepLearning.AI coursework on Phoenix tracing, benchmark design, evaluator validation, layered agent checks and case-aligned regression analysis.',
+    description: 'An educational case study based on DeepLearning.AI coursework: follow a fictional refund request to see why grounded replies, correct tool actions and completed tasks need separate evaluation.',
     link: 'https://github.com/YKaanKaya/deeplearning-ai-agentic-evaluation',
     demoLink: '/showcase/agentic-evaluation/',
     tags: ['Python', 'Phoenix', 'Agent Evaluation', 'LLM Judges', 'Regression Testing']

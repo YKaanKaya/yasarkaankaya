@@ -98,12 +98,12 @@ type ProjectMeta = {
 
 const projectMeta: Record<string, ProjectMeta> = {
   "Evaluating and Improving Agentic Applications": {
-    category: "Course work · clearly credited",
-    summary: "From Phoenix traces to case-aligned comparisons: a documented journey through trustworthy agent evaluation.",
+    category: "Educational case study · DeepLearning.AI",
+    summary: "An agent can sound right and still leave a refund undone. A course-based walkthrough of how traces, reliable scoring and regression tests expose the difference.",
     primaryHref: "/showcase/agentic-evaluation/",
-    primaryLabel: "Explore the evaluation journey",
+    primaryLabel: "Explore the educational case study",
     secondaryHref: "https://github.com/YKaanKaya/deeplearning-ai-agentic-evaluation",
-    secondaryLabel: "View source",
+    secondaryLabel: "Learning repository",
     kind: "learning",
     visual: "ml-labs",
   },
@@ -357,7 +357,7 @@ export function ProfilePage() {
             </div>
             <div className="retro-container retro-biography-strip" aria-label="Profile summary">
               <span>Since 2015 across finance and data</span><i aria-hidden="true" />
-              <span>{orderedProjects.length} public builds</span><i aria-hidden="true" />
+              <span>{orderedProjects.length} public projects</span><i aria-hidden="true" />
               <span>2 master&apos;s degrees</span>
             </div>
           </section>

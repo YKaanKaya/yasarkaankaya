@@ -6,10 +6,10 @@ import { Play, Square } from "lucide-react"
 import styles from "./showcase.module.css"
 
 const recordings = [
+  { id: "m5-comparison", label: "The refund case / Module 5 practice", title: "A supported reply, an unfinished task", description: "Inspect the eligible-refund comparison: v2 processes $98; v3 asks for confirmation. Both pass grounding and policy, while v3 fails selection and outcome. This is one case within a saved 3-failure / 3-known-good practice snapshot.", alt: "Saved Phoenix practice comparison showing the completed refund in v2 and the confirmation request in v3" },
   { id: "m1-tracing", label: "01 / Open the trace", title: "See the work behind the answer", description: "Phoenix exposes the agent's nested execution. Inspect model and tool spans rather than judging the final reply alone.", alt: "Saved Phoenix trace view from the Northwind support-agent tracing lab" },
   { id: "m3-validation", label: "03 / Challenge the judge", title: "Inspect what is being scored", description: "Phoenix correctness annotations expose one evaluation layer. Read the rule and the individual judgment before treating a score as evidence; correctness and policy compliance are separate checks.", alt: "Saved Phoenix correctness annotations from Module 3" },
-  { id: "m4-layered", label: "04 / Separate the layers", title: "Tool use and outcomes tell different stories", description: "Across 12 saved cases, tool selection fails 6 and invocation fails 8, while outcome and policy checks each fail 1. Different evaluators expose different failure modes.", alt: "Saved multi-layer Phoenix evaluation of tool use, policy compliance and task outcomes" },
-  { id: "m5-comparison", label: "05 / Compare by identity", title: "Read the tradeoff, then inspect the case", description: "This practice comparison covers 3 failure cases and 3 known-good cases. v3 preserves grounding on all 3 known-good cases, but selection and outcome pass on only 2. These are small, separate snapshots.", alt: "Reviewed excerpt of the latest Phoenix practice comparison showing failure and known-good cases" },
+  { id: "m4-layered", label: "04 / Separate the layers", title: "Compare the checks on the same trace", description: "Tool selection, argument checks, policy and task outcomes describe different parts of a request. Read them alongside the actual actions so a pass in one layer does not hide a failure in another.", alt: "Saved multi-layer Phoenix evaluation of tool use, policy compliance and task outcomes" },
 ]
 
 export function EvidenceGallery() {

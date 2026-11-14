@@ -3,12 +3,14 @@
 .page a:focus-visible, .page button:focus-visible, .page summary:focus-visible { outline: 3px solid #a84528; outline-offset: 5px; }
 .skipLink { position: absolute; top: -100px; left: 20px; z-index: 100; padding: 1rem; background: var(--paper); }
 .skipLink:focus { top: 80px; }
-.hero { display: grid; grid-template-columns: minmax(0, 1.4fr) minmax(270px, .78fr); gap: clamp(2rem, 6vw, 6rem); padding-block: clamp(3.5rem, 7vw, 6.5rem) 3.5rem; align-items: center; }
+.hero { display: grid; grid-template-columns: minmax(0, 1.35fr) minmax(290px, .85fr); gap: clamp(2rem, 5vw, 5rem); padding-block: clamp(3.5rem, 6vw, 5.5rem) 3.5rem; align-items: center; }
+.educationLabel { display: inline-block; border: 1px solid var(--ink); padding: .45rem .65rem; background: var(--accent); color: var(--ink); font: 750 .69rem/1.5 var(--font-geist-mono), monospace; letter-spacing: .035em; text-transform: uppercase; }
 .eyebrow { display: block; font: 740 .64rem/1.5 var(--font-geist-mono), monospace; letter-spacing: .09em; text-transform: uppercase; }
 .courseTitle { margin-top: 1.75rem; font: 680 .83rem/1.5 var(--font-geist-sans), sans-serif; color: var(--muted); }
-.page h1 { margin-top: .9rem; font-family: "Fraunces Variable", Georgia, serif; font-weight: 570; font-size: clamp(2.8rem, 5.5vw, 4.85rem); letter-spacing: -.055em; line-height: 1.04; }
+.page h1 { margin-top: .9rem; font-family: "Fraunces Variable", Georgia, serif; font-weight: 570; font-size: clamp(2.6rem, 4.8vw, 4.25rem); letter-spacing: -.055em; line-height: 1.05; }
 .page h1 em, .page h2 em { font-weight: 420; color: #a84528; }
 .introduction { max-width: 610px; margin-top: 1.7rem; color: var(--muted); font-size: 1.04rem; }
+.courseCredit { max-width: 610px; margin-top: 1rem; color: var(--muted); font-size: .8rem; }
 .actions { display: flex; flex-wrap: wrap; gap: .7rem; margin-top: 2rem; }
 .primaryButton, .secondaryButton { min-height: 46px; display: inline-flex; align-items: center; justify-content: center; gap: .55rem; border: 2px solid var(--ink); padding: .75rem .9rem; font: 740 .63rem/1.4 var(--font-geist-mono), monospace; letter-spacing: .025em; text-transform: uppercase; }
 .primaryButton { background: var(--ink); color: var(--paper); }
@@ -16,21 +18,24 @@
 .primaryButton:hover { background: #236b66; }
 .secondaryButton:hover { background: var(--accent); }
 .jumpLink { display: inline-flex; min-height: 44px; align-items: center; gap: .5rem; margin-top: 1.2rem; font-size: .78rem; text-decoration: underline; text-underline-offset: 4px; }
-.caseCard { background: var(--paper); border: 2px solid var(--ink); padding: 1.5rem; box-shadow: 8px 8px 0 var(--accent); }
 .caseCardHeader { display: flex; align-items: center; justify-content: space-between; padding-bottom: 1rem; border-bottom: 1px solid var(--ink); font: 750 .6rem/1.4 var(--font-geist-mono), monospace; letter-spacing: .08em; }
 .dot { width: 8px; height: 8px; border-radius: 50%; background: #236b66; box-shadow: 0 0 0 4px rgba(35,107,102,.13); }
-.cardLabel { margin-top: 1.5rem; font: 700 .65rem/1.4 var(--font-geist-mono), monospace; text-transform: uppercase; color: var(--muted); }
-.page .caseCard h2 { margin-top: .5rem; font-family: "Fraunces Variable", Georgia, serif; font-size: 2.6rem; font-weight: 550; line-height: 1.02; }
-.caseCard > p:not(.cardLabel) { margin-top: .8rem; font-size: .8rem; color: var(--muted); }
-.traceDiagram { margin-block: 1.5rem; padding: 1rem; background: #e9dfbd; font: 640 .6rem/1.5 var(--font-geist-mono), monospace; }
-.traceDiagram > span { display: block; margin-bottom: .65rem; }
-.traceDiagram > div { border-left: 2px solid #236b66; padding-left: .9rem; }
-.traceDiagram > div > div { display: grid; grid-template-columns: 1fr 1fr; gap: .5rem; margin-top: .6rem; }
-.traceDiagram > div > div > span { padding: .4rem; border: 1px solid #236b66; }
-.traceDiagram strong { display: block; margin-top: 1rem; padding-top: .7rem; border-top: 1px dashed var(--ink); font-weight: 750; }
-.facts > div { display: flex; justify-content: space-between; gap: 1rem; border-top: 1px solid #bfb79d; padding-block: .65rem; font-size: .66rem; }
-.facts dt { color: var(--muted); }
-.facts dd { font-weight: 700; text-align: right; }
+.refundCard { min-width: 0; margin-right: 8px; padding: 1.5rem; border: 2px solid var(--ink); background: var(--paper); box-shadow: 8px 8px 0 var(--accent); }
+.requestLabel { margin-top: 1.2rem; font: 700 .64rem/1.4 var(--font-geist-mono), monospace; text-transform: uppercase; }
+.page .refundCard h2 { margin-top: .4rem; font-size: 2.5rem; line-height: 1.04; }
+.refundVersions { display: grid; grid-template-columns: 1fr 1fr; gap: .7rem; margin-top: 1.5rem; }
+.refundVersions > div { min-width: 0; padding: .9rem .7rem; border-top: 3px solid #236b66; background: #e6ead7; }
+.refundVersions > .incompleteVersion { border-top-color: #a84528; background: #f3dfc8; }
+.versionLabel { display: block; font: 700 .58rem/1.4 var(--font-geist-mono), monospace; }
+.refundVersions strong { display: block; margin-top: .75rem; font: 570 1.45rem/1.12 "Fraunces Variable", Georgia, serif; letter-spacing: -.035em; }
+.outcomePass, .outcomeFail { display: block; margin-top: 1rem; font: 750 .62rem/1.4 var(--font-geist-mono), monospace; }
+.outcomePass { color: #1e5549; }
+.outcomeFail { color: #88351e; }
+.sharedScores { margin-top: 1rem; border-top: 1px solid #bfb79d; }
+.sharedScores > span { display: flex; justify-content: space-between; gap: 1rem; padding-block: .45rem; border-bottom: 1px solid #bfb79d; font-size: .7rem; }
+.sharedScores strong { color: #1e5549; font-weight: 700; }
+.reconstructionNote { margin-top: 1rem; color: var(--muted); font-size: .68rem; line-height: 1.6; }
+.refundCard .sourceLink { margin-top: .5rem; font-size: .6rem; }
 .pageNav { display: flex; flex-wrap: wrap; column-gap: 1.7rem; border-block: 2px solid var(--ink); }
 .pageNav a { display: flex; align-items: center; min-height: 52px; font: 740 .62rem/1.4 var(--font-geist-mono), monospace; text-transform: uppercase; letter-spacing: .03em; }
 .pageNav a:hover { color: #a84528; }
@@ -39,6 +44,14 @@
 .sectionHeader > .eyebrow { padding-top: .5rem; color: #a84528; }
 .page h2 { font-family: "Fraunces Variable", Georgia, serif; font-weight: 550; font-size: clamp(2.2rem, 4vw, 3.65rem); line-height: 1.05; letter-spacing: -.045em; }
 .sectionHeader > div > p { max-width: 680px; margin-top: 1.25rem; color: var(--muted); font-size: .92rem; }
+.caseExplanation { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; max-width: 1080px; font-size: .92rem; color: var(--muted); }
+.threeQuestions { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1.6rem; margin-top: 2.5rem; }
+.threeQuestions > div { border-top: 3px solid #a84528; padding-top: 1.1rem; }
+.threeQuestions > div > span { font: 750 .62rem/1.5 var(--font-geist-mono), monospace; }
+.threeQuestions h3 { margin-top: .9rem; font: 550 1.85rem/1.1 "Fraunces Variable", Georgia, serif; letter-spacing: -.035em; }
+.threeQuestions p { margin-top: .7rem; font-size: .83rem; color: var(--muted); }
+.caseTakeaway { margin-top: 2rem; border-left: 4px solid var(--ink); padding: 1.1rem 1.3rem; background: var(--paper); font-size: .9rem; }
+.scopeNote { max-width: 900px; margin-top: 1.25rem; font-size: .75rem; color: var(--muted); }
 .cycle { display: grid; grid-template-columns: repeat(5, minmax(0,1fr)); list-style: none; border: 2px solid var(--ink); margin: 0; padding: 0; background: var(--paper); }
 .cycle li { position: relative; min-width: 0; padding: 1.4rem 1.15rem; border-right: 1px solid var(--ink); }
 .cycle li:last-child { border-right: 0; background: var(--accent); }
@@ -46,7 +59,7 @@
 .cycle h3 { margin-top: 1.8rem; font-family: "Fraunces Variable", Georgia, serif; font-size: 1.75rem; font-weight: 550; }
 .cycle p { margin-top: .4rem; color: var(--muted); font-size: .69rem; }
 .loopNote { border-bottom: 2px solid var(--ink); padding: 1rem; text-align: right; font: 650 .67rem/1.6 var(--font-geist-mono), monospace; }
-.journey { border-top: 2px solid var(--ink); }
+.journey { margin-top: 2rem; border-top: 2px solid var(--ink); }
 .module { border-bottom: 1px solid #a7aa96; }
 .module summary { min-height: 112px; display: grid; grid-template-columns: 65px minmax(0, 1fr) 30px; align-items: center; gap: 1rem; list-style: none; cursor: pointer; padding: 1.3rem .6rem; }
 .module summary::-webkit-details-marker { display: none; }
@@ -86,20 +99,76 @@
 .leadFinding .smallNote { font-size: .7rem; color: #c9c2ae; }
 .leadFinding .sourceLink { margin-top: .7rem; }
 .leadFinding .sourceLink:hover { color: var(--accent); }
-.leadFinding a:focus-visible { outline-color: var(--accent); }
+.leadFinding a:focus-visible, .leadFinding summary:focus-visible { outline-color: var(--accent); }
+.codeDetail { margin-top: 1.5rem; border-top: 1px solid #718087; }
+.codeDetail summary { padding-block: .9rem; font: 700 .7rem/1.5 var(--font-geist-mono), monospace; cursor: pointer; }
+.codeDetail pre { margin-top: .2rem; }
 .findingStack { min-width: 0; display: flex; flex-direction: column; gap: 1.7rem; }
 .findingStack > div { border-top: 3px solid #a84528; padding-top: 1rem; }
 .findingStack h3 { margin-top: .7rem; font: 550 2rem/1.07 "Fraunces Variable", Georgia, serif; }
 .findingStack p { margin-top: .8rem; font-size: .82rem; color: var(--muted); }
+.takeaways { margin-top: 2rem; padding-top: 1.5rem; border-top: 2px solid var(--ink); }
+.takeaways h3 { font: 550 1.8rem/1.15 "Fraunces Variable", Georgia, serif; }
+.takeaways ul { display: grid; grid-template-columns: 1fr 1fr; gap: .7rem 2rem; margin-top: 1rem; padding-left: 1.15rem; color: var(--muted); font-size: .86rem; }
 .sources { display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(0, .8fr); gap: 3rem; border-bottom: 0; }
 .sources h2 { margin-top: 1rem; font-size: clamp(2rem, 3.4vw, 3rem); }
-.sources > div > p:not(.eyebrow) { margin-top: 1.2rem; font-size: .85rem; color: var(--muted); }
+.sources > div > p:not(.eyebrow):not(.educationLabel) { margin-top: 1.2rem; font-size: .85rem; color: var(--muted); }
 .sources p a { text-decoration: underline; text-underline-offset: 3px; }
 .sourcePanel { align-self: start; border: 2px solid var(--ink); padding: 1.5rem; background: var(--paper); }
 .sourcePanel h3 { margin-bottom: .5rem; font: 550 1.75rem/1.2 "Fraunces Variable", Georgia, serif; }
 .sourcePanel .sourceLink { display: flex; width: 100%; justify-content: space-between; border-bottom: 1px solid #bfb79d; padding-block: .65rem; }
 .sourcePanel .primaryButton { margin-top: 1.2rem; }
 .srOnly { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0; }
-@media (max-width: 900px) { .hero { grid-template-columns: minmax(0,1fr) minmax(240px,.72fr); gap: 2rem; } .page h1 { font-size: clamp(2.7rem, 6vw, 4rem); } .caseCard { padding: 1.1rem; } .page .caseCard h2 { font-size: 2.2rem; } .sectionHeader { grid-template-columns: .3fr 1fr; } .cycle li { padding: 1rem .8rem; } .cycle h3 { font-size: 1.4rem; } .findingGrid { gap: 1.5rem; } .moduleBody { padding-right: 1rem; } }
-@media (max-width: 680px) { .container { width: calc(100% - 32px); } .hero { grid-template-columns: 1fr; padding-top: 3rem; gap: 2rem; } .page h1 { font-size: clamp(2.65rem, 10.5vw, 4rem); } .courseTitle { margin-top: 1.3rem; } .caseCard { max-width: 500px; padding: 1.5rem; margin-right: 7px; } .caseCard h2 br { display: none; } .page .caseCard h2 { font-size: 2.2rem; } .traceDiagram { margin-block: 1rem; } .pageNav { gap: 0 1.2rem; padding-block: .5rem; } .pageNav a { min-height: 38px; font-size: .58rem; } .sectionHeader { grid-template-columns: 1fr; gap: 1rem; } .page h2 { font-size: clamp(2.15rem, 8vw, 3rem); } .cycle { grid-template-columns: 1fr; } .cycle li { display: grid; grid-template-columns: 30px 1fr 1.3fr; align-items: center; gap: .6rem; border-right: 0; border-bottom: 1px solid var(--ink); padding: 1rem; } .cycle li:last-child { border-bottom: 0; } .cycle h3 { margin-top: 0; font-size: 1.4rem; } .cycle p { margin-top: 0; font-size: .66rem; } .loopNote { text-align: left; padding-inline: 0; } .module summary { grid-template-columns: 35px minmax(0,1fr) 22px; gap: .6rem; padding-inline: 0; } .moduleNumber { font-size: 1.5rem; } .module h3 { font-size: 1.3rem; } .moduleBody { grid-template-columns: 1fr; padding: .5rem 0 2rem 2.8rem; gap: 1.3rem; } .gallery, .findingGrid, .sources { grid-template-columns: 1fr; } .gallery { gap: 2rem; } .leadFinding h3 { font-size: 2.2rem; } .sources { gap: 2rem; } .eyebrow { font-size: .58rem; } .introduction { font-size: .95rem; } }
-@media (prefers-reduced-motion: reduce) { :global(html):has(.page), .page, .page * { scroll-behavior: auto !important; animation: none !important; transition: none !important; } }
+@media (max-width: 900px) {
+  .hero { grid-template-columns: minmax(0, 1.2fr) minmax(260px, .9fr); gap: 1.8rem; }
+  .page h1 { font-size: clamp(2.45rem, 5vw, 3.7rem); }
+  .refundCard { padding: 1rem; }
+  .page .refundCard h2 { font-size: 2.1rem; }
+  .refundVersions { gap: .45rem; }
+  .refundVersions strong { font-size: 1.25rem; }
+  .refundVersions > div { padding-inline: .55rem; }
+  .sectionHeader { grid-template-columns: .3fr 1fr; }
+  .cycle li { padding: 1rem .8rem; }
+  .cycle h3 { font-size: 1.4rem; }
+  .findingGrid { gap: 1.5rem; }
+  .moduleBody { padding-right: 1rem; }
+}
+@media (max-width: 680px) {
+  .container { width: calc(100% - 32px); }
+  .hero { grid-template-columns: 1fr; padding-top: 3rem; gap: 2.3rem; }
+  .page h1 { font-size: clamp(2.45rem, 9.6vw, 3.8rem); }
+  .courseTitle { margin-top: 1.3rem; }
+  .educationLabel { font-size: .63rem; }
+  .refundCard { padding: 1.3rem; max-width: 500px; }
+  .page .refundCard h2 { font-size: 2.3rem; }
+  .refundVersions strong { font-size: 1.5rem; }
+  .reconstructionNote { font-size: .72rem; }
+  .pageNav { gap: 0 1.2rem; padding-block: .5rem; }
+  .pageNav a { min-height: 38px; font-size: .58rem; }
+  .sectionHeader { grid-template-columns: 1fr; gap: 1rem; }
+  .page h2 { font-size: clamp(2.15rem, 8vw, 3rem); }
+  .cycle { grid-template-columns: 1fr; }
+  .cycle li { display: grid; grid-template-columns: 30px 1fr 1.3fr; align-items: center; gap: .6rem; border-right: 0; border-bottom: 1px solid var(--ink); padding: 1rem; }
+  .cycle li:last-child { border-bottom: 0; }
+  .cycle h3 { margin-top: 0; font-size: 1.4rem; }
+  .cycle p { margin-top: 0; font-size: .66rem; }
+  .loopNote { text-align: left; padding-inline: 0; }
+  .module summary { grid-template-columns: 35px minmax(0,1fr) 22px; gap: .6rem; padding-inline: 0; }
+  .moduleNumber { font-size: 1.5rem; }
+  .module h3 { font-size: 1.3rem; }
+  .moduleBody { grid-template-columns: 1fr; padding: .5rem 0 2rem 2.8rem; gap: 1.3rem; }
+  .gallery, .findingGrid, .sources, .caseExplanation, .threeQuestions, .takeaways ul { grid-template-columns: 1fr; }
+  .caseExplanation { gap: 1.1rem; }
+  .threeQuestions { gap: 1.5rem; margin-top: 2rem; }
+  .threeQuestions h3 { font-size: 1.75rem; }
+  .caseTakeaway { padding: 1rem; }
+  .gallery { gap: 2rem; }
+  .leadFinding h3 { font-size: 2.2rem; }
+  .sources { gap: 2rem; }
+  .eyebrow { font-size: .58rem; }
+  .introduction { font-size: .95rem; }
+  .takeaways ul { gap: .7rem; }
+}
+@media (prefers-reduced-motion: reduce) {
+  :global(html):has(.page), .page, .page * { scroll-behavior: auto !important; animation: none !important; transition: none !important; }
+}
