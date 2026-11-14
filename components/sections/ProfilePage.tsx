@@ -99,9 +99,9 @@ type ProjectMeta = {
 const projectMeta: Record<string, ProjectMeta> = {
   "Evaluating and Improving Agentic Applications": {
     category: "Educational case study · DeepLearning.AI",
-    summary: "An agent can sound right and still leave a refund undone. A course-based walkthrough of how traces, reliable scoring and regression tests expose the difference.",
+    summary: "Follow the code from request to regression test: five cumulative modules with Python implementations, data contracts and annotated lab recordings.",
     primaryHref: "/showcase/agentic-evaluation/",
-    primaryLabel: "Explore the educational case study",
+    primaryLabel: "Explore the technical walkthrough",
     secondaryHref: "https://github.com/YKaanKaya/deeplearning-ai-agentic-evaluation",
     secondaryLabel: "Learning repository",
     kind: "learning",
